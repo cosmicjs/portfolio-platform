@@ -1,0 +1,147 @@
+.drag-item {
+    width: 20px;
+    height: 20px
+}
+
+.drop-content, .drop-spot {
+    height: 54px;
+    position: absolute
+}
+
+.drop-spot {
+    width: 54px;
+    z-index: 1;
+    border-bottom: 2px solid #515151
+}
+
+.drop-content {
+    width: 100%;
+    background: rgba(0, 0, 0, .29)
+}
+
+.emoji, .emoji div, .emoji img {
+    width: 47px;
+    height: 47px
+}
+
+ul, li {
+    list-style-type: none
+}
+
+ul.emoji-container {
+    list-style-type: none;
+    min-height: 150px;
+    /*margin-top: 150px;*/
+}
+
+ul.emoji-container li {
+    float: left;
+    margin-left: 10px;
+    list-style: none;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+ul.emoji-container div.emoji-container-drop {
+    margin-left: 15px;
+    margin-right: 15px;
+    width: 50px;
+    padding: 8px 1px;
+    border-bottom: 2px solid #dcdcdc;
+}
+
+.emoji-variant-container {
+    width: 50px;
+    height: 50px
+}
+
+.emoji-icon > i {
+    position: absolute
+}
+
+.show-hide {
+    -webkit-transition: .5s;
+    transition: .5s
+}
+
+.show-hide.ng-hide {
+    -webkit-transition: none;
+    transition: none;
+    opacity: 0
+}
+
+.alert-popup {
+    border: none
+}
+
+@media (min-width: 768px) {
+    .alert-popup {
+        font-size: 35px
+    }
+}
+
+@media (max-width: 767px) {
+    ul.emoji-container li {
+        height: 70px
+    }
+
+    .alert-popup {
+        font-size: 26px
+    }
+}
+
+@media (max-width: 600px) {
+    ul.emoji-container li {
+        height: 50px
+    }
+
+    .alert-popup {
+        font-size: 30px
+    }
+}
+
+@media (max-width: 450px) {
+    ul.emoji-container li {
+        height: 50px
+    }
+
+    .alert-popup {
+        font-size: 27px
+    }
+}
+
+.check-btn {
+    z-index: 3
+}
+
+.alert-popup .check-btn {
+    position: absolute;
+    left: 15px;
+    bottom: 15px
+}
+
+.emoticon {
+    width: 47px;
+    height: 47px;
+    background-size: 59996px 47px
+}
+
+
+.emoji-container-drop .caption {
+    height: 50px;
+}
+
+.win {
+    width: 100%;
+    height: 100%;
+    background: #50c7a1;
+    position: absolute;
+    z-index: 5;
+    padding: 15px;
+}
+
+.win-text {
+    height: 85%;
+    font-size: 4em;
+    color: white;
+}

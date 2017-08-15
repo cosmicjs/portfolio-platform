@@ -1,0 +1,21 @@
+<div class="row" ng-init="vm.getQuotes()">
+    <div class="col-lg-12">
+        <table class="table table-striped">
+            <tr>
+                <th>#</th>
+                <th>Text</th>
+                <th>Author</th>
+                <th>Action</th>
+            </tr>
+            <tr ng-repeat="quote in vm.quotes">
+                <td>{{$index + 1}}</td>
+                <td><a ui-sref="admin.quotes.edit({slug: quote.slug})">{{quote.metadata.text}}</a></td>
+                <td><a ui-sref="main.author({slug: quote.metadata.author.slug})">{{quote.metadata.author.metadata.name}}</a></td>
+                <td>
+                    <button class="btn btn-default btn-sm" ng-click="vm.removeQuote(quote.slug)"><i class="fa fa-remove"></i></button>
+                </td>
+            </tr>
+        </table>
+        <a ui-sref="admin.quotes.add" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add Quote</a>
+    </div>
+</div>

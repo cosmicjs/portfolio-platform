@@ -1,0 +1,1221 @@
+* {
+    box-sizing : border-box;
+    }
+
+@font-face {
+    font-family : 'emoticons';
+    src         : url('../fonts/emoticons.eot?5zh0vu');
+    src         : url('../fonts/emoticons.eot?#iefix5zh0vu') format('embedded-opentype'),
+    url('../fonts/emoticons.woff?5zh0vu') format('woff'),
+    url('../fonts/emoticons.ttf?5zh0vu') format('truetype'),
+    url('../fonts/emoticons.svg?5zh0vu#icomoon') format('svg');
+    font-weight : normal;
+    font-style  : normal;
+    }
+
+.ne-code{
+    display: none;
+    }
+
+.ne-code {
+    font-size   : 14px;
+    padding     : 20px;
+    font-family : Consolas, Menlo, Monaco, monospace;
+    padding     : 1.5em;
+    }
+
+pre {
+    position      : relative;
+    margin-bottom : 24px;
+    border-radius : 2px;
+    overflow      : hidden;
+    }
+
+code.has-numbering {
+    display     : block;
+    padding     : 12px 30px;
+    overflow-y  : auto;
+    font-weight : 300;
+    font-family : Consolas, Menlo, Monaco, monospace;
+    font-size   : 14px;
+    line-height : 20px;
+    }
+
+code.has-numbering {
+    margin-left : 36px;
+    }
+
+.pre-numbering {
+    position         : absolute;
+    top              : 0;
+    left             : 0;
+    width            : 35px;
+    padding          : 1.1em 5px 12px 0;
+    border-right     : 1px solid #e8e8e8;
+    border-radius    : 3px 0 0 3px;
+    background-color : #EEE;
+    text-align       : right;
+    font-family      : Consolas, Menlo, Monaco, monospace;
+    font-size        : 14px;
+    color            : #AAA;
+    line-height      : 20px;
+    margin-top       : -4px;
+    }
+
+.pre-numbering li{
+    list-style-type: none;
+    }
+
+.ne-pdf iframe {
+    width   : 420px;
+    height  : 530px;
+    display : block;
+    }
+
+.ne-pdf-icon {
+    width        : 200px;
+    height       : 150px;
+    float        : left;
+    border-right : 1px solid #eee;
+    }
+
+.ne-pdf-icon i {
+    margin    : 29px 62px;
+    color     : #999;
+    font-size : 84px;
+    }
+
+.ne-pdf-view button {
+    font-family        : inherit;
+    font-size          : 14px;
+    background-color   : transparent;
+    border             : 1px solid #ccc;
+    padding            : 6px 15px;
+    border-radius      : 2px;
+    color              : #333;
+    cursor             : pointer;
+    box-shadow         : 0px 1px 1px 0 rgba(0, 0, 0, 0.26);
+    outline            : 0;
+    border-bottom      : 0;
+    float              : right;
+    margin             : 80px 10px 0 10px;
+    -webkit-transition : all 0.5s linear;
+    -o-transition      : all 0.5s linear;
+    -moz-transition    : all 0.5s linear;
+    -ms-transition     : all 0.5s linear;
+    -kthtml-transition : all 0.5s linear;
+    transition         : all 0.5s linear;
+    }
+
+.ne-pdf-view button:hover {
+    box-shadow : 0 2px 2px 0 rgba(0, 0, 0, 0.26);
+    }
+
+.ne-pdf-view button i {
+    margin-right : 6px;
+    }
+
+.ne-pdf-view button a {
+    color : #333;
+    }
+
+.ne-pdf-viewer iframe {
+    margin : 0 auto;
+    }
+
+.ne-pdf-viewer {
+    background-color : #3498DB;
+    position         : relative;
+    }
+
+.ne-pdf-viewer i {
+    position  : absolute;
+    right     : 10px;
+    top       : 8px;
+    color     : #fff;
+    font-size : 25px;
+    cursor    : pointer;
+    }
+
+.ne-audio {
+    background-color : #1D1D1D;
+    border-radius    : 2px;
+    padding-top      : 6px;
+    }
+
+.ne-audio audio {
+    width : 100%;
+    }
+
+.ne-video, .ne-pdf {
+    padding            : 5px;
+    border             : 1px solid #e4e4e4;
+    border-radius      : 2px;
+    margin             : 20px 0;
+    box-shadow         : 0px 1px 1px 0 rgba(0, 0, 0, 0.26);
+    border-bottom      : 0;
+    overflow           : auto;
+    -webkit-transition : all 0.5s linear;
+    -o-transition      : all 0.5s linear;
+    -moz-transition    : all 0.5s linear;
+    -ms-transition     : all 0.5s linear;
+    -kthtml-transition : all 0.5s linear;
+    transition         : all 0.5s linear;
+    }
+
+.ne-video video {
+    width : 100%;
+    }
+
+.ne-video:hover, .ne-image:hover {
+    box-shadow : 0px 2px 2px 0 rgba(0, 0, 0, 0.26);
+    }
+
+.ne-video-preview, .ne-pdf-preview {
+    overflow : auto;
+    }
+
+.ne-video-preview img {
+    display          : block;
+    width            : 200px;
+    height           : 150px;
+    border-radius    : 2px;
+    background-color : #3498DB;
+    }
+
+.ne-video-thumb {
+    width  : 200px;
+    float  : left;
+    cursor : pointer;
+    color  : rgba(255, 255, 255, 0.6);
+    }
+
+.ne-video-thumb:hover {
+    color : #fff;
+    }
+
+.ne-video-thumb i {
+    position    : absolute;
+    font-size   : 42px;
+    margin-top  : -95px;
+    margin-left : 80px;
+    cursor      : pointer;
+    }
+
+.ne-video-detail, .ne-pdf-detail {
+    width        : calc(100% - 200px);
+    float        : left;
+    padding-left : 15px;
+    }
+
+.ne-video-title, .ne-pdf-title {
+    font-weight   : bolder;
+    padding       : 5px 0;
+    white-space   : nowrap;
+    overflow      : hidden;
+    text-overflow : ellipsis;
+    }
+
+.ne-video-desc {
+    font-size : 16px;
+    color     : #666;
+    height    : 90px;
+    }
+
+.ne-stats {
+    padding-top : 7px;
+    overflow    : auto;
+    }
+
+.ne-video-stats span {
+    padding : 0 15px;
+    float   : right;
+    }
+
+.ne-video-stats span i {
+    margin-right : 10px;
+    }
+
+.ne-video-player {
+    background-color    : #3498DB;
+    background-image    : url('../images/loader.svg');
+    background-repeat   : no-repeat;
+    background-position : center;
+    }
+
+.ne-video-player iframe {
+    width : 100%;
+    }
+
+.ne-image {
+    width              : 100%;
+    border-radius      : 2px;
+    border             : 1px solid #e4e4e4;
+    min-height         : 250px;
+    max-height         : 250px;
+    overflow           : hidden;
+    cursor             : pointer;
+    padding-bottom     : 5px;
+    -webkit-transition : all 0.5s linear;
+    -o-transition      : all 0.5s linear;
+    -moz-transition    : all 0.5s linear;
+    -ms-transition     : all 0.5s linear;
+    -kthtml-transition : all 0.5s linear;
+    transition         : all 0.5s linear;
+    box-shadow         : 0px 1px 1px 0 rgba(0, 0, 0, 0.26);
+    border-bottom      : 5px solid #ffffff;
+    margin             : 10px 0;
+    }
+
+.ne-image-long {
+    max-height : 800px;
+    }
+
+.ne-image img, .ne-image-long img {
+    width      : 100%;
+    display    : block;
+    min-height : 250px;
+    }
+
+.ne-image-wrapper {
+    margin              : 5px;
+    margin-bottom       : 0;
+    background-color    : #3498DB;
+    background-image    : url('../images/loader.svg');
+    background-repeat   : no-repeat;
+    background-position : center;
+    height              : 100%;
+    overflow            : hidden;
+    }
+
+
+
+.emoticons-image-wrapper, .emoticons-image {
+    width : 100%;
+    }
+
+.emoticons-image {
+    padding       : 5px;
+    border-radius : 2px;
+    border        : 1px solid #F2F2F2;
+    display       : block;
+    margin        : 20px 0;
+    }
+
+.icon-emoticon {
+    font-family             : 'emoticons';
+    speak                   : none;
+    font-style              : normal;
+    font-weight             : normal;
+    font-variant            : normal;
+    text-transform          : none;
+    line-height             : 1;
+    display                 : inline-block;
+    vertical-align          : middle;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing  : antialiased;
+    -moz-osx-font-smoothing : grayscale;
+    }
+
+.emoticon {
+    text-indent    : -9999px;
+    display        : inline-block;
+    height         : 22px;
+    width          : 22px;
+    vertical-align : middle;
+    }
+
+@media all and (-webkit-min-device-pixel-ratio : 1), all and (min--moz-device-pixel-ratio : 1), all and (-o-min-device-pixel-ratio : 0), all and (min-device-pixel-ratio : 1), all and (min-resolution : 96dpi) {
+    .emoticon {
+        background : transparent url(../images/emojis@2x.png) 0 0 no-repeat;
+        }
+    }
+
+@media all and (-webkit-min-device-pixel-ratio : 1.5), all and (-o-min-device-pixel-ratio : 3/2), all and (min-device-pixel-ratio : 1.5), all and (min-resolution : 144dpi) {
+    .emoticon {
+        background      : transparent url(../images/emojis@2x.png) 0 0 no-repeat;
+        background-size : 27776px 22px;
+        }
+    }
+
+@-moz-document url-prefix() {
+    .emoticon {
+        background : transparent url(../images/emojis.png) 0 0 no-repeat;
+        }
+    }
+
+.emoticon-bowtie  { background-position: -10.8px 0; }
+.emoticon-smile  { background-position: -79.92px 0; }
+.emoticon-laughing  { background-position: -149.04px 0; }
+.emoticon-blush  { background-position: -218.16px 0; }
+.emoticon-smiley  { background-position: -287.28px 0; }
+.emoticon-relaxed  { background-position: -356.40000000000003px 0; }
+.emoticon-smirk  { background-position: -425.52px 0; }
+.emoticon-heart_eyes  { background-position: -494.64000000000004px 0; }
+.emoticon-kissing_heart  { background-position: -563.76px 0; }
+.emoticon-kissing_closed_eyes  { background-position: -632.88px 0; }
+.emoticon-flushed  { background-position: -702px 0; }
+.emoticon-relieved  { background-position: -771.12px 0; }
+.emoticon-satisfied  { background-position: -840.2399999999999px 0; }
+.emoticon-grin  { background-position: -909.36px 0; }
+.emoticon-wink  { background-position: -978.48px 0; }
+.emoticon-stuck_out_tongue_winking_eye  { background-position: -1047.6000000000001px 0; }
+.emoticon-winky_face  { background-position: -1047.6000000000001px 0; }
+.emoticon-stuck_out_tongue_closed_eyes  { background-position: -1116.72px 0; }
+.emoticon-grinning  { background-position: -1185.84px 0; }
+.emoticon-kissing  { background-position: -1254.9599999999998px 0; }
+.emoticon-kissing_smiling_eyes  { background-position: -1324.0800000000002px 0; }
+.emoticon-stuck_out_tongue  { background-position: -1393.2px 0; }
+.emoticon-sleeping  { background-position: -1462.32px 0; }
+.emoticon-worried  { background-position: -1531.44px 0; }
+.emoticon-frowning  { background-position: -1600.56px 0; }
+.emoticon-anguished  { background-position: -1669.6799999999998px 0; }
+.emoticon-open_mouth  { background-position: -1738.8px 0; }
+.emoticon-wow  { background-position: -1738.8px 0; }
+.emoticon-grimacing  { background-position: -1807.92px 0; }
+.emoticon-confused  { background-position: -1877.04px 0; }
+.emoticon-hushed  { background-position: -1946.16px 0; }
+.emoticon-expressionless  { background-position: -2015.28px 0; }
+.emoticon-unamused  { background-position: -2084.4px 0; }
+.emoticon-sweat_smile  { background-position: -2153.52px 0; }
+.emoticon-sweat  { background-position: -2222.64px 0; }
+.emoticon-disappointed_relieved  { background-position: -2291.76px 0; }
+.emoticon-weary  { background-position: -2360.88px 0; }
+.emoticon-pensive  { background-position: -2430px 0; }
+.emoticon-disappointed  { background-position: -2499.12px 0; }
+.emoticon-confounded  { background-position: -2568.24px 0; }
+.emoticon-fearful  { background-position: -2637.36px 0; }
+.emoticon-cold_sweat  { background-position: -2706.48px 0; }
+.emoticon-persevere  { background-position: -2775.6px 0; }
+.emoticon-cry  { background-position: -2844.72px 0; }
+.emoticon-sob  { background-position: -2913.84px 0; }
+.emoticon-joy  { background-position: -2982.96px 0; }
+.emoticon-astonished  { background-position: -3052.08px 0; }
+.emoticon-scream  { background-position: -3121.2000000000003px 0; }
+.emoticon-neckbeard  { background-position: -3190.3199999999997px 0; }
+.emoticon-tired_face  { background-position: -3259.44px 0; }
+.emoticon-angry  { background-position: -3328.56px 0; }
+.emoticon-rage  { background-position: -3397.68px 0; }
+.emoticon-triumph  { background-position: -3466.8px 0; }
+.emoticon-sleepy  { background-position: -3535.9199999999996px 0; }
+.emoticon-yum  { background-position: -3605.04px 0; }
+.emoticon-mask  { background-position: -3674.16px 0; }
+.emoticon-sunglasses  { background-position: -3743.2799999999997px 0; }
+.emoticon-dizzy_face  { background-position: -3812.4px 0; }
+.emoticon-imp  { background-position: -3881.5200000000004px 0; }
+.emoticon-smiling_imp  { background-position: -3950.6399999999994px 0; }
+.emoticon-neutral_face  { background-position: -4019.7599999999998px 0; }
+.emoticon-no_mouth  { background-position: -4088.88px 0; }
+.emoticon-innocent  { background-position: -4158px 0; }
+.emoticon-alien  { background-position: -4227.12px 0; }
+.emoticon-yellow_heart  { background-position: -4296.24px 0; }
+.emoticon-blue_heart  { background-position: -4365.36px 0; }
+.emoticon-purple_heart  { background-position: -4434.48px 0; }
+.emoticon-heart  { background-position: -4503.6px 0; }
+.emoticon-green_heart  { background-position: -4572.72px 0; }
+.emoticon-broken_heart  { background-position: -4641.839999999999px 0; }
+.emoticon-heartbeat  { background-position: -4710.96px 0; }
+.emoticon-heartpulse  { background-position: -4780.08px 0; }
+.emoticon-two_hearts  { background-position: -4849.2px 0; }
+.emoticon-revolving_hearts  { background-position: -4918.320000000001px 0; }
+.emoticon-cupid  { background-position: -4987.44px 0; }
+.emoticon-sparkling_heart  { background-position: -5056.5599999999995px 0; }
+.emoticon-sparkles  { background-position: -5125.68px 0; }
+.emoticon-star  { background-position: -5194.8px 0; }
+.emoticon-star2  { background-position: -5263.92px 0; }
+.emoticon-dizzy  { background-position: -5333.04px 0; }
+.emoticon-boom  { background-position: -5402.16px 0; }
+.emoticon-collision  { background-position: -5471.28px 0; }
+.emoticon-anger  { background-position: -5540.400000000001px 0; }
+.emoticon-exclamation  { background-position: -5609.52px 0; }
+.emoticon-question  { background-position: -5678.639999999999px 0; }
+.emoticon-grey_exclamation  { background-position: -5747.76px 0; }
+.emoticon-grey_question  { background-position: -5816.88px 0; }
+.emoticon-zzz  { background-position: -5886px 0; }
+.emoticon-dash  { background-position: -5955.12px 0; }
+.emoticon-sweat_drops  { background-position: -6024.24px 0; }
+.emoticon-notes  { background-position: -6093.36px 0; }
+.emoticon-musical_note  { background-position: -6162.48px 0; }
+.emoticon-fire  { background-position: -6231.6px 0; }
+.emoticon-hankey  { background-position: -6300.72px 0; }
+.emoticon-poop  { background-position: -6369.839999999999px 0; }
+.emoticon-shit  { background-position: -6438.96px 0; }
+.emoticon-\+1  { background-position: -6508.08px 0; }
+.emoticon-thumbsup  { background-position: -6577.2px 0; }
+.emoticon-\-1  { background-position: -6646.32px 0; }
+.emoticon-thumbsdown  { background-position: -6715.44px 0; }
+.emoticon-ok_hand  { background-position: -6784.5599999999995px 0; }
+.emoticon-punch  { background-position: -6853.68px 0; }
+.emoticon-facepunch  { background-position: -6922.8px 0; }
+.emoticon-fist  { background-position: -6991.919999999999px 0; }
+.emoticon-v  { background-position: -7061.04px 0; }
+.emoticon-wave  { background-position: -7130.16px 0; }
+.emoticon-hand  { background-position: -7199.28px 0; }
+.emoticon-raised_hand  { background-position: -7268.400000000001px 0; }
+.emoticon-open_hands  { background-position: -7337.5199999999995px 0; }
+.emoticon-point_up  { background-position: -7406.64px 0; }
+.emoticon-point_down  { background-position: -7475.76px 0; }
+.emoticon-point_left  { background-position: -7544.879999999999px 0; }
+.emoticon-point_right  { background-position: -7614px 0; }
+.emoticon-raised_hands  { background-position: -7683.12px 0; }
+.emoticon-pray  { background-position: -7752.240000000001px 0; }
+.emoticon-point_up_2  { background-position: -7821.36px 0; }
+.emoticon-clap  { background-position: -7890.48px 0; }
+.emoticon-muscle  { background-position: -7959.6px 0; }
+.emoticon-metal  { background-position: -8028.719999999999px 0; }
+.emoticon-fu  { background-position: -8097.84px 0; }
+.emoticon-walking  { background-position: -8166.96px 0; }
+.emoticon-runner  { background-position: -8236.08px 0; }
+.emoticon-running  { background-position: -8305.2px 0; }
+.emoticon-couple  { background-position: -8374.32px 0; }
+.emoticon-family  { background-position: -8443.44px 0; }
+.emoticon-two_men_holding_hands  { background-position: -8512.56px 0; }
+.emoticon-two_women_holding_hands  { background-position: -8581.679999999998px 0; }
+.emoticon-dancer  { background-position: -8650.800000000001px 0; }
+.emoticon-dancers  { background-position: -8719.92px 0; }
+.emoticon-ok_woman  { background-position: -8789.04px 0; }
+.emoticon-no_good  { background-position: -8858.16px 0; }
+.emoticon-information_desk_person  { background-position: -8927.279999999999px 0; }
+.emoticon-raising_hand  { background-position: -8996.4px 0; }
+.emoticon-bride_with_veil  { background-position: -9065.52px 0; }
+.emoticon-person_with_pouting_face  { background-position: -9134.640000000001px 0; }
+.emoticon-person_frowning  { background-position: -9203.76px 0; }
+.emoticon-bow  { background-position: -9272.88px 0; }
+.emoticon-couplekiss  { background-position: -9342px 0; }
+.emoticon-couple_with_heart  { background-position: -9411.119999999999px 0; }
+.emoticon-massage  { background-position: -9480.24px 0; }
+.emoticon-haircut  { background-position: -9549.36px 0; }
+.emoticon-nail_care  { background-position: -9618.48px 0; }
+.emoticon-boy  { background-position: -9687.6px 0; }
+.emoticon-girl  { background-position: -9756.72px 0; }
+.emoticon-woman  { background-position: -9825.84px 0; }
+.emoticon-man  { background-position: -9894.96px 0; }
+.emoticon-baby  { background-position: -9964.08px 0; }
+.emoticon-older_woman  { background-position: -10033.2px 0; }
+.emoticon-older_man  { background-position: -10102.32px 0; }
+.emoticon-person_with_blond_hair  { background-position: -10171.44px 0; }
+.emoticon-man_with_gua_pi_mao  { background-position: -10240.56px 0; }
+.emoticon-man_with_turban  { background-position: -10309.679999999998px 0; }
+.emoticon-construction_worker  { background-position: -10378.800000000001px 0; }
+.emoticon-cop  { background-position: -10447.92px 0; }
+.emoticon-angel  { background-position: -10517.04px 0; }
+.emoticon-princess  { background-position: -10586.16px 0; }
+.emoticon-emoticon_cat  { background-position: -10655.279999999999px 0; }
+.emoticon-smile_cat  { background-position: -10724.4px 0; }
+.emoticon-heart_eyes_cat  { background-position: -10793.52px 0; }
+.emoticon-kissing_cat  { background-position: -10862.640000000001px 0; }
+.emoticon-smirk_cat  { background-position: -10931.76px 0; }
+.emoticon-scream_cat  { background-position: -11000.88px 0; }
+.emoticon-crying_cat_face  { background-position: -11070px 0; }
+.emoticon-joy_cat  { background-position: -11139.119999999999px 0; }
+.emoticon-pouting_cat  { background-position: -11208.24px 0; }
+.emoticon-japanese_ogre  { background-position: -11277.36px 0; }
+.emoticon-japanese_goblin  { background-position: -11346.48px 0; }
+.emoticon-see_no_evil  { background-position: -11415.6px 0; }
+.emoticon-hear_no_evil  { background-position: -11484.72px 0; }
+.emoticon-speak_no_evil  { background-position: -11553.84px 0; }
+.emoticon-guardsman  { background-position: -11622.96px 0; }
+.emoticon-skull  { background-position: -11692.08px 0; }
+.emoticon-feet  { background-position: -11761.2px 0; }
+.emoticon-lips  { background-position: -11830.32px 0; }
+.emoticon-kiss  { background-position: -11899.44px 0; }
+.emoticon-droplet  { background-position: -11968.56px 0; }
+.emoticon-ear  { background-position: -12037.679999999998px 0; }
+.emoticon-eyes  { background-position: -12106.800000000001px 0; }
+.emoticon-nose  { background-position: -12175.92px 0; }
+.emoticon-tongue  { background-position: -12245.04px 0; }
+.emoticon-love_letter  { background-position: -12314.16px 0; }
+.emoticon-bust_in_silhouette  { background-position: -12383.279999999999px 0; }
+.emoticon-busts_in_silhouette  { background-position: -12452.4px 0; }
+.emoticon-speech_balloon  { background-position: -12521.52px 0; }
+.emoticon-thought_balloon  { background-position: -12590.640000000001px 0; }
+.emoticon-feelsgood  { background-position: -12659.76px 0; }
+.emoticon-finnadie  { background-position: -12728.88px 0; }
+.emoticon-goberserk  { background-position: -12798px 0; }
+.emoticon-godmode  { background-position: -12867.119999999999px 0; }
+.emoticon-hurtrealbad  { background-position: -12936.24px 0; }
+.emoticon-rage1  { background-position: -13005.36px 0; }
+.emoticon-rage2  { background-position: -13074.48px 0; }
+.emoticon-rage3  { background-position: -13143.6px 0; }
+.emoticon-rage4  { background-position: -13212.72px 0; }
+.emoticon-suspect  { background-position: -13281.839999999998px 0; }
+.emoticon-trollface  { background-position: -13350.96px 0; }
+.emoticon-sunny  { background-position: -13420.08px 0; }
+.emoticon-umbrella  { background-position: -13489.2px 0; }
+.emoticon-cloud  { background-position: -13558.32px 0; }
+.emoticon-snowflake  { background-position: -13627.439999999999px 0; }
+.emoticon-snowman  { background-position: -13696.56px 0; }
+.emoticon-zap  { background-position: -13765.679999999998px 0; }
+.emoticon-cyclone  { background-position: -13834.800000000001px 0; }
+.emoticon-foggy  { background-position: -13903.92px 0; }
+.emoticon-ocean  { background-position: -13973.039999999999px 0; }
+.emoticon-cat  { background-position: -14042.16px 0; }
+.emoticon-dog  { background-position: -14111.279999999999px 0; }
+.emoticon-mouse  { background-position: -14180.4px 0; }
+.emoticon-hamster  { background-position: -14249.52px 0; }
+.emoticon-rabbit  { background-position: -14318.64px 0; }
+.emoticon-wolf  { background-position: -14387.76px 0; }
+.emoticon-frog  { background-position: -14456.88px 0; }
+.emoticon-tiger  { background-position: -14526px 0; }
+.emoticon-koala  { background-position: -14595.119999999999px 0; }
+.emoticon-bear  { background-position: -14664.24px 0; }
+.emoticon-pig  { background-position: -14733.36px 0; }
+.emoticon-pig_nose  { background-position: -14802.480000000001px 0; }
+.emoticon-cow  { background-position: -14871.6px 0; }
+.emoticon-boar  { background-position: -14940.72px 0; }
+.emoticon-monkey_face  { background-position: -15009.839999999998px 0; }
+.emoticon-monkey  { background-position: -15078.96px 0; }
+.emoticon-horse  { background-position: -15148.080000000002px 0; }
+.emoticon-racehorse  { background-position: -15217.2px 0; }
+.emoticon-camel  { background-position: -15286.32px 0; }
+.emoticon-sheep  { background-position: -15355.439999999999px 0; }
+.emoticon-elephant  { background-position: -15424.559999999998px 0; }
+.emoticon-panda_face  { background-position: -15493.68px 0; }
+.emoticon-snake  { background-position: -15562.800000000001px 0; }
+.emoticon-bird  { background-position: -15631.92px 0; }
+.emoticon-baby_chick  { background-position: -15701.039999999999px 0; }
+.emoticon-hatched_chick  { background-position: -15770.159999999998px 0; }
+.emoticon-hatching_chick  { background-position: -15839.28px 0; }
+.emoticon-chicken  { background-position: -15908.4px 0; }
+.emoticon-penguin  { background-position: -15977.52px 0; }
+.emoticon-turtle  { background-position: -16046.64px 0; }
+.emoticon-bug  { background-position: -16115.759999999998px 0; }
+.emoticon-honeybee  { background-position: -16184.880000000001px 0; }
+.emoticon-ant  { background-position: -16254px 0; }
+.emoticon-beetle  { background-position: -16323.119999999999px 0; }
+.emoticon-snail  { background-position: -16392.239999999998px 0; }
+.emoticon-octopus  { background-position: -16461.359999999997px 0; }
+.emoticon-tropical_fish  { background-position: -16530.48px 0; }
+.emoticon-fish  { background-position: -16599.600000000002px 0; }
+.emoticon-whale  { background-position: -16668.72px 0; }
+.emoticon-whale2  { background-position: -16737.84px 0; }
+.emoticon-dolphin  { background-position: -16806.96px 0; }
+.emoticon-cow2  { background-position: -16876.08px 0; }
+.emoticon-ram  { background-position: -16945.2px 0; }
+.emoticon-rat  { background-position: -17014.32px 0; }
+.emoticon-water_buffalo  { background-position: -17083.44px 0; }
+.emoticon-tiger2  { background-position: -17152.559999999998px 0; }
+.emoticon-rabbit2  { background-position: -17221.68px 0; }
+.emoticon-dragon  { background-position: -17290.8px 0; }
+.emoticon-goat  { background-position: -17359.92px 0; }
+.emoticon-rooster  { background-position: -17429.04px 0; }
+.emoticon-dog2  { background-position: -17498.16px 0; }
+.emoticon-pig2  { background-position: -17567.280000000002px 0; }
+.emoticon-mouse2  { background-position: -17636.4px 0; }
+.emoticon-ox  { background-position: -17705.52px 0; }
+.emoticon-dragon_face  { background-position: -17774.64px 0; }
+.emoticon-blowfish  { background-position: -17843.76px 0; }
+.emoticon-crocodile  { background-position: -17912.88px 0; }
+.emoticon-dromedary_camel  { background-position: -17982px 0; }
+.emoticon-leopard  { background-position: -18051.12px 0; }
+.emoticon-cat2  { background-position: -18120.239999999998px 0; }
+.emoticon-poodle  { background-position: -18189.359999999997px 0; }
+.emoticon-paw_prints  { background-position: -18258.48px 0; }
+.emoticon-bouquet  { background-position: -18327.600000000002px 0; }
+.emoticon-cherry_blossom  { background-position: -18396.72px 0; }
+.emoticon-tulip  { background-position: -18465.84px 0; }
+.emoticon-four_leaf_clover  { background-position: -18534.96px 0; }
+.emoticon-rose  { background-position: -18604.08px 0; }
+.emoticon-sunflower  { background-position: -18673.2px 0; }
+.emoticon-hibiscus  { background-position: -18742.32px 0; }
+.emoticon-maple_leaf  { background-position: -18811.44px 0; }
+.emoticon-leaves  { background-position: -18880.559999999998px 0; }
+.emoticon-fallen_leaf  { background-position: -18949.68px 0; }
+.emoticon-herb  { background-position: -19018.8px 0; }
+.emoticon-mushroom  { background-position: -19087.92px 0; }
+.emoticon-cactus  { background-position: -19157.04px 0; }
+.emoticon-palm_tree  { background-position: -19226.16px 0; }
+.emoticon-evergreen_tree  { background-position: -19295.280000000002px 0; }
+.emoticon-deciduous_tree  { background-position: -19364.4px 0; }
+.emoticon-chestnut  { background-position: -19433.52px 0; }
+.emoticon-seedling  { background-position: -19502.64px 0; }
+.emoticon-blossom  { background-position: -19571.76px 0; }
+.emoticon-ear_of_rice  { background-position: -19640.88px 0; }
+.emoticon-shell  { background-position: -19710px 0; }
+.emoticon-globe_with_meridians  { background-position: -19779.12px 0; }
+.emoticon-sun_with_face  { background-position: -19848.239999999998px 0; }
+.emoticon-full_moon_with_face  { background-position: -19917.359999999997px 0; }
+.emoticon-new_moon_with_face  { background-position: -19986.48px 0; }
+.emoticon-new_moon  { background-position: -20055.600000000002px 0; }
+.emoticon-waxing_crescent_moon  { background-position: -20124.72px 0; }
+.emoticon-first_quarter_moon  { background-position: -20193.84px 0; }
+.emoticon-waxing_gibbous_moon  { background-position: -20262.96px 0; }
+.emoticon-full_moon  { background-position: -20332.08px 0; }
+.emoticon-waning_gibbous_moon  { background-position: -20401.2px 0; }
+.emoticon-last_quarter_moon  { background-position: -20470.32px 0; }
+.emoticon-waning_crescent_moon  { background-position: -20539.44px 0; }
+.emoticon-last_quarter_moon_with_face  { background-position: -20608.559999999998px 0; }
+.emoticon-first_quarter_moon_with_face  { background-position: -20677.68px 0; }
+.emoticon-moon  { background-position: -20746.8px 0; }
+.emoticon-earth_africa  { background-position: -20815.92px 0; }
+.emoticon-earth_americas  { background-position: -20885.04px 0; }
+.emoticon-earth_asia  { background-position: -20954.16px 0; }
+.emoticon-volcano  { background-position: -21023.280000000002px 0; }
+.emoticon-milky_way  { background-position: -21092.4px 0; }
+.emoticon-partly_sunny  { background-position: -21161.52px 0; }
+.emoticon-octocat  { background-position: -21230.64px 0; }
+.emoticon-squirrel  { background-position: -21299.76px 0; }
+.emoticon-bamboo  { background-position: -21368.88px 0; }
+.emoticon-gift_heart  { background-position: -21438px 0; }
+.emoticon-dolls  { background-position: -21507.12px 0; }
+.emoticon-school_satchel  { background-position: -21576.239999999998px 0; }
+.emoticon-mortar_board  { background-position: -21645.359999999997px 0; }
+.emoticon-flags  { background-position: -21714.48px 0; }
+.emoticon-fireworks  { background-position: -21783.600000000002px 0; }
+.emoticon-sparkler  { background-position: -21852.72px 0; }
+.emoticon-wind_chime  { background-position: -21921.84px 0; }
+.emoticon-rice_scene  { background-position: -21990.96px 0; }
+.emoticon-jack_o_lantern  { background-position: -22060.08px 0; }
+.emoticon-ghost  { background-position: -22129.2px 0; }
+.emoticon-santa  { background-position: -22198.32px 0; }
+.emoticon-christmas_tree  { background-position: -22267.44px 0; }
+.emoticon-gift  { background-position: -22336.559999999998px 0; }
+.emoticon-bell  { background-position: -22405.68px 0; }
+.emoticon-no_bell  { background-position: -22474.8px 0; }
+.emoticon-tanabata_tree  { background-position: -22543.92px 0; }
+.emoticon-tada  { background-position: -22613.04px 0; }
+.emoticon-confetti_ball  { background-position: -22682.16px 0; }
+.emoticon-balloon  { background-position: -22751.280000000002px 0; }
+.emoticon-crystal_ball  { background-position: -22820.4px 0; }
+.emoticon-cd  { background-position: -22889.52px 0; }
+.emoticon-dvd  { background-position: -22958.64px 0; }
+.emoticon-floppy_disk  { background-position: -23027.76px 0; }
+.emoticon-camera  { background-position: -23096.88px 0; }
+.emoticon-video_camera  { background-position: -23166px 0; }
+.emoticon-movie_camera  { background-position: -23235.12px 0; }
+.emoticon-computer  { background-position: -23304.239999999998px 0; }
+.emoticon-tv  { background-position: -23373.359999999997px 0; }
+.emoticon-iphone  { background-position: -23442.48px 0; }
+.emoticon-phone  { background-position: -23511.600000000002px 0; }
+.emoticon-telephone  { background-position: -23580.72px 0; }
+.emoticon-telephone_receiver  { background-position: -23649.84px 0; }
+.emoticon-pager  { background-position: -23718.96px 0; }
+.emoticon-fax  { background-position: -23788.08px 0; }
+.emoticon-minidisc  { background-position: -23857.2px 0; }
+.emoticon-vhs  { background-position: -23926.32px 0; }
+.emoticon-sound  { background-position: -23995.44px 0; }
+.emoticon-speaker  { background-position: -24064.559999999998px 0; }
+.emoticon-mute  { background-position: -24133.68px 0; }
+.emoticon-loudspeaker  { background-position: -24202.8px 0; }
+.emoticon-mega  { background-position: -24271.92px 0; }
+.emoticon-hourglass  { background-position: -24341.04px 0; }
+.emoticon-hourglass_flowing_sand  { background-position: -24410.16px 0; }
+.emoticon-alarm_clock  { background-position: -24479.280000000002px 0; }
+.emoticon-watch  { background-position: -24548.4px 0; }
+.emoticon-radio  { background-position: -24617.52px 0; }
+.emoticon-satellite  { background-position: -24686.64px 0; }
+.emoticon-loop  { background-position: -24755.76px 0; }
+.emoticon-mag  { background-position: -24824.88px 0; }
+.emoticon-mag_right  { background-position: -24894px 0; }
+.emoticon-unlock  { background-position: -24963.12px 0; }
+.emoticon-lock  { background-position: -25032.239999999998px 0; }
+.emoticon-lock_with_ink_pen  { background-position: -25101.359999999997px 0; }
+.emoticon-closed_lock_with_key  { background-position: -25170.48px 0; }
+.emoticon-key  { background-position: -25239.600000000002px 0; }
+.emoticon-bulb  { background-position: -25308.72px 0; }
+.emoticon-flashlight  { background-position: -25377.84px 0; }
+.emoticon-high_brightness  { background-position: -25446.96px 0; }
+.emoticon-low_brightness  { background-position: -25516.08px 0; }
+.emoticon-electric_plug  { background-position: -25585.2px 0; }
+.emoticon-battery  { background-position: -25654.32px 0; }
+.emoticon-calling  { background-position: -25723.44px 0; }
+.emoticon-email  { background-position: -25792.559999999998px 0; }
+.emoticon-mailbox  { background-position: -25861.68px 0; }
+.emoticon-postbox  { background-position: -25930.8px 0; }
+.emoticon-bath  { background-position: -25999.92px 0; }
+.emoticon-bathtub  { background-position: -26069.04px 0; }
+.emoticon-shower  { background-position: -26138.16px 0; }
+.emoticon-toilet  { background-position: -26207.280000000002px 0; }
+.emoticon-wrench  { background-position: -26276.4px 0; }
+.emoticon-nut_and_bolt  { background-position: -26345.52px 0; }
+.emoticon-hammer  { background-position: -26414.64px 0; }
+.emoticon-seat  { background-position: -26483.76px 0; }
+.emoticon-moneybag  { background-position: -26552.879999999997px 0; }
+.emoticon-yen  { background-position: -26622px 0; }
+.emoticon-dollar  { background-position: -26691.12px 0; }
+.emoticon-pound  { background-position: -26760.239999999998px 0; }
+.emoticon-euro  { background-position: -26829.359999999997px 0; }
+.emoticon-credit_card  { background-position: -26898.48px 0; }
+.emoticon-money_with_wings  { background-position: -26967.600000000002px 0; }
+.emoticon-e\-mail  { background-position: -27036.72px 0; }
+.emoticon-inbox_tray  { background-position: -27105.84px 0; }
+.emoticon-outbox_tray  { background-position: -27174.96px 0; }
+.emoticon-envelope  { background-position: -27244.079999999998px 0; }
+.emoticon-incoming_envelope  { background-position: -27313.2px 0; }
+.emoticon-postal_horn  { background-position: -27382.32px 0; }
+.emoticon-mailbox_closed  { background-position: -27451.44px 0; }
+.emoticon-mailbox_with_mail  { background-position: -27520.559999999998px 0; }
+.emoticon-mailbox_with_no_mail  { background-position: -27589.679999999997px 0; }
+.emoticon-door  { background-position: -27658.8px 0; }
+.emoticon-smoking  { background-position: -27727.92px 0; }
+.emoticon-bomb  { background-position: -27797.04px 0; }
+.emoticon-gun  { background-position: -27866.16px 0; }
+.emoticon-hocho  { background-position: -27935.28px 0; }
+.emoticon-pill  { background-position: -28004.4px 0; }
+.emoticon-syringe  { background-position: -28073.52px 0; }
+.emoticon-page_facing_up  { background-position: -28142.64px 0; }
+.emoticon-page_with_curl  { background-position: -28211.76px 0; }
+.emoticon-bookmark_tabs  { background-position: -28280.879999999997px 0; }
+.emoticon-bar_chart  { background-position: -28350px 0; }
+.emoticon-chart_with_upwards_trend  { background-position: -28419.12px 0; }
+.emoticon-chart_with_downwards_trend  { background-position: -28488.239999999998px 0; }
+.emoticon-scroll  { background-position: -28557.359999999997px 0; }
+.emoticon-clipboard  { background-position: -28626.48px 0; }
+.emoticon-calendar  { background-position: -28695.600000000002px 0; }
+.emoticon-date  { background-position: -28764.72px 0; }
+.emoticon-card_index  { background-position: -28833.84px 0; }
+.emoticon-file_folder  { background-position: -28902.96px 0; }
+.emoticon-open_file_folder  { background-position: -28972.079999999998px 0; }
+.emoticon-scissors  { background-position: -29041.2px 0; }
+.emoticon-pushpin  { background-position: -29110.32px 0; }
+.emoticon-paperclip  { background-position: -29179.44px 0; }
+.emoticon-black_nib  { background-position: -29248.559999999998px 0; }
+.emoticon-pencil2  { background-position: -29317.679999999997px 0; }
+.emoticon-straight_ruler  { background-position: -29386.8px 0; }
+.emoticon-triangular_ruler  { background-position: -29455.92px 0; }
+.emoticon-closed_book  { background-position: -29525.04px 0; }
+.emoticon-green_book  { background-position: -29594.160000000003px 0; }
+.emoticon-blue_book  { background-position: -29663.28px 0; }
+.emoticon-orange_book  { background-position: -29732.4px 0; }
+.emoticon-notebook  { background-position: -29801.519999999997px 0; }
+.emoticon-notebook_with_decorative_cover  { background-position: -29870.64px 0; }
+.emoticon-ledger  { background-position: -29939.760000000002px 0; }
+.emoticon-books  { background-position: -30008.879999999997px 0; }
+.emoticon-bookmark  { background-position: -30078px 0; }
+.emoticon-name_badge  { background-position: -30147.119999999995px 0; }
+.emoticon-microscope  { background-position: -30216.239999999998px 0; }
+.emoticon-telescope  { background-position: -30285.36px 0; }
+.emoticon-newspaper  { background-position: -30354.48px 0; }
+.emoticon-football  { background-position: -30423.600000000002px 0; }
+.emoticon-basketball  { background-position: -30492.719999999998px 0; }
+.emoticon-soccer  { background-position: -30561.84px 0; }
+.emoticon-baseball  { background-position: -30630.960000000003px 0; }
+.emoticon-tennis  { background-position: -30700.079999999998px 0; }
+.emoticon-8ball  { background-position: -30769.2px 0; }
+.emoticon-rugby_football  { background-position: -30838.319999999996px 0; }
+.emoticon-bowling  { background-position: -30907.44px 0; }
+.emoticon-golf  { background-position: -30976.56px 0; }
+.emoticon-mountain_bicyclist  { background-position: -31045.679999999997px 0; }
+.emoticon-bicyclist  { background-position: -31114.8px 0; }
+.emoticon-horse_racing  { background-position: -31183.92px 0; }
+.emoticon-snowboarder  { background-position: -31253.04px 0; }
+.emoticon-swimmer  { background-position: -31322.160000000003px 0; }
+.emoticon-surfer  { background-position: -31391.28px 0; }
+.emoticon-ski  { background-position: -31460.4px 0; }
+.emoticon-spades  { background-position: -31529.519999999997px 0; }
+.emoticon-hearts  { background-position: -31598.64px 0; }
+.emoticon-clubs  { background-position: -31667.760000000002px 0; }
+.emoticon-diamonds  { background-position: -31736.879999999997px 0; }
+.emoticon-gem  { background-position: -31806px 0; }
+.emoticon-ring  { background-position: -31875.119999999995px 0; }
+.emoticon-trophy  { background-position: -31944.239999999998px 0; }
+.emoticon-musical_score  { background-position: -32013.36px 0; }
+.emoticon-musical_keyboard  { background-position: -32082.48px 0; }
+.emoticon-violin  { background-position: -32151.600000000002px 0; }
+.emoticon-space_invader  { background-position: -32220.719999999998px 0; }
+.emoticon-video_game  { background-position: -32289.84px 0; }
+.emoticon-black_joker  { background-position: -32358.960000000003px 0; }
+.emoticon-flower_playing_cards  { background-position: -32428.079999999998px 0; }
+.emoticon-game_die  { background-position: -32497.2px 0; }
+.emoticon-dart  { background-position: -32566.319999999996px 0; }
+.emoticon-mahjong  { background-position: -32635.44px 0; }
+.emoticon-clapper  { background-position: -32704.56px 0; }
+.emoticon-memo  { background-position: -32773.68px 0; }
+.emoticon-pencil  { background-position: -32842.8px 0; }
+.emoticon-book  { background-position: -32911.92px 0; }
+.emoticon-art  { background-position: -32981.04px 0; }
+.emoticon-microphone  { background-position: -33050.16px 0; }
+.emoticon-headphones  { background-position: -33119.28px 0; }
+.emoticon-trumpet  { background-position: -33188.4px 0; }
+.emoticon-saxophone  { background-position: -33257.52px 0; }
+.emoticon-guitar  { background-position: -33326.64px 0; }
+.emoticon-shoe  { background-position: -33395.76px 0; }
+.emoticon-sandal  { background-position: -33464.88px 0; }
+.emoticon-high_heel  { background-position: -33534px 0; }
+.emoticon-lipstick  { background-position: -33603.119999999995px 0; }
+.emoticon-boot  { background-position: -33672.24px 0; }
+.emoticon-shirt  { background-position: -33741.36px 0; }
+.emoticon-tshirt  { background-position: -33810.479999999996px 0; }
+.emoticon-necktie  { background-position: -33879.6px 0; }
+.emoticon-womans_clothes  { background-position: -33948.719999999994px 0; }
+.emoticon-dress  { background-position: -34017.84px 0; }
+.emoticon-running_shirt_with_sash  { background-position: -34086.96px 0; }
+.emoticon-jeans  { background-position: -34156.08px 0; }
+.emoticon-kimono  { background-position: -34225.200000000004px 0; }
+.emoticon-bikini  { background-position: -34294.32px 0; }
+.emoticon-ribbon  { background-position: -34363.44px 0; }
+.emoticon-tophat  { background-position: -34432.560000000005px 0; }
+.emoticon-crown  { background-position: -34501.68px 0; }
+.emoticon-womans_hat  { background-position: -34570.8px 0; }
+.emoticon-mans_shoe  { background-position: -34639.92px 0; }
+.emoticon-closed_umbrella  { background-position: -34709.04px 0; }
+.emoticon-briefcase  { background-position: -34778.16px 0; }
+.emoticon-handbag  { background-position: -34847.28px 0; }
+.emoticon-pouch  { background-position: -34916.4px 0; }
+.emoticon-purse  { background-position: -34985.52px 0; }
+.emoticon-eyeglasses  { background-position: -35054.64px 0; }
+.emoticon-fishing_pole_and_fish  { background-position: -35123.76px 0; }
+.emoticon-coffee  { background-position: -35192.88px 0; }
+.emoticon-tea  { background-position: -35262px 0; }
+.emoticon-sake  { background-position: -35331.119999999995px 0; }
+.emoticon-baby_bottle  { background-position: -35400.24px 0; }
+.emoticon-beer  { background-position: -35469.36px 0; }
+.emoticon-beers  { background-position: -35538.479999999996px 0; }
+.emoticon-cocktail  { background-position: -35607.6px 0; }
+.emoticon-tropical_drink  { background-position: -35676.719999999994px 0; }
+.emoticon-wine_glass  { background-position: -35745.84px 0; }
+.emoticon-fork_and_knife  { background-position: -35814.96px 0; }
+.emoticon-pizza  { background-position: -35884.08px 0; }
+.emoticon-hamburger  { background-position: -35953.200000000004px 0; }
+.emoticon-fries  { background-position: -36022.32px 0; }
+.emoticon-poultry_leg  { background-position: -36091.44px 0; }
+.emoticon-meat_on_bone  { background-position: -36160.560000000005px 0; }
+.emoticon-spaghetti  { background-position: -36229.68px 0; }
+.emoticon-curry  { background-position: -36298.8px 0; }
+.emoticon-fried_shrimp  { background-position: -36367.92px 0; }
+.emoticon-bento  { background-position: -36437.04px 0; }
+.emoticon-sushi  { background-position: -36506.16px 0; }
+.emoticon-fish_cake  { background-position: -36575.28px 0; }
+.emoticon-rice_ball  { background-position: -36644.4px 0; }
+.emoticon-rice_cracker  { background-position: -36713.52px 0; }
+.emoticon-rice  { background-position: -36782.64px 0; }
+.emoticon-ramen  { background-position: -36851.76px 0; }
+.emoticon-stew  { background-position: -36920.88px 0; }
+.emoticon-oden  { background-position: -36990px 0; }
+.emoticon-dango  { background-position: -37059.119999999995px 0; }
+.emoticon-egg  { background-position: -37128.24px 0; }
+.emoticon-bread  { background-position: -37197.36px 0; }
+.emoticon-doughnut  { background-position: -37266.479999999996px 0; }
+.emoticon-custard  { background-position: -37335.6px 0; }
+.emoticon-icecream  { background-position: -37404.719999999994px 0; }
+.emoticon-ice_cream  { background-position: -37473.84px 0; }
+.emoticon-shaved_ice  { background-position: -37542.96px 0; }
+.emoticon-birthday  { background-position: -37612.08px 0; }
+.emoticon-cake  { background-position: -37681.200000000004px 0; }
+.emoticon-cookie  { background-position: -37750.32px 0; }
+.emoticon-chocolate_bar  { background-position: -37819.44px 0; }
+.emoticon-candy  { background-position: -37888.560000000005px 0; }
+.emoticon-lollipop  { background-position: -37957.68px 0; }
+.emoticon-honey_pot  { background-position: -38026.8px 0; }
+.emoticon-apple  { background-position: -38095.92px 0; }
+.emoticon-green_apple  { background-position: -38165.04px 0; }
+.emoticon-tangerine  { background-position: -38234.16px 0; }
+.emoticon-lemon  { background-position: -38303.28px 0; }
+.emoticon-cherries  { background-position: -38372.4px 0; }
+.emoticon-grapes  { background-position: -38441.52px 0; }
+.emoticon-watermelon  { background-position: -38510.64px 0; }
+.emoticon-strawberry  { background-position: -38579.76px 0; }
+.emoticon-peach  { background-position: -38648.88px 0; }
+.emoticon-melon  { background-position: -38718px 0; }
+.emoticon-banana  { background-position: -38787.119999999995px 0; }
+.emoticon-pear  { background-position: -38856.24px 0; }
+.emoticon-pineapple  { background-position: -38925.36px 0; }
+.emoticon-sweet_potato  { background-position: -38994.479999999996px 0; }
+.emoticon-eggplant  { background-position: -39063.6px 0; }
+.emoticon-tomato  { background-position: -39132.719999999994px 0; }
+.emoticon-corn  { background-position: -39201.84px 0; }
+.emoticon-house  { background-position: -39270.96px 0; }
+.emoticon-house_with_garden  { background-position: -39340.08px 0; }
+.emoticon-school  { background-position: -39409.200000000004px 0; }
+.emoticon-office  { background-position: -39478.32px 0; }
+.emoticon-post_office  { background-position: -39547.44px 0; }
+.emoticon-hospital  { background-position: -39616.560000000005px 0; }
+.emoticon-bank  { background-position: -39685.68px 0; }
+.emoticon-convenience_store  { background-position: -39754.8px 0; }
+.emoticon-love_hotel  { background-position: -39823.92px 0; }
+.emoticon-hotel  { background-position: -39893.04px 0; }
+.emoticon-wedding  { background-position: -39962.16px 0; }
+.emoticon-church  { background-position: -40031.28px 0; }
+.emoticon-department_store  { background-position: -40100.4px 0; }
+.emoticon-european_post_office  { background-position: -40169.52px 0; }
+.emoticon-city_sunrise  { background-position: -40238.64px 0; }
+.emoticon-city_sunset  { background-position: -40307.76px 0; }
+.emoticon-japanese_castle  { background-position: -40376.88px 0; }
+.emoticon-european_castle  { background-position: -40446px 0; }
+.emoticon-tent  { background-position: -40515.119999999995px 0; }
+.emoticon-factory  { background-position: -40584.24px 0; }
+.emoticon-tokyo_tower  { background-position: -40653.36px 0; }
+.emoticon-japan  { background-position: -40722.479999999996px 0; }
+.emoticon-mount_fuji  { background-position: -40791.6px 0; }
+.emoticon-sunrise_over_mountains  { background-position: -40860.719999999994px 0; }
+.emoticon-sunrise  { background-position: -40929.84px 0; }
+.emoticon-stars  { background-position: -40998.96px 0; }
+.emoticon-themoreyouknow  { background-position: -40998.96px 0; }
+.emoticon-tmyk  { background-position: -40998.96px 0; }
+.emoticon-statue_of_liberty  { background-position: -41068.08px 0; }
+.emoticon-bridge_at_night  { background-position: -41137.200000000004px 0; }
+.emoticon-carousel_horse  { background-position: -41206.32px 0; }
+.emoticon-rainbow  { background-position: -41275.44px 0; }
+.emoticon-ferris_wheel  { background-position: -41344.560000000005px 0; }
+.emoticon-fountain  { background-position: -41413.68px 0; }
+.emoticon-roller_coaster  { background-position: -41482.8px 0; }
+.emoticon-ship  { background-position: -41551.92px 0; }
+.emoticon-speedboat  { background-position: -41621.04px 0; }
+.emoticon-boat  { background-position: -41690.16px 0; }
+.emoticon-sailboat  { background-position: -41759.28px 0; }
+.emoticon-rowboat  { background-position: -41828.4px 0; }
+.emoticon-anchor  { background-position: -41897.52px 0; }
+.emoticon-rocket  { background-position: -41966.64px 0; }
+.emoticon-airplane  { background-position: -42035.76px 0; }
+.emoticon-helicopter  { background-position: -42104.88px 0; }
+.emoticon-steam_locomotive  { background-position: -42174px 0; }
+.emoticon-tram  { background-position: -42243.119999999995px 0; }
+.emoticon-mountain_railway  { background-position: -42312.24px 0; }
+.emoticon-bike  { background-position: -42381.36px 0; }
+.emoticon-aerial_tramway  { background-position: -42450.479999999996px 0; }
+.emoticon-suspension_railway  { background-position: -42519.6px 0; }
+.emoticon-mountain_cableway  { background-position: -42588.719999999994px 0; }
+.emoticon-tractor  { background-position: -42657.84px 0; }
+.emoticon-blue_car  { background-position: -42726.96px 0; }
+.emoticon-oncoming_automobile  { background-position: -42796.08px 0; }
+.emoticon-car  { background-position: -42865.200000000004px 0; }
+.emoticon-red_car  { background-position: -42934.32px 0; }
+.emoticon-taxi  { background-position: -43003.44px 0; }
+.emoticon-oncoming_taxi  { background-position: -43072.560000000005px 0; }
+.emoticon-articulated_lorry  { background-position: -43141.68px 0; }
+.emoticon-bus  { background-position: -43210.8px 0; }
+.emoticon-oncoming_bus  { background-position: -43279.92px 0; }
+.emoticon-rotating_light  { background-position: -43349.04px 0; }
+.emoticon-police_car  { background-position: -43418.16px 0; }
+.emoticon-oncoming_police_car  { background-position: -43487.28px 0; }
+.emoticon-fire_engine  { background-position: -43556.4px 0; }
+.emoticon-ambulance  { background-position: -43625.52px 0; }
+.emoticon-minibus  { background-position: -43694.64px 0; }
+.emoticon-truck  { background-position: -43763.76px 0; }
+.emoticon-train  { background-position: -43832.88px 0; }
+.emoticon-station  { background-position: -43902px 0; }
+.emoticon-train2  { background-position: -43971.119999999995px 0; }
+.emoticon-bullettrain_front  { background-position: -44040.24px 0; }
+.emoticon-bullettrain_side  { background-position: -44109.36px 0; }
+.emoticon-light_rail  { background-position: -44178.479999999996px 0; }
+.emoticon-monorail  { background-position: -44247.6px 0; }
+.emoticon-railway_car  { background-position: -44316.719999999994px 0; }
+.emoticon-trolleybus  { background-position: -44385.84px 0; }
+.emoticon-ticket  { background-position: -44454.96px 0; }
+.emoticon-fuelpump  { background-position: -44524.08px 0; }
+.emoticon-vertical_traffic_light  { background-position: -44593.200000000004px 0; }
+.emoticon-traffic_light  { background-position: -44662.32px 0; }
+.emoticon-warning  { background-position: -44731.44px 0; }
+.emoticon-construction  { background-position: -44800.560000000005px 0; }
+.emoticon-beginner  { background-position: -44869.68px 0; }
+.emoticon-atm  { background-position: -44938.8px 0; }
+.emoticon-slot_machine  { background-position: -45007.92px 0; }
+.emoticon-busstop  { background-position: -45077.04px 0; }
+.emoticon-barber  { background-position: -45146.16px 0; }
+.emoticon-hotsprings  { background-position: -45215.28px 0; }
+.emoticon-checkered_flag  { background-position: -45284.4px 0; }
+.emoticon-crossed_flags  { background-position: -45353.52px 0; }
+.emoticon-izakaya_lantern  { background-position: -45422.64px 0; }
+.emoticon-moyai  { background-position: -45491.76px 0; }
+.emoticon-circus_tent  { background-position: -45560.88px 0; }
+.emoticon-performing_arts  { background-position: -45630px 0; }
+.emoticon-round_pushpin  { background-position: -45699.119999999995px 0; }
+.emoticon-triangular_flag_on_post  { background-position: -45768.24px 0; }
+.emoticon-jp  { background-position: -45837.36px 0; }
+.emoticon-kr  { background-position: -45906.479999999996px 0; }
+.emoticon-cn  { background-position: -45975.6px 0; }
+.emoticon-us  { background-position: -46044.719999999994px 0; }
+.emoticon-fr  { background-position: -46113.84px 0; }
+.emoticon-es  { background-position: -46182.96px 0; }
+.emoticon-it  { background-position: -46252.08px 0; }
+.emoticon-ru  { background-position: -46321.200000000004px 0; }
+.emoticon-gb  { background-position: -46390.32px 0; }
+.emoticon-uk  { background-position: -46459.44px 0; }
+.emoticon-de  { background-position: -46528.560000000005px 0; }
+.emoticon-one  { background-position: -46597.68px 0; }
+.emoticon-two  { background-position: -46666.8px 0; }
+.emoticon-three  { background-position: -46735.92px 0; }
+.emoticon-four  { background-position: -46805.04px 0; }
+.emoticon-five  { background-position: -46874.16px 0; }
+.emoticon-six  { background-position: -46943.28px 0; }
+.emoticon-seven  { background-position: -47012.4px 0; }
+.emoticon-eight  { background-position: -47081.52px 0; }
+.emoticon-nine  { background-position: -47150.64px 0; }
+.emoticon-keycap_ten  { background-position: -47219.76px 0; }
+.emoticon-1234  { background-position: -47288.88px 0; }
+.emoticon-zero  { background-position: -47358px 0; }
+.emoticon-hash  { background-position: -47427.119999999995px 0; }
+.emoticon-symbols  { background-position: -47496.24px 0; }
+.emoticon-arrow_backward  { background-position: -47565.36px 0; }
+.emoticon-arrow_down  { background-position: -47634.479999999996px 0; }
+.emoticon-arrow_forward  { background-position: -47703.6px 0; }
+.emoticon-arrow_left  { background-position: -47772.719999999994px 0; }
+.emoticon-capital_abcd  { background-position: -47841.84px 0; }
+.emoticon-abcd  { background-position: -47910.96px 0; }
+.emoticon-abc  { background-position: -47980.08px 0; }
+.emoticon-arrow_lower_left  { background-position: -48049.200000000004px 0; }
+.emoticon-arrow_lower_right  { background-position: -48118.32px 0; }
+.emoticon-arrow_right  { background-position: -48187.44px 0; }
+.emoticon-arrow_up  { background-position: -48256.560000000005px 0; }
+.emoticon-arrow_upper_left  { background-position: -48325.68px 0; }
+.emoticon-arrow_upper_right  { background-position: -48394.8px 0; }
+.emoticon-arrow_double_down  { background-position: -48463.92px 0; }
+.emoticon-arrow_double_up  { background-position: -48533.04px 0; }
+.emoticon-arrow_down_small  { background-position: -48602.16px 0; }
+.emoticon-arrow_heading_down  { background-position: -48671.28px 0; }
+.emoticon-arrow_heading_up  { background-position: -48740.4px 0; }
+.emoticon-leftwards_arrow_with_hook  { background-position: -48809.52px 0; }
+.emoticon-arrow_right_hook  { background-position: -48878.64px 0; }
+.emoticon-left_right_arrow  { background-position: -48947.76px 0; }
+.emoticon-arrow_up_down  { background-position: -49016.88px 0; }
+.emoticon-arrow_up_small  { background-position: -49086px 0; }
+.emoticon-arrows_clockwise  { background-position: -49155.119999999995px 0; }
+.emoticon-arrows_counterclockwise  { background-position: -49224.24px 0; }
+.emoticon-rewind  { background-position: -49293.36px 0; }
+.emoticon-fast_forward  { background-position: -49362.479999999996px 0; }
+.emoticon-information_source  { background-position: -49431.6px 0; }
+.emoticon-ok  { background-position: -49500.719999999994px 0; }
+.emoticon-twisted_rightwards_arrows  { background-position: -49569.84px 0; }
+.emoticon-repeat  { background-position: -49638.96px 0; }
+.emoticon-repeat_one  { background-position: -49708.08px 0; }
+.emoticon-new  { background-position: -49777.200000000004px 0; }
+.emoticon-top  { background-position: -49846.32px 0; }
+.emoticon-up  { background-position: -49915.44px 0; }
+.emoticon-cool  { background-position: -49984.560000000005px 0; }
+.emoticon-free  { background-position: -50053.68px 0; }
+.emoticon-ng  { background-position: -50122.8px 0; }
+.emoticon-cinema  { background-position: -50191.92px 0; }
+.emoticon-koko  { background-position: -50261.04px 0; }
+.emoticon-signal_strength  { background-position: -50330.16px 0; }
+.emoticon-u5272  { background-position: -50399.28px 0; }
+.emoticon-u5408  { background-position: -50468.4px 0; }
+.emoticon-u55b6  { background-position: -50537.52px 0; }
+.emoticon-u6307  { background-position: -50606.64px 0; }
+.emoticon-u6708  { background-position: -50675.76px 0; }
+.emoticon-u6709  { background-position: -50744.88px 0; }
+.emoticon-u6e80  { background-position: -50814px 0; }
+.emoticon-u7121  { background-position: -50883.119999999995px 0; }
+.emoticon-u7533  { background-position: -50952.24px 0; }
+.emoticon-u7a7a  { background-position: -51021.36px 0; }
+.emoticon-u7981  { background-position: -51090.479999999996px 0; }
+.emoticon-sa  { background-position: -51159.6px 0; }
+.emoticon-restroom  { background-position: -51228.719999999994px 0; }
+.emoticon-mens  { background-position: -51297.84px 0; }
+.emoticon-womens  { background-position: -51366.96px 0; }
+.emoticon-baby_symbol  { background-position: -51436.08px 0; }
+.emoticon-no_smoking  { background-position: -51505.200000000004px 0; }
+.emoticon-parking  { background-position: -51574.32px 0; }
+.emoticon-wheelchair  { background-position: -51643.44px 0; }
+.emoticon-metro  { background-position: -51712.560000000005px 0; }
+.emoticon-baggage_claim  { background-position: -51781.68px 0; }
+.emoticon-accept  { background-position: -51850.8px 0; }
+.emoticon-wc  { background-position: -51919.92px 0; }
+.emoticon-potable_water  { background-position: -51989.04px 0; }
+.emoticon-put_litter_in_its_place  { background-position: -52058.16px 0; }
+.emoticon-secret  { background-position: -52127.28px 0; }
+.emoticon-congratulations  { background-position: -52196.4px 0; }
+.emoticon-m  { background-position: -52265.52px 0; }
+.emoticon-passport_control  { background-position: -52334.64px 0; }
+.emoticon-left_luggage  { background-position: -52403.76px 0; }
+.emoticon-customs  { background-position: -52472.88px 0; }
+.emoticon-ideograph_advantage  { background-position: -52542px 0; }
+.emoticon-cl  { background-position: -52611.119999999995px 0; }
+.emoticon-sos  { background-position: -52680.24px 0; }
+.emoticon-id  { background-position: -52749.36px 0; }
+.emoticon-no_entry_sign  { background-position: -52818.479999999996px 0; }
+.emoticon-underage  { background-position: -52887.6px 0; }
+.emoticon-no_mobile_phones  { background-position: -52956.719999999994px 0; }
+.emoticon-do_not_litter  { background-position: -53025.84px 0; }
+.emoticon-non\-potable_water  { background-position: -53094.96px 0; }
+.emoticon-no_bicycles  { background-position: -53164.08px 0; }
+.emoticon-no_pedestrians  { background-position: -53233.200000000004px 0; }
+.emoticon-children_crossing  { background-position: -53302.32px 0; }
+.emoticon-no_entry  { background-position: -53371.44px 0; }
+.emoticon-eight_spoked_asterisk  { background-position: -53440.56px 0; }
+.emoticon-eight_pointed_black_star  { background-position: -53509.68px 0; }
+.emoticon-heart_decoration  { background-position: -53578.8px 0; }
+.emoticon-vs  { background-position: -53647.92px 0; }
+.emoticon-vibration_mode  { background-position: -53717.04px 0; }
+.emoticon-mobile_phone_off  { background-position: -53786.159999999996px 0; }
+.emoticon-chart  { background-position: -53855.28px 0; }
+.emoticon-currency_exchange  { background-position: -53924.4px 0; }
+.emoticon-aries  { background-position: -53993.52px 0; }
+.emoticon-taurus  { background-position: -54062.64px 0; }
+.emoticon-gemini  { background-position: -54131.759999999995px 0; }
+.emoticon-cancer  { background-position: -54200.88px 0; }
+.emoticon-leo  { background-position: -54270px 0; }
+.emoticon-virgo  { background-position: -54339.119999999995px 0; }
+.emoticon-libra  { background-position: -54408.24px 0; }
+.emoticon-scorpius  { background-position: -54477.35999999999px 0; }
+.emoticon-sagittarius  { background-position: -54546.479999999996px 0; }
+.emoticon-capricorn  { background-position: -54615.6px 0; }
+.emoticon-aquarius  { background-position: -54684.719999999994px 0; }
+.emoticon-pisces  { background-position: -54753.84px 0; }
+.emoticon-ophiuchus  { background-position: -54822.96px 0; }
+.emoticon-six_pointed_star  { background-position: -54892.08px 0; }
+.emoticon-negative_squared_cross_mark  { background-position: -54961.200000000004px 0; }
+.emoticon-a  { background-position: -55030.32px 0; }
+.emoticon-b  { background-position: -55099.44px 0; }
+.emoticon-ab  { background-position: -55168.56px 0; }
+.emoticon-o2  { background-position: -55237.68px 0; }
+.emoticon-diamond_shape_with_a_dot_inside  { background-position: -55306.8px 0; }
+.emoticon-recycle  { background-position: -55375.92px 0; }
+.emoticon-end  { background-position: -55445.04px 0; }
+.emoticon-on  { background-position: -55514.159999999996px 0; }
+.emoticon-soon  { background-position: -55583.28px 0; }
+.emoticon-clock1  { background-position: -55652.4px 0; }
+.emoticon-clock130  { background-position: -55721.52px 0; }
+.emoticon-clock10  { background-position: -55790.64px 0; }
+.emoticon-clock1030  { background-position: -55859.759999999995px 0; }
+.emoticon-clock11  { background-position: -55928.88px 0; }
+.emoticon-clock1130  { background-position: -55998px 0; }
+.emoticon-clock12  { background-position: -56067.119999999995px 0; }
+.emoticon-clock1230  { background-position: -56136.24px 0; }
+.emoticon-clock2  { background-position: -56205.35999999999px 0; }
+.emoticon-clock230  { background-position: -56274.479999999996px 0; }
+.emoticon-clock3  { background-position: -56343.6px 0; }
+.emoticon-clock330  { background-position: -56412.719999999994px 0; }
+.emoticon-clock4  { background-position: -56481.84px 0; }
+.emoticon-clock430  { background-position: -56550.96px 0; }
+.emoticon-clock5  { background-position: -56620.08px 0; }
+.emoticon-clock530  { background-position: -56689.200000000004px 0; }
+.emoticon-clock6  { background-position: -56758.32px 0; }
+.emoticon-clock630  { background-position: -56827.44px 0; }
+.emoticon-clock7  { background-position: -56896.56px 0; }
+.emoticon-clock730  { background-position: -56965.68px 0; }
+.emoticon-clock8  { background-position: -57034.8px 0; }
+.emoticon-clock830  { background-position: -57103.92px 0; }
+.emoticon-clock9  { background-position: -57173.04px 0; }
+.emoticon-clock930  { background-position: -57242.159999999996px 0; }
+.emoticon-heavy_dollar_sign  { background-position: -57311.28px 0; }
+.emoticon-copyright  { background-position: -57380.4px 0; }
+.emoticon-registered  { background-position: -57449.52px 0; }
+.emoticon-tm  { background-position: -57518.64px 0; }
+.emoticon-x  { background-position: -57587.759999999995px 0; }
+.emoticon-heavy_exclamation_mark  { background-position: -57656.88px 0; }
+.emoticon-bangbang  { background-position: -57726px 0; }
+.emoticon-interrobang  { background-position: -57795.119999999995px 0; }
+.emoticon-o  { background-position: -57864.24px 0; }
+.emoticon-heavy_multiplication_x  { background-position: -57933.35999999999px 0; }
+.emoticon-heavy_plus_sign  { background-position: -58002.479999999996px 0; }
+.emoticon-heavy_minus_sign  { background-position: -58071.6px 0; }
+.emoticon-heavy_division_sign  { background-position: -58140.719999999994px 0; }
+.emoticon-white_flower  { background-position: -58209.84px 0; }
+.emoticon-100  { background-position: -58278.96px 0; }
+.emoticon-heavy_check_mark  { background-position: -58348.08px 0; }
+.emoticon-ballot_box_with_check  { background-position: -58417.200000000004px 0; }
+.emoticon-radio_button  { background-position: -58486.32px 0; }
+.emoticon-link  { background-position: -58555.44px 0; }
+.emoticon-curly_loop  { background-position: -58624.56px 0; }
+.emoticon-wavy_dash  { background-position: -58693.68px 0; }
+.emoticon-part_alternation_mark  { background-position: -58762.8px 0; }
+.emoticon-trident  { background-position: -58831.92px 0; }
+.emoticon-black_large_square  { background-position: -58901.04px 0; }
+.emoticon-white_large_square  { background-position: -58970.159999999996px 0; }
+.emoticon-white_check_mark  { background-position: -59039.28px 0; }
+.emoticon-black_square  { background-position: -58898.88px 0; }
+.emoticon-white_square  { background-position: -58970.159999999996px 0; }
+.emoticon-black_square_button  { background-position: -59108.4px 0; }
+.emoticon-white_square_button  { background-position: -59177.520000000004px 0; }
+.emoticon-black_circle  { background-position: -59246.63999999999px 0; }
+.emoticon-white_circle  { background-position: -59315.759999999995px 0; }
+.emoticon-red_circle  { background-position: -59384.88px 0; }
+.emoticon-large_blue_circle  { background-position: -59454px 0; }
+.emoticon-large_blue_diamond  { background-position: -59523.12px 0; }
+.emoticon-large_orange_diamond  { background-position: -59592.23999999999px 0; }
+.emoticon-small_blue_diamond  { background-position: -59661.35999999999px 0; }
+.emoticon-small_orange_diamond  { background-position: -59730.479999999996px 0; }
+.emoticon-small_red_triangle  { background-position: -59799.6px 0; }
+.emoticon-small_red_triangle_down  { background-position: -59868.72px 0; }
+.emoticon-shipit  { background-position: -59937.84px 0; }
+

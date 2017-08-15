@@ -1,0 +1,10 @@
+.form-signin {
+    max-width: 330px;
+    margin: 15% auto;
+}
+
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    box-sizing: border-box;
+}

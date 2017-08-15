@@ -1,0 +1,102 @@
+#shop {
+    padding-top: 70px;
+}
+
+.slide-image {
+    width: 100%;
+}
+
+.carousel-holder {
+    margin-bottom: 30px;
+}
+
+.carousel-control,
+.item {
+    border-radius: 4px;
+}
+
+.caption-btn {
+    margin: 10px;
+}
+
+.caption h4 {
+    white-space: nowrap;
+}
+
+.thumbnail img {
+    width: 100%;
+}
+
+.ratings {
+
+    color: #d17581;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+.cart-toggle {
+    margin: 5px;
+}
+
+.thank-you i{
+    color: #4cae4c;
+}
+
+.thank-you h1{
+    font-weight: bold;
+}
+
+input.ng-invalid {
+    border: 1px solid #a94442;
+}
+
+input.ng-invalid-required {
+    border: 1px solid #ccc;
+}
+
+.show-hide {
+    transition: 1s
+}
+
+.show-hide.ng-hide {
+    opacity: 0
+}
+
+.show-hide-05 {
+    transition: 1s
+}
+
+.show-hide-05.ng-hide {
+    opacity: 0
+}
+
+.todo-text {
+    height: 85%;
+    font-size: 3em;
+    color: #fff;
+    padding: 10px;
+}
+
+.todo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #31708f;
+    z-index: 5;
+    padding: 15px;
+}
+
+/*.emoticon {*/
+    /*background : transparent url(../img/emojis@2x.png) 0 0 no-repeat !important;*/
+/*}*/

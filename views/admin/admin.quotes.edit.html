@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-sm-12">
+        <form name="vm.quotesForm" class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <textarea type="text" name="text" class="form-control" ng-model="ngDialogData.metafields[0].value" placeholder="{{ngDialogData.metafields[0].title}}" required></textarea>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group" ng-init="vm.getAuthors()">
+                    <select name="author" class="form-control" ng-model="ngDialogData.metafields[1].value" ng-options="item._id as item.metadata.name for item in vm.authors" required>
+                        <option value="">Chose author</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-sm-12">
+                <button class="btn btn-success btn-block" ng-class="{'disabled': vm.quotesForm.$invalid}" ng-click="vm.save()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

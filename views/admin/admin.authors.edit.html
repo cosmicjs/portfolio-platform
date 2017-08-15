@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-sm-12">
+        <form name="vm.authorEditForm">
+            <div class="row"
+                 flow-init="vm.flowConfig"
+                 flow-file-success="vm.register(null, $message)"
+                 flow-name="vm.flow">
+                <div class="col-sm-6">
+                    <div class="thumbnail">
+                        <img ng-if="!vm.flow.files.length  && ngDialogData.metafields[1].value" ng-src="{{ngDialogData.metafields[1].url}}">
+                        <img ng-if="!vm.flow.files.length && !ngDialogData.metafields[1].value" ng-src="{{vm.DEFAULT_IMAGE}}">
+                        <img ng-if="vm.flow.files.length" flow-img="vm.flow.files[0]">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" ng-model="ngDialogData.metafields[0].value" placeholder="{{ngDialogData.metafields[0].title}}" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text"
+                               ng-click="popup1.opened = true"
+                               class="form-control"
+                               uib-datepicker-popup="yyyy-dd-MM"
+                               is-open="popup1.opened"
+                               ng-model="ngDialogData.metafields[2].value"
+                               placeholder="{{ngDialogData.metafields[2].title}}" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text"
+                               ng-click="popup2.opened = true"
+                               class="form-control"
+                               is-open="popup2.opened"
+                               uib-datepicker-popup="yyyy-dd-MM"
+                               ng-model="ngDialogData.metafields[3].value"
+                               placeholder="{{ngDialogData.metafields[3].title}}" required>
+                    </div>
+
+                    <button ng-show="!vm.flow.files.length" class="btn btn-default btn-block btn-sm" flow-btn>Change photo</button>
+                    <div ng-show="vm.flow.files.length">
+                        <uib-progressbar class="event-progress active" max="100" value="vm.uploadProgress"></uib-progressbar>
+                        <button class="btn btn-default btn-block btn-sm" ng-click="vm.flow.cancel()">Cancel</button>
+                    </div>
+                    <a href="" class="pull-right" ng-click="vm.showContent = !vm.showContent">
+                        <span ng-show="!vm.showContent">Show</span>
+                        <span ng-show="vm.showContent">Hide</span>
+                        description
+                    </a>
+                </div>
+            </div>
+            <div class="row" ng-show="vm.showContent">
+                <hr>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <div text-angular="" ng-model="ngDialogData.content"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <hr>
+                    <button class="btn btn-success btn-block" ng-class="{'disabled': vm.uploadProgress !== 100 && vm.authorEditForm.$invalid}" ng-click="vm.save()">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

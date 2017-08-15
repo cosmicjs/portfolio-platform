@@ -1,0 +1,30 @@
+<div id="wrapper" class="toggled">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    Emoji App
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="admin.authors">Authors</a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="admin.quotes">Quotes</a>
+            </li>
+            <li>
+                <a ui-sref="auth">Logout</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid" ui-view></div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
