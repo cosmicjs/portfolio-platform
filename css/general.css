@@ -100,3 +100,16 @@ input.ng-invalid-required {
 /*.emoticon {*/
     /*background : transparent url(../img/emojis@2x.png) 0 0 no-repeat !important;*/
 /*}*/
+
+#main {
+    z-index: 1;
+    overflow-x: hidden !important;
+}
+
+#header {
+    z-index: 2;
+}
+
+body {
+    overflow-x: hidden;
+}

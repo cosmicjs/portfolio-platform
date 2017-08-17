@@ -27,7 +27,7 @@
 
                         crAcl.setRole('ROLE_USER');
                         AuthService.setCredentials(currentUser);
-                        $state.go('portfolio');
+                        $state.go('portfolio.intro');
                     }
                     else
                         Flash.create('danger', 'Incorrect username or password');

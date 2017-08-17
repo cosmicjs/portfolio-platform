@@ -1,0 +1,26 @@
+.slide {
+    -webkit-transition: -webkit-transform .7s ease-in-out;
+    -moz-transition: -moz-transform .7s ease-in-out;
+    -o-transition: -o-transform .7s ease-in-out;
+    transition: transform .7s ease-in-out;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+
+.slide.ng-enter {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+
+.slide.ng-enter.ng-enter-active, .slide.ng-leave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+}
+
+.slide.ng-leave.ng-leave-active {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+}

@@ -2,7 +2,12 @@
     'use strict';
 
     angular
-        .module('portfolio', [])
+        .module('portfolio', [
+            'portfolio.intro',
+            'portfolio.projects',
+            'portfolio.about',
+            'portfolio.contact'
+        ])
         .config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
@@ -11,6 +16,7 @@
         $stateProvider
             .state('portfolio', {
                 url: '/',
+                abstract: true,
                 templateUrl: '../views/portfolio/portfolio.html',
                 controller: 'PortfolioCtrl',
                 data: {

@@ -90,7 +90,6 @@
                 }
             });
 
-        $locationProvider.html5Mode(true);
     } 
 
     run.$inject = ['$rootScope', '$cookieStore', '$state', 'crAcl'];
@@ -110,7 +109,7 @@
  
         if ($rootScope.globals.currentUser) {
             crAcl.setRole($rootScope.globals.currentUser.metadata.role);
-            $state.go('portfolio');
+            $state.go('portfolio.intro');
         }
         else {
             crAcl.setRole();

@@ -90,7 +90,6 @@
                 }
             });
 
-        $locationProvider.html5Mode(true);
     } 
 
     run.$inject = ['$rootScope', '$cookieStore', '$state', 'crAcl'];
@@ -110,7 +109,7 @@
  
         if ($rootScope.globals.currentUser) {
             crAcl.setRole($rootScope.globals.currentUser.metadata.role);
-            $state.go('portfolio');
+            $state.go('portfolio.intro');
         }
         else {
             crAcl.setRole();
@@ -211,7 +210,7 @@
 
                         crAcl.setRole('ROLE_USER');
                         AuthService.setCredentials(currentUser);
-                        $state.go('portfolio');
+                        $state.go('portfolio.intro');
                     }
                     else
                         Flash.create('danger', 'Incorrect username or password');
@@ -300,6 +299,15 @@
             };
         });  
 })();  
+angular.module("config", [])
+.constant("BUCKET_SLUG", "photography-portfolio")
+.constant("URL", "https://api.cosmicjs.com/v1/")
+.constant("MEDIA_URL", "https://api.cosmicjs.com/v1/photography-portfolio/media")
+.constant("READ_KEY", "BnYF1ENerFAclDGKtsIffF3PtaYqQyvuyqTTHpFVzsHSKPMt58")
+.constant("DEFAULT_IMAGE", "https://cosmicjs.com/uploads/cbb8e880-60f0-11e7-bc4a-a399e42d4caf-1499215291_user.png")
+.constant("WRITE_KEY", "n20lcTUP5shFNaIYe2H369K9T9PVyywhysOBh9o9xpy2VTYMhB");
+
+ 
 (function () {
     'use strict'; 
 
@@ -339,7 +347,12 @@
     'use strict';
 
     angular
-        .module('portfolio', [])
+        .module('portfolio', [
+            'portfolio.intro',
+            'portfolio.projects',
+            'portfolio.about',
+            'portfolio.contact'
+        ])
         .config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
@@ -348,6 +361,7 @@
         $stateProvider
             .state('portfolio', {
                 url: '/',
+                abstract: true,
                 templateUrl: '../views/portfolio/portfolio.html',
                 controller: 'PortfolioCtrl',
                 data: {
@@ -357,15 +371,6 @@
     }
 
 })();
- 
-angular.module("config", [])
-.constant("BUCKET_SLUG", "photography-portfolio")
-.constant("URL", "https://api.cosmicjs.com/v1/")
-.constant("MEDIA_URL", "https://api.cosmicjs.com/v1/photography-portfolio/media")
-.constant("READ_KEY", "BnYF1ENerFAclDGKtsIffF3PtaYqQyvuyqTTHpFVzsHSKPMt58")
-.constant("DEFAULT_IMAGE", "https://cosmicjs.com/uploads/cbb8e880-60f0-11e7-bc4a-a399e42d4caf-1499215291_user.png")
-.constant("WRITE_KEY", "n20lcTUP5shFNaIYe2H369K9T9PVyywhysOBh9o9xpy2VTYMhB");
-
  
 (function () {
     'use strict';
@@ -742,6 +747,94 @@ angular.module("config", [])
             };
         });
 })();  
+(function () {
+    'use strict';
+
+    angular
+        .module('portfolio.about', [])
+        .config(config);
+
+    config.$inject = ['$stateProvider', '$urlRouterProvider'];
+    function config($stateProvider, $urlRouterProvider) {
+
+        $stateProvider
+            .state('portfolio.about', {
+                url: 'about',
+                templateUrl: '../views/portfolio/portfolio.about.html',
+                data: {
+                    is_granted: ['ROLE_USER']
+                }
+            });
+    }
+
+})();
+ 
+(function () {
+    'use strict';
+
+    angular
+        .module('portfolio.contact', [])
+        .config(config);
+
+    config.$inject = ['$stateProvider', '$urlRouterProvider'];
+    function config($stateProvider, $urlRouterProvider) {
+
+        $stateProvider
+            .state('portfolio.contact', {
+                url: 'contact',
+                templateUrl: '../views/portfolio/portfolio.contact.html',
+                data: {
+                    is_granted: ['ROLE_USER']
+                }
+            });
+    }
+
+})();
+ 
+(function () {
+    'use strict';
+
+    angular
+        .module('portfolio.intro', [])
+        .config(config);
+
+    config.$inject = ['$stateProvider', '$urlRouterProvider'];
+    function config($stateProvider, $urlRouterProvider) {
+
+        $stateProvider
+            .state('portfolio.intro', {
+                url: '',
+                templateUrl: '../views/portfolio/portfolio.intro.html',
+                data: {
+                    is_granted: ['ROLE_USER']
+                }
+            });
+    }
+
+})();
+ 
+(function () {
+    'use strict';
+
+    angular
+        .module('portfolio.projects', [])
+        .config(config);
+
+    config.$inject = ['$stateProvider', '$urlRouterProvider'];
+    function config($stateProvider, $urlRouterProvider) {
+
+        $stateProvider
+            .state('portfolio.projects', {
+                url: 'projects',
+                templateUrl: '../views/portfolio/portfolio.projects.html',
+                data: {
+                    is_granted: ['ROLE_USER']
+                }
+            });
+    }
+
+})();
+ 
 (function () {
     'use strict'; 
 
