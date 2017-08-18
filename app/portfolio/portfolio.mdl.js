@@ -6,7 +6,8 @@
             'portfolio.intro',
             'portfolio.projects',
             'portfolio.about',
-            'portfolio.contact'
+            'portfolio.contact',
+            'portfolio.settings'
         ])
         .config(config);
 

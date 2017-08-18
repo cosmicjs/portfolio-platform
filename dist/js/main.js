@@ -351,7 +351,8 @@ angular.module("config", [])
             'portfolio.intro',
             'portfolio.projects',
             'portfolio.about',
-            'portfolio.contact'
+            'portfolio.contact',
+            'portfolio.settings'
         ])
         .config(config);
 
@@ -827,6 +828,28 @@ angular.module("config", [])
             .state('portfolio.projects', {
                 url: 'projects',
                 templateUrl: '../views/portfolio/portfolio.projects.html',
+                data: {
+                    is_granted: ['ROLE_USER']
+                }
+            });
+    }
+
+})();
+ 
+(function () {
+    'use strict';
+
+    angular
+        .module('portfolio.settings', [])
+        .config(config);
+
+    config.$inject = ['$stateProvider', '$urlRouterProvider'];
+    function config($stateProvider, $urlRouterProvider) {
+
+        $stateProvider
+            .state('portfolio.settings', {
+                url: 'settings',
+                templateUrl: '../views/portfolio/portfolio.settings.html',
                 data: {
                     is_granted: ['ROLE_USER']
                 }
