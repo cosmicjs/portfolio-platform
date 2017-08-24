@@ -8,13 +8,11 @@
 		<uib-tabset active="active">
 			<uib-tab index="0" heading="Intro">
 
-				<form method="post">
+				<form>
 					<div class="row">
+						<div class="12u$" text-angular="" ta-toolbar="vm.toolbarEditor" ng-model="vm.portfolio.metafields[4].value"></div>
 						<div class="12u$">
-							<textarea name="message" placeholder="Intro"></textarea>
-						</div>
-						<div class="12u$">
-							<input type="submit" value="Save" />
+							<input type="submit" value="Save" ng-click="vm.updatePortfolio()">
 						</div>
 					</div>
 				</form>
@@ -79,16 +77,27 @@
 				<form method="post">
 					<div class="row">
 						<div class="12u$">
-							<textarea name="message" placeholder="About me"></textarea>
+							<div class="12u$" text-angular="" ta-toolbar="vm.toolbarEditor" ng-model="vm.portfolio.metafields[5].value"></div>
 						</div>
 						<div class="12u$">
-							<input type="submit" value="Save" />
+							<input type="submit" value="Save" ng-click="vm.updatePortfolio()">
 						</div>
 					</div>
 				</form>
 
 			</uib-tab>
-			<uib-tab index="3" heading="Contact">Contact</uib-tab>
+			<uib-tab index="3" heading="Contact">
+				<form method="post">
+					<div class="row">
+						<div class="12u$">
+							<div class="12u$" text-angular="" ta-toolbar="vm.toolbarEditor" ng-model="vm.portfolio.metafields[6].value"></div>
+						</div>
+						<div class="12u$">
+							<input type="submit" value="Save" ng-click="vm.updatePortfolio()">
+						</div>
+					</div>
+				</form>
+			</uib-tab>
 		</uib-tabset>
 
 

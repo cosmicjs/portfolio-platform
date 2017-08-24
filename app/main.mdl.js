@@ -108,7 +108,7 @@
             .setRedirect('auth');
  
         if ($rootScope.globals.currentUser) {
-            crAcl.setRole($rootScope.globals.currentUser.metadata.role);
+            crAcl.setRole($rootScope.globals.currentUser.role);
             $state.go('portfolio.intro');
         }
         else {

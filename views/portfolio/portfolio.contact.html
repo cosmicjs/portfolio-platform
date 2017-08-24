@@ -5,12 +5,9 @@
 			<h2>Contact</h2>
 		</header>
 
-		<p>Elementum sem parturient nulla quam placerat viverra
-			mauris non cum elit tempus ullamcorper dolor. Libero rutrum ut lacinia
-			donec curae mus. Eleifend id porttitor ac ultricies lobortis sem nunc
-			orci ridiculus faucibus a consectetur. Porttitor curae mauris urna mi dolor.</p>
+		<div ng-bind-html="vm.portfolio.metadata.contact"></div>
 
-		<form method="post" action="#">
+		<form action="{{vm.contact}}" method="post" enctype="text/plain">
 			<div class="row">
 				<div class="6u 12u$(mobile)"><input type="text" name="name" placeholder="Name" /></div>
 				<div class="6u$ 12u$(mobile)"><input type="text" name="email" placeholder="Email" /></div>

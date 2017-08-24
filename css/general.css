@@ -113,3 +113,7 @@ input.ng-invalid-required {
 body {
     overflow-x: hidden;
 }
+
+.btn-toolbar button {
+    color: #333 !important;
+}

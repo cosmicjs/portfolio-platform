@@ -19,7 +19,7 @@
                 url: '/',
                 abstract: true,
                 templateUrl: '../views/portfolio/portfolio.html',
-                controller: 'PortfolioCtrl',
+                controller: 'PortfolioCtrl as vm',
                 data: {
                     is_granted: ['ROLE_USER']
                 }

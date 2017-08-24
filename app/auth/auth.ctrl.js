@@ -20,13 +20,15 @@
                 function success(response) {
                     if (response.data.status !== 'empty') {
                         var currentUser = response.data.objects[0];
-
-                        currentUser.metadata = {
-                            role: 'ROLE_USER'
-                        };
-
+                        
                         crAcl.setRole('ROLE_USER');
-                        AuthService.setCredentials(currentUser);
+                        AuthService.setCredentials({
+                            slug: currentUser.slug,
+                            first_name: currentUser.metadata.first_name,
+                            last_name: currentUser.metadata.last_name,
+                            email: currentUser.metadata.email,
+                            role: 'ROLE_USER'
+                        });
                         $state.go('portfolio.intro');
                     }
                     else

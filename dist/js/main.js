@@ -108,7 +108,7 @@
             .setRedirect('auth');
  
         if ($rootScope.globals.currentUser) {
-            crAcl.setRole($rootScope.globals.currentUser.metadata.role);
+            crAcl.setRole($rootScope.globals.currentUser.role);
             $state.go('portfolio.intro');
         }
         else {
@@ -203,13 +203,15 @@
                 function success(response) {
                     if (response.data.status !== 'empty') {
                         var currentUser = response.data.objects[0];
-
-                        currentUser.metadata = {
-                            role: 'ROLE_USER'
-                        };
-
+                        
                         crAcl.setRole('ROLE_USER');
-                        AuthService.setCredentials(currentUser);
+                        AuthService.setCredentials({
+                            slug: currentUser.slug,
+                            first_name: currentUser.metadata.first_name,
+                            last_name: currentUser.metadata.last_name,
+                            email: currentUser.metadata.email,
+                            role: 'ROLE_USER'
+                        });
                         $state.go('portfolio.intro');
                     }
                     else
@@ -315,12 +317,55 @@ angular.module("config", [])
         .module('main')
         .controller('PortfolioCtrl', PortfolioCtrl);
 
-    function PortfolioCtrl($rootScope, $scope, $state, AuthService, Flash, $log) {
+    function PortfolioCtrl($rootScope, $sce, $scope, $state, AuthService, PortfolioService, $log) {
         var vm = this;
-        
-        vm.currentUser = $rootScope.globals.currentUser.metadata;
+
+        getPortfolio();
+
+        vm.currentUser = $rootScope.globals.currentUser;
         
         vm.logout = logout;
+        vm.updatePortfolio = updatePortfolio;
+
+        vm.portfolio = {};
+
+        vm.toolbarEditor = [
+            ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'bold', 'italics', 'underline', 'justifyLeft', 'justifyCenter', 'justifyRight']
+        ];
+        
+        function getPortfolio() {
+            function success(response) {
+                vm.portfolio = response.data.object;
+
+                vm.contact = $sce.trustAsResourceUrl('mailto:' + vm.currentUser.email);
+
+                $log.info(response);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+            PortfolioService
+                .getPortfolioBySlug($rootScope.globals.currentUser.slug)
+                .then(success, failed);
+        }
+
+        function updatePortfolio() {
+            function success(response) {
+                getPortfolio();
+
+                $log.info(response);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+            PortfolioService
+                .updatePortfolio(vm.portfolio)
+                .then(success, failed);
+        }
 
         function logout() {
             function success(response) {
@@ -364,7 +409,7 @@ angular.module("config", [])
                 url: '/',
                 abstract: true,
                 templateUrl: '../views/portfolio/portfolio.html',
-                controller: 'PortfolioCtrl',
+                controller: 'PortfolioCtrl as vm',
                 data: {
                     is_granted: ['ROLE_USER']
                 }
@@ -373,6 +418,120 @@ angular.module("config", [])
 
 })();
  
+(function () {
+    'use strict';
+
+    angular
+        .module('main')
+        .service('PortfolioService', function ($http,
+                                          $cookieStore, 
+                                          $q, 
+                                          $rootScope,
+                                          URL, BUCKET_SLUG, READ_KEY, WRITE_KEY, MEDIA_URL) {
+            
+            $http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+            this.author = {
+                content: null,
+                type_slug: "authors",
+                title: null,
+                bucket_slug: BUCKET_SLUG,
+                metafields: [
+                    {
+                        key: "name",
+                        title: "Name",
+                        type: "text",
+                        value: null
+                    },
+                    {
+                        key: "photo",
+                        title: "Photo",
+                        type: "file",
+                        value: null
+                    },
+                    {
+                        key: "born",
+                        title: "Born",
+                        type: "date",
+                        value: null
+                    },
+                    {
+                        key: "died",
+                        title: "Died",
+                        type: "date",
+                        value: null
+                    }
+                ]
+            };
+
+            this.getAuthors = function () {
+                return $http.get(URL + BUCKET_SLUG + '/object-type/authors', {
+                    params: {
+                        limit: 100,
+                        read_key: READ_KEY
+                    }
+                });
+            };
+            this.getPortfolioBySlug = function (slug) {
+                return $http.get(URL + BUCKET_SLUG + '/object/' + slug, {
+                    params: {
+                        read_key: READ_KEY
+                    }
+                });
+            };
+
+            this.updatePortfolio = function (portfolio) {
+                portfolio.write_key = WRITE_KEY;
+
+                return $http.put(URL + BUCKET_SLUG + '/edit-object', portfolio);
+            };
+            this.removeAuthor = function (slug) {
+                return $http.delete(URL + BUCKET_SLUG + '/' + slug, {
+                    ignoreLoadingBar: true,
+                    headers:{
+                        'Content-Type': 'application/json'
+                    },
+                    data: {
+                        write_key: WRITE_KEY
+                    }
+                });
+            };
+            this.addAuthor = function (author) {
+                author.write_key = WRITE_KEY;
+                author.title = author.metafields[0].value;
+
+                return $http.post(URL + BUCKET_SLUG + '/add-object', author);
+            };
+            this.upload = function (file) {
+                var fd = new FormData(); 
+                fd.append('media', file);
+                fd.append('write_key', WRITE_KEY);
+
+                var defer = $q.defer();
+
+                var xhttp = new XMLHttpRequest();
+
+                xhttp.upload.addEventListener("progress",function (e) {
+                    defer.notify(parseInt(e.loaded * 100 / e.total));
+                });
+                xhttp.upload.addEventListener("error",function (e) {
+                    defer.reject(e);
+                });
+
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState === 4) {
+                        defer.resolve(JSON.parse(xhttp.response)); //Outputs a DOMString by default
+                    }
+                };
+
+                xhttp.open("post", MEDIA_URL, true);
+
+                xhttp.send(fd);
+                
+                return defer.promise;
+            }
+        });
+})();  
 (function () {
     'use strict';
 
@@ -840,6 +999,37 @@ angular.module("config", [])
     'use strict';
 
     angular
+        .module('main')
+        .controller('PortfolioSettingsCtrl', PortfolioSettingsCtrl);
+
+    function PortfolioSettingsCtrl($rootScope, $scope, $state, PortfolioService, Flash, $log) {
+        var vm = this;
+
+        function getPortfolio() {
+            function success(response) {
+                vm.portfolio = response.data.object;
+
+                $log.info(response);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+            PortfolioService
+                .getPortfolioBySlug($rootScope.globals.currentUser.slug)
+                .then(success, failed);
+        }
+
+        $scope.state = $state;
+
+    }
+})();
+
+(function () {
+    'use strict';
+
+    angular
         .module('portfolio.settings', [])
         .config(config);
 
@@ -850,6 +1040,7 @@ angular.module("config", [])
             .state('portfolio.settings', {
                 url: 'settings',
                 templateUrl: '../views/portfolio/portfolio.settings.html',
+                // controller: 'PortfolioSettingsCtrl as vm',
                 data: {
                     is_granted: ['ROLE_USER']
                 }
