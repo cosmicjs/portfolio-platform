@@ -317,7 +317,7 @@ angular.module("config", [])
         .module('main')
         .controller('PortfolioCtrl', PortfolioCtrl);
 
-    function PortfolioCtrl($rootScope, $sce, $scope, $state, AuthService, PortfolioService, $log) {
+    function PortfolioCtrl($rootScope, $sce, $scope, $state, ngDialog, AuthService, PortfolioService, $log) {
         var vm = this;
 
         getPortfolio();
@@ -326,16 +326,28 @@ angular.module("config", [])
         
         vm.logout = logout;
         vm.updatePortfolio = updatePortfolio;
+        vm.openAddProjectDialog = openAddProjectDialog;
+        vm.openEditProjectDialog = openEditProjectDialog;
 
         vm.portfolio = {};
 
         vm.toolbarEditor = [
             ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'bold', 'italics', 'underline', 'justifyLeft', 'justifyCenter', 'justifyRight']
         ];
+
+        function chunk(arr, size) {
+            var newArr = [];
+            for (var i = 0; i < arr.length; i += size) {
+                newArr.push(arr.slice(i, i + size));
+            }
+            return newArr;
+        }
         
         function getPortfolio() {
             function success(response) {
                 vm.portfolio = response.data.object;
+
+                vm.projectsChunk = chunk(vm.portfolio.metadata.projects, 2);
 
                 vm.contact = $sce.trustAsResourceUrl('mailto:' + vm.currentUser.email);
 
@@ -365,6 +377,35 @@ angular.module("config", [])
             PortfolioService
                 .updatePortfolio(vm.portfolio)
                 .then(success, failed);
+        }
+        
+        function openAddProjectDialog(slug) {
+
+            var options = {
+                templateUrl: '../views/portfolio/portfolio.project.edit.html',
+                showClose: true,
+                // controller: 'PortfolioProjectsEdit as vm'
+            };
+
+            ngDialog.open(options).closePromise.finally(function () {
+                getPortfolio();
+            });
+        }
+
+        function openEditProjectDialog(slug) {
+
+            var options = {
+                templateUrl: '../views/portfolio/portfolio.project.edit.html',
+                showClose: true,
+                controller: 'PortfolioProjectsEdit as vm',
+                data: {
+                    slug: slug
+                }
+            };
+
+            ngDialog.open(options).closePromise.finally(function () {
+                getPortfolio();
+            });
         }
 
         function logout() {
@@ -472,6 +513,7 @@ angular.module("config", [])
                     }
                 });
             };
+
             this.getPortfolioBySlug = function (slug) {
                 return $http.get(URL + BUCKET_SLUG + '/object/' + slug, {
                     params: {
@@ -485,6 +527,7 @@ angular.module("config", [])
 
                 return $http.put(URL + BUCKET_SLUG + '/edit-object', portfolio);
             };
+            
             this.removeAuthor = function (slug) {
                 return $http.delete(URL + BUCKET_SLUG + '/' + slug, {
                     ignoreLoadingBar: true,
@@ -875,6 +918,7 @@ angular.module("config", [])
                     }
                 });
             };
+            
             this.getQuoteBySlug = function (slug) {
                 return $http.get(URL + BUCKET_SLUG + '/object/' + slug, {
                     params: {
@@ -995,6 +1039,122 @@ angular.module("config", [])
 
 })();
  
+(function () {
+    'use strict';
+
+    angular
+        .module('main')
+        .service('PortfolioProjectsService', function ($http,
+                                          $cookieStore, 
+                                          $q, 
+                                          $rootScope,
+                                          URL, BUCKET_SLUG, READ_KEY, WRITE_KEY, MEDIA_URL) {
+            
+            $http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+            this.author = {
+                content: null,
+                type_slug: "authors",
+                title: null,
+                bucket_slug: BUCKET_SLUG,
+                metafields: [
+                    {
+                        key: "name",
+                        title: "Name",
+                        type: "text",
+                        value: null
+                    },
+                    {
+                        key: "photo",
+                        title: "Photo",
+                        type: "file",
+                        value: null
+                    },
+                    {
+                        key: "born",
+                        title: "Born",
+                        type: "date",
+                        value: null
+                    },
+                    {
+                        key: "died",
+                        title: "Died",
+                        type: "date",
+                        value: null
+                    }
+                ]
+            };
+
+            this.getAuthors = function () {
+                return $http.get(URL + BUCKET_SLUG + '/object-type/authors', {
+                    params: {
+                        limit: 100,
+                        read_key: READ_KEY
+                    }
+                });
+            };
+
+            this.getProjectBySlug = function (slug) {
+                return $http.get(URL + BUCKET_SLUG + '/object/' + slug, {
+                    params: {
+                        read_key: READ_KEY
+                    }
+                });
+            };
+
+            this.updateProject = function (project) {
+                project.write_key = WRITE_KEY;
+
+                return $http.put(URL + BUCKET_SLUG + '/edit-object', project);
+            };
+            
+            this.removeProject = function (slug) {
+                return $http.delete(URL + BUCKET_SLUG + '/' + slug, {
+                    ignoreLoadingBar: true,
+                    headers:{
+                        'Content-Type': 'application/json'
+                    },
+                    data: {
+                        write_key: WRITE_KEY
+                    }
+                });
+            };
+            this.addProject = function (project) {
+                project.write_key = WRITE_KEY;
+                project.title = author.metafields[0].value;
+
+                return $http.post(URL + BUCKET_SLUG + '/add-object', project);
+            };
+            this.upload = function (file) {
+                var fd = new FormData(); 
+                fd.append('media', file);
+                fd.append('write_key', WRITE_KEY);
+
+                var defer = $q.defer();
+
+                var xhttp = new XMLHttpRequest();
+
+                xhttp.upload.addEventListener("progress",function (e) {
+                    defer.notify(parseInt(e.loaded * 100 / e.total));
+                });
+                xhttp.upload.addEventListener("error",function (e) {
+                    defer.reject(e);
+                });
+
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState === 4) {
+                        defer.resolve(JSON.parse(xhttp.response)); //Outputs a DOMString by default
+                    }
+                };
+
+                xhttp.open("post", MEDIA_URL, true);
+
+                xhttp.send(fd);
+                
+                return defer.promise;
+            }
+        });
+})();  
 (function () {
     'use strict';
 
@@ -1554,3 +1714,104 @@ angular.module("config", [])
     }
 })();
  
+(function () {
+    'use strict'; 
+
+    angular
+        .module('main')
+        .controller('PortfolioProjectsEdit', PortfolioProjectsEdit);
+
+    function PortfolioProjectsEdit($state, PortfolioProjectsService, Notification, $log, $scope, DEFAULT_IMAGE, MEDIA_URL, ngDialog) {
+        var vm = this;
+
+        vm.cancelUpload = cancelUpload;
+        vm.getProject = getProject;
+        vm.save = save;
+
+        vm.uploadProgress = 0;
+        vm.showContent = false;
+
+        vm.DEFAULT_IMAGE = DEFAULT_IMAGE;
+
+        vm.project = {};
+        vm.flow = {};
+        vm.projectEditForm = null;
+
+        vm.flowConfig = {
+            target: MEDIA_URL,
+            singleFile: true
+        };
+
+        function getProject() {
+            function success(response) {
+                vm.project = response.data.object;
+                
+                $log.info(response);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+           
+            PortfolioProjectsService
+                .getProjectBySlug($scope.ngDialogData.slug)
+                .then(success, failed);
+        }
+
+        function updateProject() {
+            function success(response) {
+                $log.info(response);
+
+                Notification.primary(
+                    {
+                        message: 'Saved',
+                        delay: 800,
+                        replaceMessage: true
+                    }
+                );
+
+                ngDialog.close();
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+
+            if (vm.projectEditForm.$valid)
+                PortfolioProjectsService
+                    .updateProject(vm.project)
+                    .then(success, failed);
+        }
+
+        function cancelUpload() {
+            vm.flow.cancel();
+            vm.background = {
+                'background-image': 'url(' + (vm.event.metafields[0].value ? vm.event.metafields[0].url : DEFAULT_IMAGE) + ')'
+            };
+        }
+
+        function upload() {
+            PortfolioProjectsService
+                .upload(vm.flow.files[0].file)
+                .then(function(response){
+
+                    vm.project.metafields[1].value = response.media.name;
+                    updateProject();
+
+                }, function(){
+                    console.log('failed :(');
+                }, function(progress){
+                    vm.uploadProgress = progress;
+                });
+        }
+        
+        function save() {
+            if (vm.flow.files.length) 
+                upload();
+            else
+                updateProject();
+        }
+
+    }
+})();

@@ -3,7 +3,7 @@
 
     angular
         .module('main')
-        .service('PortfolioService', function ($http,
+        .service('PortfolioProjectsService', function ($http,
                                           $cookieStore, 
                                           $q, 
                                           $rootScope,
@@ -53,7 +53,7 @@
                 });
             };
 
-            this.getPortfolioBySlug = function (slug) {
+            this.getProjectBySlug = function (slug) {
                 return $http.get(URL + BUCKET_SLUG + '/object/' + slug, {
                     params: {
                         read_key: READ_KEY
@@ -61,13 +61,13 @@
                 });
             };
 
-            this.updatePortfolio = function (portfolio) {
-                portfolio.write_key = WRITE_KEY;
+            this.updateProject = function (project) {
+                project.write_key = WRITE_KEY;
 
-                return $http.put(URL + BUCKET_SLUG + '/edit-object', portfolio);
+                return $http.put(URL + BUCKET_SLUG + '/edit-object', project);
             };
             
-            this.removeAuthor = function (slug) {
+            this.removeProject = function (slug) {
                 return $http.delete(URL + BUCKET_SLUG + '/' + slug, {
                     ignoreLoadingBar: true,
                     headers:{
@@ -78,11 +78,11 @@
                     }
                 });
             };
-            this.addAuthor = function (author) {
-                author.write_key = WRITE_KEY;
-                author.title = author.metafields[0].value;
+            this.addProject = function (project) {
+                project.write_key = WRITE_KEY;
+                project.title = author.metafields[0].value;
 
-                return $http.post(URL + BUCKET_SLUG + '/add-object', author);
+                return $http.post(URL + BUCKET_SLUG + '/add-object', project);
             };
             this.upload = function (file) {
                 var fd = new FormData(); 

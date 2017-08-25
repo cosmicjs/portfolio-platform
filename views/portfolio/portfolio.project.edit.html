@@ -1,0 +1,29 @@
+<div class="row" ng-init="vm.getProject()">
+    <div class="col-sm-12">
+        <form name="vm.projectEditForm">
+            <div class="row"
+                 flow-init="vm.flowConfig"
+                 flow-name="vm.flow">
+                <div class="col-sm-12">
+                    <div class="thumbnail">
+                        <img ng-if="!vm.flow.files.length  && vm.project.metafields[1].value" ng-src="{{vm.project.metafields[1].url}}">
+                        <img ng-if="!vm.flow.files.length && !vm.project.metafields[1].value" ng-src="{{vm.DEFAULT_IMAGE}}">
+                        <img ng-if="vm.flow.files.length" flow-img="vm.flow.files[0]">
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <input type="text" class="form-control" ng-model="vm.project.metafields[0].value" placeholder="{{vm.project.metafields[0].title}}" required>
+                    </div>
+
+                    <button ng-show="!vm.flow.files.length" class="btn btn-default btn-block btn-sm" flow-btn>Change photo</button>
+                    <div ng-show="vm.flow.files.length">
+                        <uib-progressbar class="event-progress active" max="100" value="vm.uploadProgress"></uib-progressbar>
+                        <button class="btn btn-default btn-block btn-sm" ng-click="vm.flow.cancel()">Cancel</button>
+                    </div>
+                    <button class="btn btn-primary btn-block" ng-click="vm.save()">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

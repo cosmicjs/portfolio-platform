@@ -11,45 +11,11 @@
 			fusce hendrerit lacus ridiculus.</p>
 
 		<div class="row">
-			<div class="4u 12u$(mobile)">
-				<article class="item">
-					<a href="#" class="image fit"><img src="/dist/img/pic02.jpg" alt="" /></a>
+			<div class="4u 12u$(mobile)" ng-repeat="projects in vm.projectsChunk">
+				<article class="item" ng-repeat="project in projects">
+					<a href="" class="image fit"><img ng-src="{{project.metadata.image.url}}" alt="" /></a>
 					<header>
-						<h3>Ipsum Feugiat</h3>
-					</header>
-				</article>
-				<article class="item">
-					<a href="#" class="image fit"><img src="/dist/img/pic03.jpg" alt="" /></a>
-					<header>
-						<h3>Rhoncus Semper</h3>
-					</header>
-				</article>
-			</div>
-			<div class="4u 12u$(mobile)">
-				<article class="item">
-					<a href="#" class="image fit"><img src="/dist/img/pic04.jpg" alt="" /></a>
-					<header>
-						<h3>Magna Nullam</h3>
-					</header>
-				</article>
-				<article class="item">
-					<a href="#" class="image fit"><img src="/dist/img/pic05.jpg" alt="" /></a>
-					<header>
-						<h3>Natoque Vitae</h3>
-					</header>
-				</article>
-			</div>
-			<div class="4u$ 12u$(mobile)">
-				<article class="item">
-					<a href="#" class="image fit"><img src="/dist/img/pic06.jpg" alt="" /></a>
-					<header>
-						<h3>Dolor Penatibus</h3>
-					</header>
-				</article>
-				<article class="item">
-					<a href="#" class="image fit"><img src="/dist/img/pic07.jpg" alt="" /></a>
-					<header>
-						<h3>Orci Convallis</h3>
+						<h3>{{project.metadata.name}}</h3>
 					</header>
 				</article>
 			</div>

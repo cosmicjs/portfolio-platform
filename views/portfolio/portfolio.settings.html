@@ -21,50 +21,16 @@
 			<uib-tab index="1" heading="Projects">
 				<div class="row">
 					<div class="12u$">
-						<button class=""><i class="fa fa-plus"></i> Add projects</button>
+						<button ng-click="vm.openAddProjectDialog()"><i class="fa fa-plus"></i> Add projects</button>
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="4u 12u$(mobile)">
-						<article class="item">
-							<a href="#" class="image fit"><img src="/dist/img/pic02.jpg" alt="" /></a>
+					<div class="4u 12u$(mobile)" ng-repeat="projects in vm.projectsChunk">
+						<article class="item" ng-repeat="project in projects" ng-click="vm.openEditProjectDialog(project.slug)">
+							<a href="" class="image fit"><img ng-src="{{project.metadata.image.url}}" alt="" /></a>
 							<header>
-								<h3>Ipsum Feugiat</h3>
-							</header>
-						</article>
-						<article class="item">
-							<a href="#" class="image fit"><img src="/dist/img/pic03.jpg" alt="" /></a>
-							<header>
-								<h3>Rhoncus Semper</h3>
-							</header>
-						</article>
-					</div>
-					<div class="4u 12u$(mobile)">
-						<article class="item">
-							<a href="#" class="image fit"><img src="/dist/img/pic04.jpg" alt="" /></a>
-							<header>
-								<h3>Magna Nullam</h3>
-							</header>
-						</article>
-						<article class="item">
-							<a href="#" class="image fit"><img src="/dist/img/pic05.jpg" alt="" /></a>
-							<header>
-								<h3>Natoque Vitae</h3>
-							</header>
-						</article>
-					</div>
-					<div class="4u$ 12u$(mobile)">
-						<article class="item">
-							<a href="#" class="image fit"><img src="/dist/img/pic06.jpg" alt="" /></a>
-							<header>
-								<h3>Dolor Penatibus</h3>
-							</header>
-						</article>
-						<article class="item">
-							<a href="#" class="image fit"><img src="/dist/img/pic07.jpg" alt="" /></a>
-							<header>
-								<h3>Orci Convallis</h3>
+								<h3>{{project.metadata.name}}</h3>
 							</header>
 						</article>
 					</div>

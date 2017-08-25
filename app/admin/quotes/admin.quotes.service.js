@@ -41,6 +41,7 @@
                     }
                 });
             };
+            
             this.getQuoteBySlug = function (slug) {
                 return $http.get(URL + BUCKET_SLUG + '/object/' + slug, {
                     params: {

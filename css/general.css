@@ -117,3 +117,7 @@ body {
 .btn-toolbar button {
     color: #333 !important;
 }
+
+.btn-default {
+    color: #333 !important;
+}
