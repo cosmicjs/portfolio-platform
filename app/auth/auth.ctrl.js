@@ -29,7 +29,7 @@
                             email: currentUser.metadata.email,
                             role: 'ROLE_USER'
                         });
-                        $state.go('portfolio.intro');
+                        $state.go('portfolio.intro', {slug: currentUser.slug});
                     }
                     else
                         Flash.create('danger', 'Incorrect username or password');

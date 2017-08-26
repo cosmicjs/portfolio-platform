@@ -13,7 +13,7 @@
                 url: '',
                 templateUrl: '../views/portfolio/portfolio.intro.html',
                 data: {
-                    is_granted: ['ROLE_USER']
+                    is_granted: ['ROLE_USER', 'ROLE_GUEST']
                 }
             });
     }

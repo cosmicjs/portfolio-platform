@@ -5,12 +5,12 @@
         .module('main')
         .controller('PortfolioCtrl', PortfolioCtrl);
 
-    function PortfolioCtrl($rootScope, $sce, $scope, $state, ngDialog, AuthService, PortfolioService, $log) {
+    function PortfolioCtrl($rootScope, $stateParams, $sce, $scope, $state, ngDialog, AuthService, UserService, PortfolioService, $log) {
         var vm = this;
 
         getPortfolio();
 
-        vm.currentUser = $rootScope.globals.currentUser;
+        vm.currentUser = $rootScope.globals.currentUser ? $rootScope.globals.currentUser : getUser();
         
         vm.logout = logout;
         vm.updatePortfolio = updatePortfolio;
@@ -30,6 +30,27 @@
             }
             return newArr;
         }
+
+        function getUser() {
+            function success(response) {
+                var currentUser = response.data.object;
+
+                vm.currentUser = {
+                    slug: currentUser.slug,
+                    first_name: currentUser.metadata.first_name,
+                    last_name: currentUser.metadata.last_name,
+                    email: currentUser.metadata.email
+                };
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+            UserService
+                .getUser($stateParams.slug, true)
+                .then(success, failed);
+        }
         
         function getPortfolio() {
             function success(response) {
@@ -47,7 +68,7 @@
             }
 
             PortfolioService
-                .getPortfolioBySlug($rootScope.globals.currentUser.slug)
+                .getPortfolioBySlug($stateParams.slug)
                 .then(success, failed);
         }
 

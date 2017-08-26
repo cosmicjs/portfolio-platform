@@ -16,12 +16,12 @@
 
         $stateProvider
             .state('portfolio', {
-                url: '/',
+                url: '/:slug/',
                 abstract: true,
                 templateUrl: '../views/portfolio/portfolio.html',
                 controller: 'PortfolioCtrl as vm',
                 data: {
-                    is_granted: ['ROLE_USER']
+                    is_granted: ['ROLE_USER', 'ROLE_GUEST']
                 }
             });
     }
