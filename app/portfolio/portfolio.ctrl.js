@@ -56,7 +56,10 @@
             function success(response) {
                 vm.portfolio = response.data.object;
 
-                vm.projectsChunk = chunk(vm.portfolio.metadata.projects, 2);
+                if (Array.isArray(vm.portfolio.metadata.projects))
+                    vm.projectsChunk = chunk(vm.portfolio.metadata.projects, 2);
+                else
+                    vm.projectsChunk = [];
 
                 vm.contact = $sce.trustAsResourceUrl('mailto:' + vm.currentUser.email);
 

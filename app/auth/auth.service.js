@@ -32,6 +32,59 @@
                     }
                 });
             };
+            this.register = function (user) {
+                return $http.post(URL + BUCKET_SLUG + '/add-object', {
+                        title: user.first_name + ' ' + user.last_name,
+                        type_slug: 'users',
+                        slug: user.username,
+                        metafields: [
+                            {
+                                key: "first_name",
+                                type: "text",
+                                value: user.first_name
+                            },
+                            {
+                                key: "last_name",
+                                type: "text",
+                                value: user.last_name
+                            },
+                            {
+                                key: "email",
+                                type: "text",
+                                value: user.email
+                            },
+                            {
+                                key: "password",
+                                type: "text",
+                                value: user.password
+                            },
+                            {
+                                key: "intro",
+                                type: "html-textarea",
+                                value: null
+                            },
+                            {
+                                key: "about",
+                                type: "html-textarea",
+                                value: null
+                            },
+                            {
+                                key: "contact",
+                                type: "html-textarea",
+                                value: null
+                            },
+                            {
+                                key: "projects",
+                                type: "objects",
+                                objects: [],
+                                object_type: "projects",
+                                value: null
+                            }
+                        ],
+
+                        write_key: WRITE_KEY
+                    }, { ignoreLoadingBar: false });
+            };
             authService.setCredentials = function (user) { 
                 $rootScope.globals = {
                     currentUser: user

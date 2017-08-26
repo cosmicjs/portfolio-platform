@@ -9,6 +9,7 @@
         var vm = this;              
 
         vm.login = login;
+        vm.register = register;
         
         vm.loginForm = null;
         
@@ -56,6 +57,23 @@
             if (vm.loginForm.$valid)
                 AuthService
                     .checkUsername(credentials)
+                    .then(success, failed);
+        }
+
+        function register(credentials) {
+            function success(response) {
+                login(credentials);
+               
+                $log.info(response);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+            if (vm.loginForm.$valid)
+                AuthService
+                    .register(credentials)
                     .then(success, failed);
         }
 

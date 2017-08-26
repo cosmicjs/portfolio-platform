@@ -6,7 +6,7 @@
 	<div id="logo">
 		<span class="image avatar48"><img src="/dist/img/avatar.jpg" alt="" /></span>
 		<h1 id="title">{{vm.currentUser.first_name}} {{vm.currentUser.last_name}}</h1>
-		<p uib-tooltip="Share this link with other people" tooltip-placement="top">
+		<p uib-tooltip="Share this link with other people" tooltip-placement="top" cr-granted="ROLE_USER">
 			<a target="_blank" ui-sref="portfolio.intro({slug: vm.currentUser.slug})">Public Link <i class="fa fa-external-link"></i></a>
 		</p>
 	</div>
@@ -32,7 +32,7 @@
 			<li><a ui-sref="portfolio.about" ui-sref-active="active" id="about-link" class="skel-layers-ignoreHref"><span class="icon fa-user">About Me</span></a></li>
 			<li><a ui-sref="portfolio.contact" ui-sref-active="active" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa-envelope">Contact</span></a></li>
 			<li cr-granted="ROLE_USER"><a ui-sref="portfolio.settings" ui-sref-active="active" id="settings-link" class="skel-layers-ignoreHref"><span class="icon fa-cog">Settings</span></a></li>
-			<li cr-granted="ROLE_USER"><a ui-sref="auth" ui-sref-active="active"  class="skel-layers-ignoreHref"><span class="icon fa-sign-out">Log out</span></a></li>
+			<li cr-granted="ROLE_USER"><a ui-sref="login" ui-sref-active="active"  class="skel-layers-ignoreHref"><span class="icon fa-sign-out">Log out</span></a></li>
 		</ul>
 	</nav>
 
@@ -41,13 +41,13 @@
 <div class="bottom">
 
 	<!-- Social Icons -->
-	<ul class="icons">
-		<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-		<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-		<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
-		<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-		<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
-	</ul>
+	<!--<ul class="icons">-->
+		<!--<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>-->
+		<!--<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>-->
+		<!--<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>-->
+		<!--<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>-->
+		<!--<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>-->
+	<!--</ul>-->
 
 </div>
 

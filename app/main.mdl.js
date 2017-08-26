@@ -21,8 +21,6 @@
             'ngSanitize',
             'ngTouch',
 
-            'admin',
-            
             'portfolio',
             
             'config'
@@ -45,22 +43,7 @@
 
         $urlRouterProvider.otherwise(function ($injector) {
             var $state = $injector.get("$state");
-            // var $location = $injector.get("$location");
-            // var crAcl = $injector.get("crAcl");
-            //
-            // var state = "";
-            //
-            // switch (crAcl.getRole()) {
-            //     case 'ROLE_ADMIN':
-            //         state = 'admin.authors';
-            //         break;
-            //     default : state = 'main.emoji'; 
-            // }
-            //
-            // if (state) $state.go(state);
-            // else $location.path('/');
-
-            $state.go('auth');
+            $state.go('login');
         });
  
         $stateProvider
@@ -77,9 +60,21 @@
                 url: '/blog',
                 templateUrl: '../blog.html'
             })
-            .state('auth', {
+            .state('login', {
                 url: '/login',
                 templateUrl: '../views/auth/login.html',
+                controller: 'AuthCtrl as auth',
+                onEnter: ['AuthService', 'crAcl', function(AuthService, crAcl) {
+                    AuthService.clearCredentials();
+                    crAcl.setRole();
+                }],
+                data: {
+                    is_granted: ['ROLE_GUEST']
+                }
+            })
+            .state('register', {
+                url: '/register',
+                templateUrl: '../views/auth/register.html',
                 controller: 'AuthCtrl as auth',
                 onEnter: ['AuthService', 'crAcl', function(AuthService, crAcl) {
                     AuthService.clearCredentials();
@@ -94,7 +89,7 @@
 
     run.$inject = ['$rootScope', '$cookieStore', '$state', 'crAcl'];
     function run($rootScope, $cookieStore, $state, crAcl) {
-        // keep user logged in after page refresh
+
         $rootScope.globals = $cookieStore.get('globals') || {};
 
         crAcl
@@ -105,7 +100,7 @@
             });
 
         crAcl
-            .setRedirect('auth');
+            .setRedirect('login');
  
         if ($rootScope.globals.currentUser) {
             crAcl.setRole($rootScope.globals.currentUser.role);

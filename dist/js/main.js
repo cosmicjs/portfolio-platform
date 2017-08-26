@@ -21,8 +21,6 @@
             'ngSanitize',
             'ngTouch',
 
-            'admin',
-            
             'portfolio',
             
             'config'
@@ -45,22 +43,7 @@
 
         $urlRouterProvider.otherwise(function ($injector) {
             var $state = $injector.get("$state");
-            // var $location = $injector.get("$location");
-            // var crAcl = $injector.get("crAcl");
-            //
-            // var state = "";
-            //
-            // switch (crAcl.getRole()) {
-            //     case 'ROLE_ADMIN':
-            //         state = 'admin.authors';
-            //         break;
-            //     default : state = 'main.emoji'; 
-            // }
-            //
-            // if (state) $state.go(state);
-            // else $location.path('/');
-
-            $state.go('auth');
+            $state.go('login');
         });
  
         $stateProvider
@@ -77,9 +60,21 @@
                 url: '/blog',
                 templateUrl: '../blog.html'
             })
-            .state('auth', {
+            .state('login', {
                 url: '/login',
                 templateUrl: '../views/auth/login.html',
+                controller: 'AuthCtrl as auth',
+                onEnter: ['AuthService', 'crAcl', function(AuthService, crAcl) {
+                    AuthService.clearCredentials();
+                    crAcl.setRole();
+                }],
+                data: {
+                    is_granted: ['ROLE_GUEST']
+                }
+            })
+            .state('register', {
+                url: '/register',
+                templateUrl: '../views/auth/register.html',
                 controller: 'AuthCtrl as auth',
                 onEnter: ['AuthService', 'crAcl', function(AuthService, crAcl) {
                     AuthService.clearCredentials();
@@ -94,7 +89,7 @@
 
     run.$inject = ['$rootScope', '$cookieStore', '$state', 'crAcl'];
     function run($rootScope, $cookieStore, $state, crAcl) {
-        // keep user logged in after page refresh
+
         $rootScope.globals = $cookieStore.get('globals') || {};
 
         crAcl
@@ -105,7 +100,7 @@
             });
 
         crAcl
-            .setRedirect('auth');
+            .setRedirect('login');
  
         if ($rootScope.globals.currentUser) {
             crAcl.setRole($rootScope.globals.currentUser.role);
@@ -192,6 +187,7 @@
         var vm = this;              
 
         vm.login = login;
+        vm.register = register;
         
         vm.loginForm = null;
         
@@ -242,6 +238,23 @@
                     .then(success, failed);
         }
 
+        function register(credentials) {
+            function success(response) {
+                login(credentials);
+               
+                $log.info(response);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+            if (vm.loginForm.$valid)
+                AuthService
+                    .register(credentials)
+                    .then(success, failed);
+        }
+
     }
 })();
 
@@ -279,6 +292,59 @@
                     }
                 });
             };
+            this.register = function (user) {
+                return $http.post(URL + BUCKET_SLUG + '/add-object', {
+                        title: user.first_name + ' ' + user.last_name,
+                        type_slug: 'users',
+                        slug: user.username,
+                        metafields: [
+                            {
+                                key: "first_name",
+                                type: "text",
+                                value: user.first_name
+                            },
+                            {
+                                key: "last_name",
+                                type: "text",
+                                value: user.last_name
+                            },
+                            {
+                                key: "email",
+                                type: "text",
+                                value: user.email
+                            },
+                            {
+                                key: "password",
+                                type: "text",
+                                value: user.password
+                            },
+                            {
+                                key: "intro",
+                                type: "html-textarea",
+                                value: null
+                            },
+                            {
+                                key: "about",
+                                type: "html-textarea",
+                                value: null
+                            },
+                            {
+                                key: "contact",
+                                type: "html-textarea",
+                                value: null
+                            },
+                            {
+                                key: "projects",
+                                type: "objects",
+                                objects: [],
+                                object_type: "projects",
+                                value: null
+                            }
+                        ],
+
+                        write_key: WRITE_KEY
+                    }, { ignoreLoadingBar: false });
+            };
             authService.setCredentials = function (user) { 
                 $rootScope.globals = {
                     currentUser: user
@@ -306,7 +372,7 @@ angular.module("config", [])
 .constant("URL", "https://api.cosmicjs.com/v1/")
 .constant("MEDIA_URL", "https://api.cosmicjs.com/v1/photography-portfolio/media")
 .constant("READ_KEY", "BnYF1ENerFAclDGKtsIffF3PtaYqQyvuyqTTHpFVzsHSKPMt58")
-.constant("DEFAULT_IMAGE", "https://cosmicjs.com/uploads/cbb8e880-60f0-11e7-bc4a-a399e42d4caf-1499215291_user.png")
+.constant("DEFAULT_IMAGE", "https://cosmicjs.com/uploads/fbc6dac0-8ab0-11e7-bf76-7da7db006046-image.png")
 .constant("WRITE_KEY", "n20lcTUP5shFNaIYe2H369K9T9PVyywhysOBh9o9xpy2VTYMhB");
 
  
@@ -368,7 +434,10 @@ angular.module("config", [])
             function success(response) {
                 vm.portfolio = response.data.object;
 
-                vm.projectsChunk = chunk(vm.portfolio.metadata.projects, 2);
+                if (Array.isArray(vm.portfolio.metadata.projects))
+                    vm.projectsChunk = chunk(vm.portfolio.metadata.projects, 2);
+                else
+                    vm.projectsChunk = [];
 
                 vm.contact = $sce.trustAsResourceUrl('mailto:' + vm.currentUser.email);
 
@@ -1042,6 +1111,60 @@ angular.module("config", [])
     'use strict';
 
     angular
+        .module('main')
+        .controller('PortfolioSettingsCtrl', PortfolioSettingsCtrl);
+
+    function PortfolioSettingsCtrl($rootScope, $scope, $state, PortfolioService, Flash, $log) {
+        var vm = this;
+
+        function getPortfolio() {
+            function success(response) {
+                vm.portfolio = response.data.object;
+
+                $log.info(response);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+            PortfolioService
+                .getPortfolioBySlug($rootScope.globals.currentUser.slug)
+                .then(success, failed);
+        }
+
+        $scope.state = $state;
+
+    }
+})();
+
+(function () {
+    'use strict';
+
+    angular
+        .module('portfolio.settings', [])
+        .config(config);
+
+    config.$inject = ['$stateProvider', '$urlRouterProvider'];
+    function config($stateProvider, $urlRouterProvider) {
+
+        $stateProvider
+            .state('portfolio.settings', {
+                url: 'settings',
+                templateUrl: '../views/portfolio/portfolio.settings.html',
+                // controller: 'PortfolioSettingsCtrl as vm',
+                data: {
+                    is_granted: ['ROLE_USER']
+                }
+            });
+    }
+
+})();
+ 
+(function () {
+    'use strict';
+
+    angular
         .module('portfolio.projects', [])
         .config(config);
 
@@ -1164,60 +1287,6 @@ angular.module("config", [])
             }
         });
 })();  
-(function () {
-    'use strict';
-
-    angular
-        .module('main')
-        .controller('PortfolioSettingsCtrl', PortfolioSettingsCtrl);
-
-    function PortfolioSettingsCtrl($rootScope, $scope, $state, PortfolioService, Flash, $log) {
-        var vm = this;
-
-        function getPortfolio() {
-            function success(response) {
-                vm.portfolio = response.data.object;
-
-                $log.info(response);
-            }
-
-            function failed(response) {
-                $log.error(response);
-            }
-
-            PortfolioService
-                .getPortfolioBySlug($rootScope.globals.currentUser.slug)
-                .then(success, failed);
-        }
-
-        $scope.state = $state;
-
-    }
-})();
-
-(function () {
-    'use strict';
-
-    angular
-        .module('portfolio.settings', [])
-        .config(config);
-
-    config.$inject = ['$stateProvider', '$urlRouterProvider'];
-    function config($stateProvider, $urlRouterProvider) {
-
-        $stateProvider
-            .state('portfolio.settings', {
-                url: 'settings',
-                templateUrl: '../views/portfolio/portfolio.settings.html',
-                // controller: 'PortfolioSettingsCtrl as vm',
-                data: {
-                    is_granted: ['ROLE_USER']
-                }
-            });
-    }
-
-})();
- 
 (function () {
     'use strict'; 
 
@@ -1741,7 +1810,7 @@ angular.module("config", [])
 
         vm.DEFAULT_IMAGE = DEFAULT_IMAGE;
 
-        vm.project =PortfolioProjectsService.project;
+        vm.project = PortfolioProjectsService.project;
         vm.flow = {};
         vm.projectEditForm = null;
 
@@ -1780,6 +1849,16 @@ angular.module("config", [])
                 var projects = [];
 
                 vm.user = response.data.object;
+
+                if (!vm.user.metafields[7])
+                    vm.user.metafields[7] = {
+                        key: "projects",
+                        type: "objects",
+                        object_type: "projects",
+                        objects: [],
+                        value: null
+                    };
+
                 vm.user.metafields[7].objects.push(project);
 
                 vm.user.metafields[7].objects.forEach(function (item) {
@@ -1811,12 +1890,10 @@ angular.module("config", [])
             function failed(response) {
                 $log.error(response);
             }
-
-
-            if (vm.projectEditForm.$valid)
-                PortfolioProjectsService
-                    .createProject(vm.project)
-                    .then(success, failed);
+            
+            PortfolioProjectsService
+                .createProject(vm.project)
+                .then(success, failed);
         }
 
         function cancelUpload() {
@@ -1842,10 +1919,9 @@ angular.module("config", [])
         }
 
         function save() {
-            if (vm.flow.files.length) 
+            if (vm.flow.files.length && 
+                vm.projectEditForm.$valid) 
                 upload();
-            else
-                createProject();
         }
 
     }

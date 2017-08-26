@@ -16,7 +16,7 @@
 
         vm.DEFAULT_IMAGE = DEFAULT_IMAGE;
 
-        vm.project =PortfolioProjectsService.project;
+        vm.project = PortfolioProjectsService.project;
         vm.flow = {};
         vm.projectEditForm = null;
 
@@ -55,6 +55,16 @@
                 var projects = [];
 
                 vm.user = response.data.object;
+
+                if (!vm.user.metafields[7])
+                    vm.user.metafields[7] = {
+                        key: "projects",
+                        type: "objects",
+                        object_type: "projects",
+                        objects: [],
+                        value: null
+                    };
+
                 vm.user.metafields[7].objects.push(project);
 
                 vm.user.metafields[7].objects.forEach(function (item) {
@@ -86,12 +96,10 @@
             function failed(response) {
                 $log.error(response);
             }
-
-
-            if (vm.projectEditForm.$valid)
-                PortfolioProjectsService
-                    .createProject(vm.project)
-                    .then(success, failed);
+            
+            PortfolioProjectsService
+                .createProject(vm.project)
+                .then(success, failed);
         }
 
         function cancelUpload() {
@@ -117,10 +125,9 @@
         }
 
         function save() {
-            if (vm.flow.files.length) 
+            if (vm.flow.files.length && 
+                vm.projectEditForm.$valid) 
                 upload();
-            else
-                createProject();
         }
 
     }
