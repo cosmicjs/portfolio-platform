@@ -17,7 +17,6 @@
             'flow',
             'angular-loading-bar',
             'ngDragDrop',
-            'ngEmoticons',
             'ngSanitize',
             'ngTouch',
 
@@ -47,15 +46,6 @@
         });
  
         $stateProvider
-            .state('main', {
-                url: '/',
-                abstract: true,
-                templateUrl: '../views/main.html',
-                // controller: 'CartCtrl as cart',
-                data: {
-                    is_granted: ['ROLE_GUEST']
-                }
-            })
             .state('blog', {
                 url: '/blog',
                 templateUrl: '../blog.html'

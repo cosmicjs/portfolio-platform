@@ -11,8 +11,8 @@
         ])
         .config(config);
 
-    config.$inject = ['$stateProvider', '$urlRouterProvider'];
-    function config($stateProvider, $urlRouterProvider) {
+    config.$inject = ['$stateProvider'];
+    function config($stateProvider) {
 
         $stateProvider
             .state('portfolio', {

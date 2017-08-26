@@ -126,3 +126,13 @@ body {
     padding-bottom: 160px;
     padding-top: 25px !important;
 }
+
+.cosmic-logo {
+    position: absolute;
+    margin-left: -25px;
+    margin-top: -1px;
+}
+
+#main > section.one {
+    background-image: url(../img/banner.jpg) !important;
+}

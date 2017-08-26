@@ -2,32 +2,32 @@
     <div class="row">
         <div class="col-md-offset-2 col-md-8">
             <h2>
-                How to Build an Emoji App Using AngularJS
+                How to Build an Photography Portfolio App Using AngularJS
             </h2>
             <hr>
             <img src="/dist/img/for-blog.png" class="img-responsive">
             <br>
             <p>
-                In this tutorial I'm going to show you how to create a "Emoji" app using a little bit of Node, and Cosmic JS. For the sake of understanding how to consume Restful API’s, this tutorial will show how to make simple AJAX requests to the Cosmic JS API in order to retrieve, update, and delete data in our Cosmic JS buckets. Let's get started.
+                In this tutorial I'm going to show you how to create a "Photography Portfolio" app using a little bit of Node, and Cosmic JS. For the sake of understanding how to consume Restful API’s, this tutorial will show how to make simple AJAX requests to the Cosmic JS API in order to retrieve, update, and delete data in our Cosmic JS buckets. Let's get started.
             </p>
             <h2>TL;DR</h2>
             <p>
-                <a href="https://github.com/kutsaniuk/emoji-app">Download the GitHub repo.</a><br>
-                <a href="http://emoji.cosmicapp.co">Check out the demo.</a>
+                <a href="https://github.com/kutsaniuk/cosmicapp-porfolio">Download the GitHub repo.</a><br>
+                <a href="http://cosmicapp-porfolio.cosmicapp.co">Check out the demo.</a>
             </p>
             <h2>Getting Started:</h2>
             <p>
                 First, let’s make a new directory to build our project in and lets also make a package.json file.
             </p>
-            <pre>mkdir emoji-app</pre>
-            <pre>emoji-app$ touch package.json</pre>
+            <pre>mkdir cosmicapp-porfolio</pre>
+            <pre>cosmicapp-porfolio$ touch package.json</pre>
             <p>
                 Now, in your package.json, copy and paste the code below:
             </p>
             <pre>
-//emoji-app/package.json
+//cosmicapp-porfolio/package.json
 {
-  "name": "emoji-app",
+  "name": "photography-portfolio-app",
   "version": "1.0.0",
   "main": "app-server.js",
   "engines": {
@@ -65,22 +65,22 @@
     "gulp-npm-script-sync": "^1.1.0",
     "gulp-remote-src": "^0.4.2"
   }
-}/
+}
             </pre>
             <p>
                 Second, let’s make a bower.json file.
             </p>
-            <pre>emoji-app$ touch bower.json</pre>
+            <pre>cosmicapp-porfolio$ touch bower.json</pre>
             <p>
                 Now, in your bower.json, copy and paste the code below:
             </p>
             <pre>
-//emoji-app/bower.json
+//cosmicapp-porfolio/bower.json
 {
-  "name": "emoji-app",
-  "description": "Emoji App",
+  "name": "photography-portfolio-app",
+  "description": "Photography Portfolio App",
   "version": "0.0.0",
-  "homepage": "https://github.com/kutsaniuk/emoji-app",
+  "homepage": "https://github.com/kutsaniuk/cosmicapp-porfolio",
   "license": "MIT",
   "private": true,
   "dependencies": {
@@ -109,7 +109,6 @@
     "components-font-awesome": "^4.7.0",
     "angular-loading-bar": "^0.9.0",
     "angular-environment": "^1.0.8",
-    "angular-emoji-popup": "",
     "angular-dragdrop": "",
     "angular-sanitize": "1.5.*",
     "angular-drag-and-drop-directives": "",
@@ -128,9 +127,9 @@
             <p>
                 Config app server:
             </p>
-            <pre>emoji-app$ touch app-server.js</pre>
+            <pre>cosmicapp-porfolio$ touch app-server.js</pre>
             <pre>
-//events-app/app-server.js
+//cosmicapp-porfolio/app-server.js
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
@@ -143,7 +142,7 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 })
 http.listen(app.get('port'), () => {
-  console.log('Emoji App listening on ' + app.get('port'))
+  console.log('Photography Portfolio App listening on ' + app.get('port'))
 })
             </pre>
             <h2>What we're installing and why:</h2>
@@ -154,53 +153,35 @@ http.listen(app.get('port'), () => {
             </ol>
             <h2>Building our app:</h2>
             <p>
-                Now we're going to build out our file structure a bit more so that we can organize our angular modules and js files. This is what our emoji-app directory should look like:
+                Now we're going to build out our file structure a bit more so that we can organize our angular modules and js files. This is what our cosmicapp-porfolio directory should look like:
             </p>
             <pre>
-emoji-app
+cosmicapp-porfolio
 |----app
 |       |----auth
 |                 |----auth.ctrl.js
 |                 |----auth.service.js
 |       |----config
 |                 |----config.js
-|       |----watch
-|                 |----profile
-|                           |----watch.profile.ctrl.js
-|                           |----watch.profile.mdl.js
-|                 |----watch.ctrl.js
-|                 |----watch.mdl.js
-|                 |----watch.service.js
-|       |----admin
-|                 |----authors
+|       |----portfolio
+|                 |----about
+|                           |----portfolio.about.mdl.js
+|                 |----contact
+|                           |----portfolio.contact.mdl.js
+|                 |----intro
+|                           |----portfolio.intro.mdl.js
+|                 |----projects
 |                           |----add
-|                                   |----admin.authors.add.ctrl.js
-|                                   |----admin.authors.add.mdl.js
+|                                   |----portfolio.projects.add.ctrl.js
 |                           |----edit
-|                                   |----admin.authors.edit.ctrl.js
-|                                   |----admin.authors.edit.mdl.js
-|                           |----admin.authors.ctrl.js
-|                           |----admin.authors.mdl.js
-|                           |----admin.authors.service.js
-|                 |----quotes
-|                           |----add
-|                                   |----admin.quotes.add.ctrl.js
-|                                   |----admin.quotes.add.mdl.js
-|                           |----edit
-|                                   |----admin.quotes.edit.ctrl.js
-|                                   |----admin.quotes.edit.mdl.js
-|                           |----admin.quotes.ctrl.js
-|                           |----admin.quotes.mdl.js
-|                           |----admin.quotes.service.js
-|                 |----admin.ctrl.js
-|                 |----admin.mdl.js
-|       |----author
-|                 |----author.ctrl.js
-|                 |----author.mdl.js
-|       |----emoji
-|                 |----emoji.ctrl.js
-|                 |----emoji.mdl.js
-|                 |----emoji.service.js
+|                                   |----portfolio.projects.edit.ctrl.js
+|                           |----portfolio.projects.mdl.js
+|                 |----settings
+|                           |----portfolio.settings.ctrl.js
+|                           |----portfolio.settings.mdl.js
+|                 |----portfolio.ctrl.js
+|                 |----portfolio.mdl.js
+|                 |----portfolio.service.js
 |       |----user
 |                 |----user.service.js
 |       |----main.mdl.js
@@ -210,7 +191,6 @@ emoji-app
 |       |----js
 |----css
 |----views
-|----resources
 |----gulpfile.js
 |----app-server.js
 |----bower.json
@@ -229,7 +209,7 @@ emoji-app
     &lt;meta name="description" content=""&gt;
     &lt;meta name="author" content=""&gt;
 
-    &lt;title&gt;Emoji App&lt;/title&gt;
+    &lt;title&gt;Photography Portfolio App&lt;/title&gt;
 
     &lt;!-- bower:css --&gt;
     &lt;!-- endbower --&gt;
@@ -268,7 +248,9 @@ emoji-app
                 Copy the following code into your gulpfile.js file:
             </p>
             <pre>
-//emoji-app/gulpfile.js
+//cosmicapp-porfolio/gulpfile.js
+'use strict';
+
 'use strict';
 
 var gulp = require('gulp'),
@@ -324,7 +306,6 @@ gulp.task('bower', function () {
     }))
     .pipe(gulp.dest(''));
 });
-
             </pre>
             <p>
                 After that we can create main module. Copy and paste the following code into your main.mdl.js file:
@@ -349,21 +330,18 @@ gulp.task('bower', function () {
             'flow',
             'angular-loading-bar',
             'ngDragDrop',
-            'ngEmoticons',
             'ngSanitize',
             'ngTouch',
 
-            'emoji',
-            'admin',
-            'author',
+            'portfolio',
 
             'config'
         ])
         .config(config)
         .run(run);
 
-    config.$inject = ['$stateProvider', '$urlRouterProvider', 'cfpLoadingBarProvider', 'NotificationProvider'];
-    function config($stateProvider, $urlRouterProvider, cfpLoadingBarProvider, NotificationProvider) {
+    config.$inject = ['$stateProvider', '$urlRouterProvider', 'cfpLoadingBarProvider', 'NotificationProvider', '$locationProvider'];
+    function config($stateProvider, $urlRouterProvider, cfpLoadingBarProvider, NotificationProvider, $locationProvider) {
         cfpLoadingBarProvider.includeSpinner = false;
 
         NotificationProvider.setOptions({
@@ -377,37 +355,15 @@ gulp.task('bower', function () {
 
         $urlRouterProvider.otherwise(function ($injector) {
             var $state = $injector.get("$state");
-            var $location = $injector.get("$location");
-            var crAcl = $injector.get("crAcl");
-
-            var state = "";
-
-            switch (crAcl.getRole()) {
-                case 'ROLE_ADMIN':
-                    state = 'admin.authors';
-                    break;
-                default : state = 'main.emoji';
-            }
-
-            if (state) $state.go(state);
-            else $location.path('/');
+            $state.go('login');
         });
 
         $stateProvider
-            .state('main', {
-                url: '/',
-                abstract: true,
-                templateUrl: '../views/main.html',
-                // controller: 'CartCtrl as cart',
-                data: {
-                    is_granted: ['ROLE_GUEST']
-                }
-            })
             .state('blog', {
                 url: '/blog',
                 templateUrl: '../blog.html'
             })
-            .state('auth', {
+            .state('login', {
                 url: '/login',
                 templateUrl: '../views/auth/login.html',
                 controller: 'AuthCtrl as auth',
@@ -418,48 +374,47 @@ gulp.task('bower', function () {
                 data: {
                     is_granted: ['ROLE_GUEST']
                 }
+            })
+            .state('register', {
+                url: '/register',
+                templateUrl: '../views/auth/register.html',
+                controller: 'AuthCtrl as auth',
+                onEnter: ['AuthService', 'crAcl', function(AuthService, crAcl) {
+                    AuthService.clearCredentials();
+                    crAcl.setRole();
+                }],
+                data: {
+                    is_granted: ['ROLE_GUEST']
+                }
             });
+
     }
 
     run.$inject = ['$rootScope', '$cookieStore', '$state', 'crAcl'];
     function run($rootScope, $cookieStore, $state, crAcl) {
-        // keep user logged in after page refresh
+
         $rootScope.globals = $cookieStore.get('globals') || {};
 
         crAcl
             .setInheritanceRoles({
                 'ROLE_ADMIN': ['ROLE_ADMIN', 'ROLE_GUEST'],
+                'ROLE_USER': ['ROLE_USER', 'ROLE_GUEST'],
                 'ROLE_GUEST': ['ROLE_GUEST']
             });
 
         crAcl
-            .setRedirect('main.emoji');
+            .setRedirect('login');
 
         if ($rootScope.globals.currentUser) {
-            crAcl.setRole($rootScope.globals.currentUser.metadata.role);
-            // $state.go('admin.watches');
+            crAcl.setRole($rootScope.globals.currentUser.role);
+            $state.go('portfolio.intro');
         }
         else {
             crAcl.setRole();
         }
 
     }
-    angular.module('main')
-        .directive('compile', ['$compile', function ($compile) {
-            return function (scope, element, attrs) {
-                scope.$watch(
-                    function (scope) {
-                        // watch the 'compile' expression for changes
-                        return scope.$eval(attrs.compile);
-                    },
-                    function (value) {
-                        element.html(value);
 
-                        $compile(element.contents())(scope);
-                    }
-                );
-            };
-        }]);
 })();
              </pre>
             <p>
@@ -477,6 +432,7 @@ gulp.task('bower', function () {
         var vm = this;
 
         vm.login = login;
+        vm.register = register;
 
         vm.loginForm = null;
 
@@ -489,9 +445,15 @@ gulp.task('bower', function () {
                     if (response.data.status !== 'empty') {
                         var currentUser = response.data.objects[0];
 
-                        crAcl.setRole(currentUser.metadata.role);
-                        AuthService.setCredentials(currentUser);
-                        $state.go('admin.authors');
+                        crAcl.setRole('ROLE_USER');
+                        AuthService.setCredentials({
+                            slug: currentUser.slug,
+                            first_name: currentUser.metadata.first_name,
+                            last_name: currentUser.metadata.last_name,
+                            email: currentUser.metadata.email,
+                            role: 'ROLE_USER'
+                        });
+                        $state.go('portfolio.intro', {slug: currentUser.slug});
                     }
                     else
                         Flash.create('danger', 'Incorrect username or password');
@@ -518,6 +480,23 @@ gulp.task('bower', function () {
             if (vm.loginForm.$valid)
                 AuthService
                     .checkUsername(credentials)
+                    .then(success, failed);
+        }
+
+        function register(credentials) {
+            function success(response) {
+                login(credentials);
+
+                $log.info(response);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+            if (vm.loginForm.$valid)
+                AuthService
+                    .register(credentials)
                     .then(success, failed);
         }
 
@@ -562,6 +541,59 @@ gulp.task('bower', function () {
                     }
                 });
             };
+            this.register = function (user) {
+                return $http.post(URL + BUCKET_SLUG + '/add-object', {
+                        title: user.first_name + ' ' + user.last_name,
+                        type_slug: 'users',
+                        slug: user.username,
+                        metafields: [
+                            {
+                                key: "first_name",
+                                type: "text",
+                                value: user.first_name
+                            },
+                            {
+                                key: "last_name",
+                                type: "text",
+                                value: user.last_name
+                            },
+                            {
+                                key: "email",
+                                type: "text",
+                                value: user.email
+                            },
+                            {
+                                key: "password",
+                                type: "text",
+                                value: user.password
+                            },
+                            {
+                                key: "intro",
+                                type: "html-textarea",
+                                value: null
+                            },
+                            {
+                                key: "about",
+                                type: "html-textarea",
+                                value: null
+                            },
+                            {
+                                key: "contact",
+                                type: "html-textarea",
+                                value: null
+                            },
+                            {
+                                key: "projects",
+                                type: "objects",
+                                objects: [],
+                                object_type: "projects",
+                                value: null
+                            }
+                        ],
+
+                        write_key: WRITE_KEY
+                    }, { ignoreLoadingBar: false });
+            };
             authService.setCredentials = function (user) {
                 $rootScope.globals = {
                     currentUser: user
@@ -591,7 +623,7 @@ gulp.task('bower', function () {
             <ol>
                 <li>We are using the ui-router for config routes.</li>
                 <li>We created Auth Service for our asynchronous calls to our Cosmic JS API.</li>
-                <li>We created Auth Controller for checking credentials.</li>
+                <li>We created Auth Controller for checking credentials and registration users.</li>
             </ol>
             <p>
                 Create User Service for get and update User, copy and paste the code below:
@@ -637,7 +669,7 @@ gulp.task('bower', function () {
 })();
             </pre>
             <p>
-                Create Emoji Service for get emoji from words, copy and paste the code below:
+                Create Portfolio Service for get and update, copy and paste the code below:
             </p>
             <pre>
 (function () {
@@ -645,100 +677,61 @@ gulp.task('bower', function () {
 
     angular
         .module('main')
-        .service('EmojiService', function ($http) {
+        .service('PortfolioService', function ($http,
+                                          $cookieStore,
+                                          $q,
+                                          $rootScope,
+                                          URL, BUCKET_SLUG, READ_KEY, WRITE_KEY, MEDIA_URL) {
 
-            var that = this;
+            $http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-            that.Quote = function (text, author, slug) {
-                this.text = text;
-                this.author = author;
-                this.slug = slug;
-            };
-
-            that.Emoji = function (code, position) {
-                this.code = code;
-                this.position = position;
-            };
-
-            that.Container = function (type, item) {
-                this.type = type;
-                this.item = item;
-            };
-
-            that.Random = {
-                randNumOld: 0,
-                getRandomInt: function (min, max) {
-                    var randNum = Math.floor(Math.random() * (max - min + 1)) + min;
-                    if (randNum == this.randNumOld) return this.getRandomInt(min, max);
-                    this.randNumOld = randNum;
-
-                    return randNum;
-                }
-            };
-
-            this.getEmojisFromWords = function (quote) {
-                var words = [];
-                var word = '';
-
-                quote += " ";
-
-                for (var i = 0; i < quote.length; i++) {
-                    if (quote[i] !== ' ') word += quote[i];
-                    else {
-                        words.push(word);
-                        word = '';
+            this.getPortfolioBySlug = function (slug) {
+                return $http.get(URL + BUCKET_SLUG + '/object/' + slug, {
+                    params: {
+                        read_key: READ_KEY
                     }
-                }
-
-                for (var j = 0; j < words.length; j++) {
-                    if (getMeAnEmoji(words[j]) !== "") words[j] = ":" + getMeAnEmoji(words[j]) + ":";
-                }
-
-                console.log(words);
-                return words;
+                });
             };
 
-            this.getEmoji = function (quote, emojis, containers, checkAnswers) {
-                var i = 0;
-                var position = 0;
-                var result;
-                var word = '';
-                var isEmoji = new RegExp(":");
-                var _quote = quote;
+            this.updatePortfolio = function (portfolio) {
+                portfolio.write_key = WRITE_KEY;
 
-                while (i < quote.text.length) {
-                    if (isEmoji.test(quote.text[i])) {
-                        result = ( /\:(\w+)\:/.exec(quote.text) )[1];
-                        emojis.push(new that.Emoji(":" + result + ":", i));
-                        containers.push(new that.Container('emoji', []));
-                        checkAnswers.push(new that.Emoji(":" + result + ":", position));
-
-                        quote.text[i] = quote.text[i].replace(':' + result + ':', '_emoji_');
-
-                        position++;
-                    }
-                    else {
-                        containers.push(new that.Container('word', quote.text[i]));
-                    }
-                    word = '';
-                    i++;
-                }
-
-                $http.get('/resources/emojis.json')
-                    .success(function (data) {
-                        for (var j = 0; j < 3; j++) {
-                            emojis.push(new that.Emoji(":" + data[parseInt(Math.random() * data.length)] + ":"));
-                        }
-                    });
-
-                return _quote;
+                return $http.put(URL + BUCKET_SLUG + '/edit-object', portfolio);
             };
 
+            this.upload = function (file) {
+                var fd = new FormData();
+                fd.append('media', file);
+                fd.append('write_key', WRITE_KEY);
+
+                var defer = $q.defer();
+
+                var xhttp = new XMLHttpRequest();
+
+                xhttp.upload.addEventListener("progress",function (e) {
+                    defer.notify(parseInt(e.loaded * 100 / e.total));
+                });
+                xhttp.upload.addEventListener("error",function (e) {
+                    defer.reject(e);
+                });
+
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState === 4) {
+                        defer.resolve(JSON.parse(xhttp.response)); //Outputs a DOMString by default
+                    }
+                };
+
+                xhttp.open("post", MEDIA_URL, true);
+
+                xhttp.send(fd);
+
+                return defer.promise;
+            }
         });
 })();
             </pre>
             <p>
-                Create Emoji Controller for get quotes and checking results, copy and paste the code below:
+                Create Portfolio Controller for update and add, edit projects, copy and paste the code below:
             </p>
             <pre>
 (function () {
@@ -746,206 +739,173 @@ gulp.task('bower', function () {
 
     angular
         .module('main')
-        .controller('EmojiCtrl', EmojiCtrl);
+        .controller('PortfolioCtrl', PortfolioCtrl);
 
-    function EmojiCtrl($scope, DEFAULT_IMAGE, EmojiService, AdminQuotesService, $log) {
+    function PortfolioCtrl($rootScope, $stateParams, $sce, $scope, $state, ngDialog, AuthService, UserService, PortfolioService, $log) {
         var vm = this;
 
-        vm.checkAnswers = [];
-        vm.quote = {};
-        vm.quotes = [];
-        vm.emojis = [];
-        vm.containers = [];
-        vm.win = false;
+        getPortfolio();
 
-        vm.DEFAULT_IMAGE = DEFAULT_IMAGE;
+        vm.currentUser = $rootScope.globals.currentUser ? $rootScope.globals.currentUser : getUser();
 
-        var random = EmojiService.Random;
-        var getEmojisFromWords = EmojiService.getEmojisFromWords;
-        var getEmoji = EmojiService.getEmoji;
-        var Quote = EmojiService.Quote;
-        var Emoji = EmojiService.Emoji;
+        vm.logout = logout;
+        vm.updatePortfolio = updatePortfolio;
+        vm.openAddProjectDialog = openAddProjectDialog;
+        vm.openEditProjectDialog = openEditProjectDialog;
 
-        var getRandomQuote = _getRandomQuote;
-        var getUserAnswers = _getUserAnswers;
+        vm.portfolio = {};
 
-        vm.getUserAnswerLength = getUserAnswerLength;
-        vm.nextQuote = nextQuote;
-        vm.checkAnswer = checkAnswer;
-        vm.getUserAnswerLength = getUserAnswerLength;
+        vm.toolbarEditor = [
+            ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'bold', 'italics', 'underline', 'justifyLeft', 'justifyCenter', 'justifyRight']
+        ];
 
-        $scope.getOptionsContainer = getOptionsContainer;
-
-        function _getRandomQuote(quotes) {
-            var _random = random.getRandomInt(0, quotes.length - 1);
-            console.log(quotes[_random]);
-            return quotes[_random].slug;
-        }
-
-        function _getUserAnswers(containers) {
-            var userAnswers = [];
-            var position = 0;
-
-            for (var i = 0; i < containers.length; i++) {
-
-                if (!Array.isArray(containers[i].item)) continue;
-                userAnswers.push(new Emoji(containers[i].item[0].code, position));
-                position++;
-
+        function chunk(arr, size) {
+            var newArr = [];
+            for (var i = 0; i < arr.length; i += size) {
+                newArr.push(arr.slice(i, i + size));
             }
-
-            return userAnswers;
+            return newArr;
         }
 
-        function getUserAnswerLength() {
-            var userAnswersLength = 0;
-
-            for (var k = 0; k < vm.containers.length; k++) {
-                if (!Array.isArray(vm.containers[k].item)) continue;
-                if (vm.containers[k].item.length !== 0) userAnswersLength += 1;
-            }
-            return userAnswersLength;
-        }
-
-        function nextQuote() {
-            getQuote(getRandomQuote(vm.quotes));
-        }
-
-        function checkAnswer() {
-            var result = [];
-            var position = 0;
-
-            function in_array(value, array) {
-                for (var i = 0; i < array.length; i++) {
-                    if (array[i] == value) return true;
-                }
-                return false;
-            }
-
-            if (vm.getUserAnswerLength() === vm.checkAnswers.length) {
-                var userAnswers = getUserAnswers(vm.containers);
-                for (var j = 0; j < userAnswers.length; j++) {
-                    vm.checkAnswers[j].code === userAnswers[j].code ? result.push(true) : result.push(false);
-                }
-
-                console.log(result);
-
-                for (var i = 0; i < vm.containers.length; i++) {
-
-                    if (!Array.isArray(vm.containers[i].item)) continue;
-                    if (!result[position]) {
-                        vm.emojis[vm.containers[i].item[0].jqyoui_pos] = new Emoji(vm.containers[i].item[0].code, i);
-                        vm.containers[i].item.splice(0, 1);
-                    }
-                    position++;
-
-                }
-
-                console.log(vm.emojis);
-                !in_array(false, result) ? vm.win = true : vm.win = false;
-            }
-        }
-
-        function getOptionsContainer(container) {
-            return {
-                accept: function (dragEl) {
-                    if (container.length >= 1) {
-                        return false;
-                    } else {
-                        return true;
-                    }
-                }
-            }
-        }
-
-        function getQuotes() {
+        function getUser() {
             function success(response) {
-                response.data.objects.forEach(function (quote) {
-                    vm.quotes.push(
-                        new Quote(
-                            getEmojisFromWords(quote.metadata.text),
-                            quote.metadata.author,
-                            quote.slug
-                        )
-                    );
-                });
-                $log.info(vm.quotes);
+                var currentUser = response.data.object;
 
-                getQuote(getRandomQuote(vm.quotes));
-
+                vm.currentUser = {
+                    slug: currentUser.slug,
+                    first_name: currentUser.metadata.first_name,
+                    last_name: currentUser.metadata.last_name,
+                    email: currentUser.metadata.email
+                };
             }
 
             function failed(response) {
                 $log.error(response);
             }
 
-            AdminQuotesService
-                .getQuotes(true)
+            UserService
+                .getUser($stateParams.slug, true)
                 .then(success, failed);
         }
 
-        function getQuote(slug) {
+        function getPortfolio() {
             function success(response) {
-                vm.quote = new Quote(
-                    getEmojisFromWords(response.data.object.metadata.text),
-                    response.data.object.metadata.author,
-                    response.data.object.slug
-                );
+                vm.portfolio = response.data.object;
 
-                vm.emojis = [];
-                vm.containers = [];
-                vm.checkAnswers = [];
-                vm.win = false;
+                if (Array.isArray(vm.portfolio.metadata.projects))
+                    vm.projectsChunk = chunk(vm.portfolio.metadata.projects, 2);
+                else
+                    vm.projectsChunk = [];
 
-                getEmoji(
-                    vm.quote,
-                    vm.emojis,
-                    vm.containers,
-                    vm.checkAnswers
-                );
+                vm.contact = $sce.trustAsResourceUrl('mailto:' + vm.currentUser.email);
 
-                vm.emojis.sort(function (a, b) {
-                    return a.code.charCodeAt(1) - b.code.charCodeAt(2)
-                });
-
-                vm.emojis.reverse();
-                console.log('emojis', vm.emojis);
+                $log.info(response);
             }
 
             function failed(response) {
                 $log.error(response);
             }
 
-            AdminQuotesService
-                .getQuoteBySlug(slug)
+            PortfolioService
+                .getPortfolioBySlug($stateParams.slug)
                 .then(success, failed);
         }
 
-        getQuotes();
+        function updatePortfolio() {
+            function success(response) {
+                getPortfolio();
 
-        $('.emoji').draggable(); // FOR TouchScreen
+                $log.info(response);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+            PortfolioService
+                .updatePortfolio(vm.portfolio)
+                .then(success, failed);
+        }
+
+        function openAddProjectDialog(slug) {
+
+            var options = {
+                templateUrl: '../views/portfolio/portfolio.project.edit.html',
+                showClose: true,
+                controller: 'PortfolioProjectsAddCtrl as vm'
+            };
+
+            ngDialog.open(options).closePromise.finally(function () {
+                getPortfolio();
+            });
+        }
+
+        function openEditProjectDialog(slug) {
+
+            var options = {
+                templateUrl: '../views/portfolio/portfolio.project.edit.html',
+                showClose: true,
+                controller: 'PortfolioProjectsEditCtrl as vm',
+                data: {
+                    slug: slug
+                }
+            };
+
+            ngDialog.open(options).closePromise.finally(function () {
+                getPortfolio();
+            });
+        }
+
+        function logout() {
+            function success(response) {
+                $state.go('auth');
+
+                $log.info(response);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+            AuthService
+                .clearCredentials()
+                .then(success, failed);
+        }
+
+        $scope.state = $state;
+
     }
 })();
             </pre>
             <p>
-                Create Emoji Module, copy and paste the code below:
+                Create Portfolio Module, copy and paste the code below:
             </p>
             <pre>
 (function () {
     'use strict';
 
     angular
-        .module('emoji', [])
+        .module('portfolio', [
+            'portfolio.intro',
+            'portfolio.projects',
+            'portfolio.about',
+            'portfolio.contact',
+            'portfolio.settings'
+        ])
         .config(config);
 
-    config.$inject = ['$stateProvider', '$urlRouterProvider'];
-    function config($stateProvider, $urlRouterProvider) {
+    config.$inject = ['$stateProvider'];
+    function config($stateProvider) {
 
         $stateProvider
-            .state('main.emoji', {
-                url: '',
-                templateUrl: '../views/emoji/emoji.html',
-                controller: 'EmojiCtrl as emojiCtrl'
+            .state('portfolio', {
+                url: '/:slug/',
+                abstract: true,
+                templateUrl: '../views/portfolio/portfolio.html',
+                controller: 'PortfolioCtrl as vm',
+                data: {
+                    is_granted: ['ROLE_USER', 'ROLE_GUEST']
+                }
             });
     }
 })();
@@ -954,80 +914,13 @@ gulp.task('bower', function () {
                 What's going on here:
             </h2>
             <ol>
-                <li>We created Emoji Service for get emoji from words.</li>
-                <li>We created Emoji Controller for drag and drop emoji, get quotes and checking results.</li>
-                <li>We created Emoji Module.</li>
+                <li>We created Portfolio Service for get and update.</li>
+                <li>We created Portfolio Controller for update and add, edit project.</li>
+                <li>We created Portfolio Module.</li>
             </ol>
             <p>
                 Create Author Controller for getting information of author, copy and paste the code below:
             </p>
-            <pre>
-(function () {
-    'use strict';
-
-    angular
-        .module('main')
-        .controller('AuthorCtrl', AuthorCtrl);
-
-    function AuthorCtrl($stateParams, $scope, DEFAULT_IMAGE, AdminAuthorsService, Flash, $log) {
-        var vm = this;
-
-        vm.author = {};
-
-        vm.DEFAULT_IMAGE = DEFAULT_IMAGE;
-
-        getAuthor($stateParams.slug);
-
-        function getAuthor(slug) {
-            function success(response) {
-                response.data.object.metadata.born = new Date(response.data.object.metafields[2].value);
-                response.data.object.metadata.died = new Date(response.data.object.metafields[3].value);
-                vm.author = response.data.object;
-            }
-
-            function failed(response) {
-                $log.error(response);
-            }
-
-            AdminAuthorsService
-                .getAuthorBySlug(slug)
-                .then(success, failed);
-        }
-    }
-})();
-</pre>
-            <p>
-                Create Author Module, copy and paste the code below:
-            </p>
-            <pre>
-(function () {
-    'use strict';
-
-    angular
-        .module('author', [])
-        .config(config);
-
-    config.$inject = ['$stateProvider', '$urlRouterProvider'];
-    function config($stateProvider, $urlRouterProvider) {
-
-        $stateProvider
-            .state('main.author', {
-                url: 'author/:slug',
-                templateUrl: '../views/author/author.html',
-                controller: 'AuthorCtrl as vm',
-                data: {
-                    is_granted: ['ROLE_GUEST']
-                }
-            });
-    }
-})();
-</pre>
-            <h2>
-                What's going on here:
-            </h2>
-            <ol>
-                <li>We can see information about authors.</li>
-            </ol>
             <h2>Conclusion:</h2>
             <p>
                 We were able to consume the Cosmic JS API with our actions and dispatcher functions.

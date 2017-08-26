@@ -10,49 +10,7 @@
                                           URL, BUCKET_SLUG, READ_KEY, WRITE_KEY, MEDIA_URL) {
             
             $http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-            this.author = {
-                content: null,
-                type_slug: "authors",
-                title: null,
-                bucket_slug: BUCKET_SLUG,
-                metafields: [
-                    {
-                        key: "name",
-                        title: "Name",
-                        type: "text",
-                        value: null
-                    },
-                    {
-                        key: "photo",
-                        title: "Photo",
-                        type: "file",
-                        value: null
-                    },
-                    {
-                        key: "born",
-                        title: "Born",
-                        type: "date",
-                        value: null
-                    },
-                    {
-                        key: "died",
-                        title: "Died",
-                        type: "date",
-                        value: null
-                    }
-                ]
-            };
-
-            this.getAuthors = function () {
-                return $http.get(URL + BUCKET_SLUG + '/object-type/authors', {
-                    params: {
-                        limit: 100,
-                        read_key: READ_KEY
-                    }
-                });
-            };
-
+            
             this.getPortfolioBySlug = function (slug) {
                 return $http.get(URL + BUCKET_SLUG + '/object/' + slug, {
                     params: {
@@ -67,23 +25,6 @@
                 return $http.put(URL + BUCKET_SLUG + '/edit-object', portfolio);
             };
             
-            this.removeAuthor = function (slug) {
-                return $http.delete(URL + BUCKET_SLUG + '/' + slug, {
-                    ignoreLoadingBar: true,
-                    headers:{
-                        'Content-Type': 'application/json'
-                    },
-                    data: {
-                        write_key: WRITE_KEY
-                    }
-                });
-            };
-            this.addAuthor = function (author) {
-                author.write_key = WRITE_KEY;
-                author.title = author.metafields[0].value;
-
-                return $http.post(URL + BUCKET_SLUG + '/add-object', author);
-            };
             this.upload = function (file) {
                 var fd = new FormData(); 
                 fd.append('media', file);
