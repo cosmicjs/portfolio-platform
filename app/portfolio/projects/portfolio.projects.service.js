@@ -11,9 +11,9 @@
             
             $http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-            this.author = {
+            this.project = {
                 content: null,
-                type_slug: "authors",
+                type_slug: "projects",
                 title: null,
                 bucket_slug: BUCKET_SLUG,
                 metafields: [
@@ -24,21 +24,9 @@
                         value: null
                     },
                     {
-                        key: "photo",
-                        title: "Photo",
+                        key: "image",
+                        title: "Image",
                         type: "file",
-                        value: null
-                    },
-                    {
-                        key: "born",
-                        title: "Born",
-                        type: "date",
-                        value: null
-                    },
-                    {
-                        key: "died",
-                        title: "Died",
-                        type: "date",
                         value: null
                     }
                 ]
@@ -78,9 +66,9 @@
                     }
                 });
             };
-            this.addProject = function (project) {
+            this.createProject = function (project) {
                 project.write_key = WRITE_KEY;
-                project.title = author.metafields[0].value;
+                project.title = project.metafields[0].value;
 
                 return $http.post(URL + BUCKET_SLUG + '/add-object', project);
             };

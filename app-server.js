@@ -12,5 +12,5 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 })
 http.listen(app.get('port'), () => {
-  console.log('Emoji App listening on ' + app.get('port'))
+  console.log('Portfolio App listening on ' + app.get('port'))
 })

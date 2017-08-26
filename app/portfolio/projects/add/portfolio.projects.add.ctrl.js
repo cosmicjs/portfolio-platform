@@ -3,13 +3,12 @@
 
     angular
         .module('main')
-        .controller('PortfolioProjectsEditCtrl', PortfolioProjectsEditCtrl);
+        .controller('PortfolioProjectsAddCtrl', PortfolioProjectsAddCtrl);
 
-    function PortfolioProjectsEditCtrl($state, PortfolioProjectsService, Notification, $log, $scope, DEFAULT_IMAGE, MEDIA_URL, ngDialog) {
+    function PortfolioProjectsAddCtrl(UserService, PortfolioProjectsService, Notification, $log, $scope, DEFAULT_IMAGE, MEDIA_URL, ngDialog) {
         var vm = this;
 
         vm.cancelUpload = cancelUpload;
-        vm.getProject = getProject;
         vm.save = save;
 
         vm.uploadProgress = 0;
@@ -17,7 +16,7 @@
 
         vm.DEFAULT_IMAGE = DEFAULT_IMAGE;
 
-        vm.project = {};
+        vm.project =PortfolioProjectsService.project;
         vm.flow = {};
         vm.projectEditForm = null;
 
@@ -26,26 +25,10 @@
             singleFile: true
         };
 
-        function getProject() {
+        vm.user = {};
+
+        function updateUser(user) {
             function success(response) {
-                vm.project = response.data.object;
-                
-                $log.info(response);
-            }
-
-            function failed(response) {
-                $log.error(response);
-            }
-           
-            PortfolioProjectsService
-                .getProjectBySlug($scope.ngDialogData.slug)
-                .then(success, failed);
-        }
-
-        function updateProject() {
-            function success(response) {
-                $log.info(response);
-
                 Notification.primary(
                     {
                         message: 'Saved',
@@ -62,9 +45,52 @@
             }
 
 
+            UserService
+                .updateUser(user, true)
+                .then(success, failed);
+        }
+
+        function getCurrentUser(project) {
+            function success(response) {
+                var projects = [];
+
+                vm.user = response.data.object;
+                vm.user.metafields[7].objects.push(project);
+
+                vm.user.metafields[7].objects.forEach(function (item) {
+                    projects.push(item._id);
+                });
+
+                vm.user.metafields[7].value = projects.join();
+
+                updateUser(vm.user);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+
+            UserService
+                .getCurrentUser(vm.project, true)
+                .then(success, failed);
+        }
+        
+        function createProject() {
+            function success(response) {
+                $log.info(response);
+
+                getCurrentUser(response.data.object);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+
             if (vm.projectEditForm.$valid)
                 PortfolioProjectsService
-                    .updateProject(vm.project)
+                    .createProject(vm.project)
                     .then(success, failed);
         }
 
@@ -81,7 +107,7 @@
                 .then(function(response){
 
                     vm.project.metafields[1].value = response.media.name;
-                    updateProject();
+                    createProject();
 
                 }, function(){
                     console.log('failed :(');
@@ -89,12 +115,12 @@
                     vm.uploadProgress = progress;
                 });
         }
-        
+
         function save() {
             if (vm.flow.files.length) 
                 upload();
             else
-                updateProject();
+                createProject();
         }
 
     }

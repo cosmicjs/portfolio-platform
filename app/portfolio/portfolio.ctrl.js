@@ -72,7 +72,7 @@
             var options = {
                 templateUrl: '../views/portfolio/portfolio.project.edit.html',
                 showClose: true,
-                // controller: 'PortfolioProjectsEdit as vm'
+                controller: 'PortfolioProjectsAddCtrl as vm'
             };
 
             ngDialog.open(options).closePromise.finally(function () {
@@ -85,7 +85,7 @@
             var options = {
                 templateUrl: '../views/portfolio/portfolio.project.edit.html',
                 showClose: true,
-                controller: 'PortfolioProjectsEdit as vm',
+                controller: 'PortfolioProjectsEditCtrl as vm',
                 data: {
                     slug: slug
                 }

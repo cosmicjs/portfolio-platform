@@ -384,7 +384,7 @@ angular.module("config", [])
             var options = {
                 templateUrl: '../views/portfolio/portfolio.project.edit.html',
                 showClose: true,
-                // controller: 'PortfolioProjectsEdit as vm'
+                controller: 'PortfolioProjectsAddCtrl as vm'
             };
 
             ngDialog.open(options).closePromise.finally(function () {
@@ -397,7 +397,7 @@ angular.module("config", [])
             var options = {
                 templateUrl: '../views/portfolio/portfolio.project.edit.html',
                 showClose: true,
-                controller: 'PortfolioProjectsEdit as vm',
+                controller: 'PortfolioProjectsEditCtrl as vm',
                 data: {
                     slug: slug
                 }
@@ -1052,9 +1052,9 @@ angular.module("config", [])
             
             $http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-            this.author = {
+            this.project = {
                 content: null,
-                type_slug: "authors",
+                type_slug: "projects",
                 title: null,
                 bucket_slug: BUCKET_SLUG,
                 metafields: [
@@ -1065,21 +1065,9 @@ angular.module("config", [])
                         value: null
                     },
                     {
-                        key: "photo",
-                        title: "Photo",
+                        key: "image",
+                        title: "Image",
                         type: "file",
-                        value: null
-                    },
-                    {
-                        key: "born",
-                        title: "Born",
-                        type: "date",
-                        value: null
-                    },
-                    {
-                        key: "died",
-                        title: "Died",
-                        type: "date",
                         value: null
                     }
                 ]
@@ -1119,9 +1107,9 @@ angular.module("config", [])
                     }
                 });
             };
-            this.addProject = function (project) {
+            this.createProject = function (project) {
                 project.write_key = WRITE_KEY;
-                project.title = author.metafields[0].value;
+                project.title = project.metafields[0].value;
 
                 return $http.post(URL + BUCKET_SLUG + '/add-object', project);
             };
@@ -1719,9 +1707,137 @@ angular.module("config", [])
 
     angular
         .module('main')
-        .controller('PortfolioProjectsEdit', PortfolioProjectsEdit);
+        .controller('PortfolioProjectsAddCtrl', PortfolioProjectsAddCtrl);
 
-    function PortfolioProjectsEdit($state, PortfolioProjectsService, Notification, $log, $scope, DEFAULT_IMAGE, MEDIA_URL, ngDialog) {
+    function PortfolioProjectsAddCtrl(UserService, PortfolioProjectsService, Notification, $log, $scope, DEFAULT_IMAGE, MEDIA_URL, ngDialog) {
+        var vm = this;
+
+        vm.cancelUpload = cancelUpload;
+        vm.save = save;
+
+        vm.uploadProgress = 0;
+        vm.showContent = false;
+
+        vm.DEFAULT_IMAGE = DEFAULT_IMAGE;
+
+        vm.project =PortfolioProjectsService.project;
+        vm.flow = {};
+        vm.projectEditForm = null;
+
+        vm.flowConfig = {
+            target: MEDIA_URL,
+            singleFile: true
+        };
+
+        vm.user = {};
+
+        function updateUser(user) {
+            function success(response) {
+                Notification.primary(
+                    {
+                        message: 'Saved',
+                        delay: 800,
+                        replaceMessage: true
+                    }
+                );
+
+                ngDialog.close();
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+
+            UserService
+                .updateUser(user, true)
+                .then(success, failed);
+        }
+
+        function getCurrentUser(project) {
+            function success(response) {
+                var projects = [];
+
+                vm.user = response.data.object;
+                vm.user.metafields[7].objects.push(project);
+
+                vm.user.metafields[7].objects.forEach(function (item) {
+                    projects.push(item._id);
+                });
+
+                vm.user.metafields[7].value = projects.join();
+
+                updateUser(vm.user);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+
+            UserService
+                .getCurrentUser(vm.project, true)
+                .then(success, failed);
+        }
+        
+        function createProject() {
+            function success(response) {
+                $log.info(response);
+
+                getCurrentUser(response.data.object);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+
+            if (vm.projectEditForm.$valid)
+                PortfolioProjectsService
+                    .createProject(vm.project)
+                    .then(success, failed);
+        }
+
+        function cancelUpload() {
+            vm.flow.cancel();
+            vm.background = {
+                'background-image': 'url(' + (vm.event.metafields[0].value ? vm.event.metafields[0].url : DEFAULT_IMAGE) + ')'
+            };
+        }
+
+        function upload() {
+            PortfolioProjectsService
+                .upload(vm.flow.files[0].file)
+                .then(function(response){
+
+                    vm.project.metafields[1].value = response.media.name;
+                    createProject();
+
+                }, function(){
+                    console.log('failed :(');
+                }, function(progress){
+                    vm.uploadProgress = progress;
+                });
+        }
+
+        function save() {
+            if (vm.flow.files.length) 
+                upload();
+            else
+                createProject();
+        }
+
+    }
+})();
+
+(function () {
+    'use strict'; 
+
+    angular
+        .module('main')
+        .controller('PortfolioProjectsEditCtrl', PortfolioProjectsEditCtrl);
+
+    function PortfolioProjectsEditCtrl($state, PortfolioProjectsService, Notification, $log, $scope, DEFAULT_IMAGE, MEDIA_URL, ngDialog) {
         var vm = this;
 
         vm.cancelUpload = cancelUpload;
