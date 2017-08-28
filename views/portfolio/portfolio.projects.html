@@ -5,10 +5,7 @@
 			<h2>Projects</h2>
 		</header>
 
-		<p>Vitae natoque dictum etiam semper magnis enim feugiat convallis convallis
-			egestas rhoncus ridiculus in quis risus amet curabitur tempor orci penatibus.
-			Tellus erat mauris ipsum fermentum etiam vivamus eget. Nunc nibh morbi quis
-			fusce hendrerit lacus ridiculus.</p>
+		<p ng-bind-html="vm.portfolio.metadata.project_text"></p>
 
 		<div class="row">
 			<div class="4u 12u$(mobile)" ng-repeat="projects in vm.projectsChunk">

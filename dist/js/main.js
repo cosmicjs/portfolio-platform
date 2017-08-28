@@ -267,6 +267,21 @@
                                 objects: [],
                                 object_type: "projects",
                                 value: null
+                            },
+                            {
+                                key: "about_image",
+                                type: "file",
+                                value: null
+                            },
+                            {
+                                key: "intro_image",
+                                type: "file",
+                                value: null
+                            },
+                            {
+                                key: "project_text",
+                                type: "html-textarea",
+                                value: null
                             }
                         ],
 
@@ -311,7 +326,7 @@ angular.module("config", [])
         .module('main')
         .controller('PortfolioCtrl', PortfolioCtrl);
 
-    function PortfolioCtrl($rootScope, $stateParams, $sce, $scope, $state, ngDialog, AuthService, UserService, PortfolioService, $log) {
+    function PortfolioCtrl($rootScope, $stateParams, $sce, $scope, $state, ngDialog, AuthService, UserService, PortfolioService, Notification, $log) {
         var vm = this;
 
         getPortfolio();
@@ -384,6 +399,14 @@ angular.module("config", [])
         function updatePortfolio() {
             function success(response) {
                 getPortfolio();
+
+                Notification.primary(
+                    {
+                        message: 'Saved',
+                        delay: 800,
+                        replaceMessage: true
+                    }
+                );
 
                 $log.info(response);
             }
@@ -576,16 +599,16 @@ angular.module("config", [])
     'use strict';
 
     angular
-        .module('portfolio.about', [])
+        .module('portfolio.contact', [])
         .config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
     function config($stateProvider, $urlRouterProvider) {
 
         $stateProvider
-            .state('portfolio.about', {
-                url: 'about',
-                templateUrl: '../views/portfolio/portfolio.about.html',
+            .state('portfolio.contact', {
+                url: 'contact',
+                templateUrl: '../views/portfolio/portfolio.contact.html',
                 data: {
                     is_granted: ['ROLE_USER', 'ROLE_GUEST']
                 }
@@ -598,16 +621,16 @@ angular.module("config", [])
     'use strict';
 
     angular
-        .module('portfolio.contact', [])
+        .module('portfolio.about', [])
         .config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
     function config($stateProvider, $urlRouterProvider) {
 
         $stateProvider
-            .state('portfolio.contact', {
-                url: 'contact',
-                templateUrl: '../views/portfolio/portfolio.contact.html',
+            .state('portfolio.about', {
+                url: 'about',
+                templateUrl: '../views/portfolio/portfolio.about.html',
                 data: {
                     is_granted: ['ROLE_USER', 'ROLE_GUEST']
                 }

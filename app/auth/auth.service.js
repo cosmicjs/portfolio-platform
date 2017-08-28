@@ -79,6 +79,21 @@
                                 objects: [],
                                 object_type: "projects",
                                 value: null
+                            },
+                            {
+                                key: "about_image",
+                                type: "file",
+                                value: null
+                            },
+                            {
+                                key: "intro_image",
+                                type: "file",
+                                value: null
+                            },
+                            {
+                                key: "project_text",
+                                type: "html-textarea",
+                                value: null
                             }
                         ],
 

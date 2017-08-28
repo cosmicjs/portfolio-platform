@@ -5,7 +5,7 @@
         .module('main')
         .controller('PortfolioCtrl', PortfolioCtrl);
 
-    function PortfolioCtrl($rootScope, $stateParams, $sce, $scope, $state, ngDialog, AuthService, UserService, PortfolioService, $log) {
+    function PortfolioCtrl($rootScope, $stateParams, $sce, $scope, $state, ngDialog, AuthService, UserService, PortfolioService, Notification, $log) {
         var vm = this;
 
         getPortfolio();
@@ -78,6 +78,14 @@
         function updatePortfolio() {
             function success(response) {
                 getPortfolio();
+
+                Notification.primary(
+                    {
+                        message: 'Saved',
+                        delay: 800,
+                        replaceMessage: true
+                    }
+                );
 
                 $log.info(response);
             }
