@@ -9,6 +9,19 @@
 			<uib-tab index="0" heading="Intro">
 
 				<form>
+					<br>
+					<div class="text-center"
+						 flow-init="vm.flowConfig"
+						 flow-name="vm.flowIntro">
+						<div>
+							<img ng-if="vm.flowIntro.files.length" flow-img="vm.flowIntro.files[0]" class="img-responsive">
+							<uib-progressbar ng-if="vm.uploadProgress" class="event-progress active" max="100" value="vm.uploadProgress"></uib-progressbar>
+						</div>
+						<br>
+						<button class="btn btn-default btn-lg" flow-btn>Change Image</button>
+						<button ng-show="vm.flowIntro.files.length" class="btn btn-primary btn-lg" ng-click="vm.uploadIntroImage()">Upload</button>
+					</div>
+					<br>
 					<div class="row">
 						<div class="12u$" text-angular="" ta-toolbar="vm.toolbarEditor" ng-model="vm.portfolio.metafields[4].value"></div>
 						<div class="12u$">
@@ -48,7 +61,19 @@
 
 			</uib-tab>
 			<uib-tab index="2" heading="About Me">
-
+				<br>
+				<div class="text-center"
+					 flow-init="vm.flowConfig"
+					 flow-name="vm.flowAbout">
+					<div>
+						<img ng-if="vm.flowAbout.files.length" flow-img="vm.flowAbout.files[0]" class="img-responsive">
+						<uib-progressbar ng-if="vm.uploadProgress" class="event-progress active" max="100" value="vm.uploadProgress"></uib-progressbar>
+					</div>
+					<br>
+					<button class="btn btn-default btn-lg" flow-btn>Change Image</button>
+					<button ng-show="vm.flowAbout.files.length" class="btn btn-primary btn-lg" ng-click="vm.uploadAboutImage()">Upload</button>
+				</div>
+				<br>
 				<form method="post">
 					<div class="row">
 						<div class="12u$">

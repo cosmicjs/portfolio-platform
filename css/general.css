@@ -134,5 +134,5 @@ body {
 }
 
 #main > section.one {
-    background-image: url(../img/banner.jpg) !important;
+    /*background-image: url(../img/banner.jpg) !important;*/
 }

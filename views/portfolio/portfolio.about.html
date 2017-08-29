@@ -5,7 +5,9 @@
 			<h2>About Me</h2>
 		</header>
 
-		<a href="#" class="image featured"><img src="/dist/img/pic08.jpg" alt="" /></a>
+		<a href="" class="image featured" ng-show="vm.portfolio.metadata.about_image.url">
+			<img ng-src="{{vm.portfolio.metadata.about_image.url}}" alt="" />
+		</a>
 
 		<div ng-bind-html="vm.portfolio.metadata.about"></div>
 

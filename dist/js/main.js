@@ -326,7 +326,19 @@ angular.module("config", [])
         .module('main')
         .controller('PortfolioCtrl', PortfolioCtrl);
 
-    function PortfolioCtrl($rootScope, $stateParams, $sce, $scope, $state, ngDialog, AuthService, UserService, PortfolioService, Notification, $log) {
+    function PortfolioCtrl($rootScope,
+                           $stateParams,
+                           $sce,
+                           $scope,
+                           $state,
+                           ngDialog,
+                           AuthService,
+                           UserService,
+                           PortfolioService,
+                           Notification,
+                           PortfolioProjectsService,
+                           $log,
+                           MEDIA_URL) {
         var vm = this;
 
         getPortfolio();
@@ -337,12 +349,54 @@ angular.module("config", [])
         vm.updatePortfolio = updatePortfolio;
         vm.openAddProjectDialog = openAddProjectDialog;
         vm.openEditProjectDialog = openEditProjectDialog;
+        vm.uploadIntroImage = uploadIntroImage;
+        vm.uploadAboutImage = uploadAboutImage;
 
         vm.portfolio = {};
 
         vm.toolbarEditor = [
             ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'bold', 'italics', 'underline', 'justifyLeft', 'justifyCenter', 'justifyRight']
         ];
+
+        vm.uploadProgress = 0;
+        vm.flowIntro = {};
+        vm.flowAbout = {};
+        vm.flowConfig = {
+            target: MEDIA_URL,
+            singleFile: true
+        };
+
+        function uploadIntroImage() {
+            PortfolioProjectsService
+                .upload(vm.flowIntro.files[0].file)
+                .then(function(response){
+
+                    vm.portfolio.metafields[9].value = response.media.name;
+                    vm.uploadProgress = 0;
+                    updatePortfolio();
+
+                }, function(){
+                    console.log('failed :(');
+                }, function(progress){
+                    vm.uploadProgress = progress;
+                });
+        }
+
+        function uploadAboutImage() {
+            PortfolioProjectsService
+                .upload(vm.flowAbout.files[0].file)
+                .then(function(response){
+
+                    vm.portfolio.metafields[8].value = response.media.name;
+                    vm.uploadProgress = 0;
+                    updatePortfolio();
+
+                }, function(){
+                    console.log('failed :(');
+                }, function(progress){
+                    vm.uploadProgress = progress;
+                });
+        }
 
         function chunk(arr, size) {
             var newArr = [];
@@ -599,16 +653,16 @@ angular.module("config", [])
     'use strict';
 
     angular
-        .module('portfolio.contact', [])
+        .module('portfolio.about', [])
         .config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
     function config($stateProvider, $urlRouterProvider) {
 
         $stateProvider
-            .state('portfolio.contact', {
-                url: 'contact',
-                templateUrl: '../views/portfolio/portfolio.contact.html',
+            .state('portfolio.about', {
+                url: 'about',
+                templateUrl: '../views/portfolio/portfolio.about.html',
                 data: {
                     is_granted: ['ROLE_USER', 'ROLE_GUEST']
                 }
@@ -621,16 +675,16 @@ angular.module("config", [])
     'use strict';
 
     angular
-        .module('portfolio.about', [])
+        .module('portfolio.contact', [])
         .config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
     function config($stateProvider, $urlRouterProvider) {
 
         $stateProvider
-            .state('portfolio.about', {
-                url: 'about',
-                templateUrl: '../views/portfolio/portfolio.about.html',
+            .state('portfolio.contact', {
+                url: 'contact',
+                templateUrl: '../views/portfolio/portfolio.contact.html',
                 data: {
                     is_granted: ['ROLE_USER', 'ROLE_GUEST']
                 }
