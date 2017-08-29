@@ -108,6 +108,15 @@
     
 })();
  
+angular.module("config", [])
+.constant("BUCKET_SLUG", "photography-portfolio")
+.constant("URL", "https://api.cosmicjs.com/v1/")
+.constant("MEDIA_URL", "https://api.cosmicjs.com/v1/photography-portfolio/media")
+.constant("READ_KEY", "BnYF1ENerFAclDGKtsIffF3PtaYqQyvuyqTTHpFVzsHSKPMt58")
+.constant("DEFAULT_IMAGE", "https://cosmicjs.com/uploads/fbc6dac0-8ab0-11e7-bf76-7da7db006046-image.png")
+.constant("WRITE_KEY", "n20lcTUP5shFNaIYe2H369K9T9PVyywhysOBh9o9xpy2VTYMhB");
+
+ 
 (function () {
     'use strict'; 
 
@@ -270,12 +279,12 @@
                                 type: "objects",
                                 objects: [],
                                 object_type: "projects",
-                                value: null
+                                value: "59a41db710d640f7530004b2"
                             },
                             {
                                 key: "about_image",
                                 type: "file",
-                                value: null
+                                value: "da3fca30-8c52-11e7-b7b2-8747dfd2b196-pic05.jpg"
                             },
                             {
                                 key: "intro_image",
@@ -314,15 +323,6 @@
             };
         });  
 })();  
-angular.module("config", [])
-.constant("BUCKET_SLUG", "photography-portfolio")
-.constant("URL", "https://api.cosmicjs.com/v1/")
-.constant("MEDIA_URL", "https://api.cosmicjs.com/v1/photography-portfolio/media")
-.constant("READ_KEY", "BnYF1ENerFAclDGKtsIffF3PtaYqQyvuyqTTHpFVzsHSKPMt58")
-.constant("DEFAULT_IMAGE", "https://cosmicjs.com/uploads/fbc6dac0-8ab0-11e7-bf76-7da7db006046-image.png")
-.constant("WRITE_KEY", "n20lcTUP5shFNaIYe2H369K9T9PVyywhysOBh9o9xpy2VTYMhB");
-
- 
 (function () {
     'use strict'; 
 

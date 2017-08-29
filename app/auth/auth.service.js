@@ -78,12 +78,12 @@
                                 type: "objects",
                                 objects: [],
                                 object_type: "projects",
-                                value: null
+                                value: "59a41db710d640f7530004b2"
                             },
                             {
                                 key: "about_image",
                                 type: "file",
-                                value: null
+                                value: "da3fca30-8c52-11e7-b7b2-8747dfd2b196-pic05.jpg"
                             },
                             {
                                 key: "intro_image",
