@@ -42,10 +42,14 @@
 
         $urlRouterProvider.otherwise(function ($injector) {
             var $state = $injector.get("$state");
-            $state.go('login');
+            $state.go('main');
         });
  
         $stateProvider
+            .state('main', {
+                url: '/',
+                templateUrl: '../views/main.html'
+            })
             .state('blog', {
                 url: '/blog',
                 templateUrl: '../blog.html'
@@ -90,7 +94,7 @@
             });
 
         crAcl
-            .setRedirect('login');
+            .setRedirect('main');
  
         if ($rootScope.globals.currentUser) {
             crAcl.setRole($rootScope.globals.currentUser.role);

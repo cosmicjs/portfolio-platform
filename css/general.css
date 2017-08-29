@@ -136,3 +136,7 @@ body {
 #main > section.one {
     /*background-image: url(../img/banner.jpg) !important;*/
 }
+
+.welcome-page {
+    margin: 0 !important;
+}
