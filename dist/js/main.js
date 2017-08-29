@@ -48,7 +48,25 @@
         $stateProvider
             .state('main', {
                 url: '/',
-                templateUrl: '../views/main.html'
+                templateUrl: '../views/main.html',
+                controller: function ($scope, $log, PortfolioService) {
+                    getHomePage();
+                    
+                    function getHomePage() {
+                        function success(response) {
+                            $scope.homePage = response.data.object;
+                            $log.info(response);
+                        }
+
+                        function failed(response) {
+                            $log.error(response);
+                        }
+
+                        PortfolioService
+                            .getHomePage()
+                            .then(success, failed);
+                    }
+                }
             })
             .state('blog', {
                 url: '/blog',
@@ -88,7 +106,7 @@
 
         crAcl
             .setInheritanceRoles({
-                'ROLE_ADMIN': ['ROLE_ADMIN', 'ROLE_GUEST'],
+                'ROLE_ADMIN': ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_GUEST'],
                 'ROLE_USER': ['ROLE_USER', 'ROLE_GUEST'],
                 'ROLE_GUEST': ['ROLE_GUEST']
             });
@@ -107,15 +125,6 @@
     }
     
 })();
- 
-angular.module("config", [])
-.constant("BUCKET_SLUG", "photography-portfolio")
-.constant("URL", "https://api.cosmicjs.com/v1/")
-.constant("MEDIA_URL", "https://api.cosmicjs.com/v1/photography-portfolio/media")
-.constant("READ_KEY", "BnYF1ENerFAclDGKtsIffF3PtaYqQyvuyqTTHpFVzsHSKPMt58")
-.constant("DEFAULT_IMAGE", "https://cosmicjs.com/uploads/fbc6dac0-8ab0-11e7-bf76-7da7db006046-image.png")
-.constant("WRITE_KEY", "n20lcTUP5shFNaIYe2H369K9T9PVyywhysOBh9o9xpy2VTYMhB");
-
  
 (function () {
     'use strict'; 
@@ -141,13 +150,13 @@ angular.module("config", [])
                     if (response.data.status !== 'empty') {
                         var currentUser = response.data.objects[0];
                         
-                        crAcl.setRole('ROLE_USER');
+                        crAcl.setRole(currentUser.metadata.role);
                         AuthService.setCredentials({
                             slug: currentUser.slug,
                             first_name: currentUser.metadata.first_name,
                             last_name: currentUser.metadata.last_name,
                             email: currentUser.metadata.email,
-                            role: 'ROLE_USER'
+                            role: currentUser.metadata.role
                         });
                         $state.go('portfolio.intro', {slug: currentUser.slug});
                     }
@@ -277,9 +286,8 @@ angular.module("config", [])
                             {
                                 key: "projects",
                                 type: "objects",
-                                objects: [],
                                 object_type: "projects",
-                                value: "59a41db710d640f7530004b2"
+                                value: "59a5d47df2f43ca279000031"
                             },
                             {
                                 key: "about_image",
@@ -295,6 +303,11 @@ angular.module("config", [])
                                 key: "project_text",
                                 type: "html-textarea",
                                 value: null
+                            },
+                            {
+                                key: "role",
+                                type: "text",
+                                value: "ROLE_USER"
                             }
                         ],
 
@@ -323,6 +336,15 @@ angular.module("config", [])
             };
         });  
 })();  
+angular.module("config", [])
+.constant("BUCKET_SLUG", "photography-portfolio")
+.constant("URL", "https://api.cosmicjs.com/v1/")
+.constant("MEDIA_URL", "https://api.cosmicjs.com/v1/photography-portfolio/media")
+.constant("READ_KEY", "BnYF1ENerFAclDGKtsIffF3PtaYqQyvuyqTTHpFVzsHSKPMt58")
+.constant("DEFAULT_IMAGE", "https://cosmicjs.com/uploads/fbc6dac0-8ab0-11e7-bf76-7da7db006046-image.png")
+.constant("WRITE_KEY", "n20lcTUP5shFNaIYe2H369K9T9PVyywhysOBh9o9xpy2VTYMhB");
+
+ 
 (function () {
     'use strict'; 
 
@@ -346,6 +368,7 @@ angular.module("config", [])
         var vm = this;
 
         getPortfolio();
+        getHomePage();
 
         vm.currentUser = $rootScope.globals.currentUser ? $rootScope.globals.currentUser : getUser();
         
@@ -355,6 +378,8 @@ angular.module("config", [])
         vm.openEditProjectDialog = openEditProjectDialog;
         vm.uploadIntroImage = uploadIntroImage;
         vm.uploadAboutImage = uploadAboutImage;
+        vm.uploadHomePageImage = uploadHomePageImage;
+        vm.updateHomePage = updateHomePage;
 
         vm.portfolio = {};
 
@@ -365,10 +390,27 @@ angular.module("config", [])
         vm.uploadProgress = 0;
         vm.flowIntro = {};
         vm.flowAbout = {};
+        vm.flowHomePage = {};
         vm.flowConfig = {
             target: MEDIA_URL,
             singleFile: true
         };
+
+        function uploadHomePageImage() {
+            PortfolioProjectsService
+                .upload(vm.flowHomePage.files[0].file)
+                .then(function(response){
+
+                    vm.homePage.metafields[1].value = response.media.name;
+                    vm.uploadProgress = 0;
+                    updateHomePage();
+
+                }, function(){
+                    console.log('failed :(');
+                }, function(progress){
+                    vm.uploadProgress = progress;
+                });
+        }
 
         function uploadIntroImage() {
             PortfolioProjectsService
@@ -477,6 +519,45 @@ angular.module("config", [])
                 .updatePortfolio(vm.portfolio)
                 .then(success, failed);
         }
+
+        function updateHomePage() {
+            function success(response) {
+                getHomePage();
+
+                Notification.primary(
+                    {
+                        message: 'Saved',
+                        delay: 800,
+                        replaceMessage: true
+                    }
+                );
+
+                $log.info(response);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+            PortfolioService
+                .updatePortfolio(vm.homePage)
+                .then(success, failed);
+        }
+
+        function getHomePage() {
+            function success(response) {
+                vm.homePage = response.data.object;
+                $log.info(response);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+            PortfolioService
+                .getHomePage()
+                .then(success, failed);
+        }
         
         function openAddProjectDialog(slug) {
 
@@ -573,6 +654,14 @@ angular.module("config", [])
             
             this.getPortfolioBySlug = function (slug) {
                 return $http.get(URL + BUCKET_SLUG + '/object/' + slug, {
+                    params: {
+                        read_key: READ_KEY
+                    }
+                });
+            };
+
+            this.getHomePage = function () {
+                return $http.get(URL + BUCKET_SLUG + '/object/home', {
                     params: {
                         read_key: READ_KEY
                     }

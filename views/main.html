@@ -1,8 +1,8 @@
 <div id="main" class="welcome-page">
-<section id="top" class="one dark" ng-style="{'background-image': ('url(\'../dist/img/banner.jpg\')')}">
+<section id="top" class="one dark" ng-style="{'background-image': ('url(\'' + homePage.metadata.background.url + '\')')}">
 	<div class="container">
 
-		<header>
+		<header ng-bind-html="homePage.metadata.home_text">
 			<h2 class="alt">Hi! It is website for <strong>Photographers</strong><br>
 				You can create portfolio</h2>
 			<p>Please <a ui-sref="register">register</a> or <a ui-sref="login">log in</a>.

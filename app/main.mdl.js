@@ -48,7 +48,25 @@
         $stateProvider
             .state('main', {
                 url: '/',
-                templateUrl: '../views/main.html'
+                templateUrl: '../views/main.html',
+                controller: function ($scope, $log, PortfolioService) {
+                    getHomePage();
+                    
+                    function getHomePage() {
+                        function success(response) {
+                            $scope.homePage = response.data.object;
+                            $log.info(response);
+                        }
+
+                        function failed(response) {
+                            $log.error(response);
+                        }
+
+                        PortfolioService
+                            .getHomePage()
+                            .then(success, failed);
+                    }
+                }
             })
             .state('blog', {
                 url: '/blog',
@@ -88,7 +106,7 @@
 
         crAcl
             .setInheritanceRoles({
-                'ROLE_ADMIN': ['ROLE_ADMIN', 'ROLE_GUEST'],
+                'ROLE_ADMIN': ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_GUEST'],
                 'ROLE_USER': ['ROLE_USER', 'ROLE_GUEST'],
                 'ROLE_GUEST': ['ROLE_GUEST']
             });

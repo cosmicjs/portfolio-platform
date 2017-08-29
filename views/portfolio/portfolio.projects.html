@@ -9,7 +9,7 @@
 
 		<div class="row">
 			<div class="4u 12u$(mobile)" ng-repeat="projects in vm.projectsChunk">
-				<article class="item" ng-repeat="project in projects">
+				<article class="item" ng-if="project.metadata.name !== 'example'" ng-repeat="project in projects">
 					<a href="" class="image fit"><img ng-src="{{project.metadata.image.url}}" alt="" /></a>
 					<header>
 						<h3>{{project.metadata.name}}</h3>

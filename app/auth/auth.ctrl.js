@@ -22,13 +22,13 @@
                     if (response.data.status !== 'empty') {
                         var currentUser = response.data.objects[0];
                         
-                        crAcl.setRole('ROLE_USER');
+                        crAcl.setRole(currentUser.metadata.role);
                         AuthService.setCredentials({
                             slug: currentUser.slug,
                             first_name: currentUser.metadata.first_name,
                             last_name: currentUser.metadata.last_name,
                             email: currentUser.metadata.email,
-                            role: 'ROLE_USER'
+                            role: currentUser.metadata.role
                         });
                         $state.go('portfolio.intro', {slug: currentUser.slug});
                     }

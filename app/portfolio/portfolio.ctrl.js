@@ -21,6 +21,7 @@
         var vm = this;
 
         getPortfolio();
+        getHomePage();
 
         vm.currentUser = $rootScope.globals.currentUser ? $rootScope.globals.currentUser : getUser();
         
@@ -30,6 +31,8 @@
         vm.openEditProjectDialog = openEditProjectDialog;
         vm.uploadIntroImage = uploadIntroImage;
         vm.uploadAboutImage = uploadAboutImage;
+        vm.uploadHomePageImage = uploadHomePageImage;
+        vm.updateHomePage = updateHomePage;
 
         vm.portfolio = {};
 
@@ -40,10 +43,27 @@
         vm.uploadProgress = 0;
         vm.flowIntro = {};
         vm.flowAbout = {};
+        vm.flowHomePage = {};
         vm.flowConfig = {
             target: MEDIA_URL,
             singleFile: true
         };
+
+        function uploadHomePageImage() {
+            PortfolioProjectsService
+                .upload(vm.flowHomePage.files[0].file)
+                .then(function(response){
+
+                    vm.homePage.metafields[1].value = response.media.name;
+                    vm.uploadProgress = 0;
+                    updateHomePage();
+
+                }, function(){
+                    console.log('failed :(');
+                }, function(progress){
+                    vm.uploadProgress = progress;
+                });
+        }
 
         function uploadIntroImage() {
             PortfolioProjectsService
@@ -150,6 +170,45 @@
 
             PortfolioService
                 .updatePortfolio(vm.portfolio)
+                .then(success, failed);
+        }
+
+        function updateHomePage() {
+            function success(response) {
+                getHomePage();
+
+                Notification.primary(
+                    {
+                        message: 'Saved',
+                        delay: 800,
+                        replaceMessage: true
+                    }
+                );
+
+                $log.info(response);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+            PortfolioService
+                .updatePortfolio(vm.homePage)
+                .then(success, failed);
+        }
+
+        function getHomePage() {
+            function success(response) {
+                vm.homePage = response.data.object;
+                $log.info(response);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+            PortfolioService
+                .getHomePage()
                 .then(success, failed);
         }
         

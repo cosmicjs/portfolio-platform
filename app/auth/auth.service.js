@@ -76,9 +76,8 @@
                             {
                                 key: "projects",
                                 type: "objects",
-                                objects: [],
                                 object_type: "projects",
-                                value: "59a41db710d640f7530004b2"
+                                value: "59a5d47df2f43ca279000031"
                             },
                             {
                                 key: "about_image",
@@ -94,6 +93,11 @@
                                 key: "project_text",
                                 type: "html-textarea",
                                 value: null
+                            },
+                            {
+                                key: "role",
+                                type: "text",
+                                value: "ROLE_USER"
                             }
                         ],
 

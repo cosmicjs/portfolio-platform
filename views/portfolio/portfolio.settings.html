@@ -49,7 +49,7 @@
 
 				<div class="row">
 					<div class="4u 12u$(mobile)" ng-repeat="projects in vm.projectsChunk">
-						<article class="item" ng-repeat="project in projects" ng-click="vm.openEditProjectDialog(project.slug)">
+						<article class="item" ng-if="project.metadata.name !== 'example'" ng-repeat="project in projects" ng-click="vm.openEditProjectDialog(project.slug)">
 							<a href="" class="image fit"><img ng-src="{{project.metadata.image.url}}" alt="" /></a>
 							<header>
 								<h3>{{project.metadata.name}}</h3>
@@ -94,6 +94,31 @@
 						</div>
 						<div class="12u$">
 							<input type="submit" value="Save" ng-click="vm.updatePortfolio()">
+						</div>
+					</div>
+				</form>
+			</uib-tab>
+			<uib-tab index="4" heading="Home Page" ng-if="vm.portfolio.metadata.role === 'ROLE_ADMIN'">
+				<br>
+				<div class="text-center"
+					 flow-init="vm.flowConfig"
+					 flow-name="vm.flowHomePage">
+					<div>
+						<img ng-if="vm.flowHomePage.files.length" flow-img="vm.flowHomePage.files[0]" class="img-responsive">
+						<uib-progressbar ng-if="vm.uploadProgress" class="event-progress active" max="100" value="vm.uploadProgress"></uib-progressbar>
+					</div>
+					<br>
+					<button class="btn btn-default btn-lg" flow-btn>Change Image</button>
+					<button ng-show="vm.flowHomePage.files.length" class="btn btn-primary btn-lg" ng-click="vm.uploadHomePageImage()">Upload</button>
+				</div>
+				<br>
+				<form method="post">
+					<div class="row">
+						<div class="12u$">
+							<div class="12u$" text-angular="" ta-toolbar="vm.toolbarEditor" ng-model="vm.homePage.metafields[0].value"></div>
+						</div>
+						<div class="12u$">
+							<input type="submit" value="Save" ng-click="vm.updateHomePage()">
 						</div>
 					</div>
 				</form>

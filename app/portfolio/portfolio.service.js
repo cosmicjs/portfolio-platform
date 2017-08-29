@@ -19,6 +19,14 @@
                 });
             };
 
+            this.getHomePage = function () {
+                return $http.get(URL + BUCKET_SLUG + '/object/home', {
+                    params: {
+                        read_key: READ_KEY
+                    }
+                });
+            };
+
             this.updatePortfolio = function (portfolio) {
                 portfolio.write_key = WRITE_KEY;
 
