@@ -1,5 +1,10 @@
 <div id="main" class="welcome-page">
-<section id="top" class="one dark" ng-style="{'background-image': ('url(\'' + homePage.metadata.background.url + '\')')}">
+<section id="top" class="one dark" ng-style="{
+'background-image': ('url(\'' + homePage.metadata.background.url + '\')'),
+'background-size': 'cover',
+'background-position': 'center',
+'background-repeat': 'no-repeat'
+}">
 	<div class="container">
 
 		<header ng-bind-html="homePage.metadata.home_text">
