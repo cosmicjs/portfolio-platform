@@ -49,9 +49,12 @@
 
 				<div class="row">
 					<div class="4u 12u$(mobile)" ng-repeat="projects in vm.projectsChunk">
-						<article class="item" ng-if="project.metadata.name !== 'example'" ng-repeat="project in projects" ng-click="vm.openEditProjectDialog(project.slug)">
-							<a href="" class="image fit"><img ng-src="{{project.metadata.image.url}}" alt="" /></a>
-							<header>
+						<article class="item text-right" ng-if="project.metadata.name !== 'example'" ng-repeat="project in projects">
+							<a href="" ng-click="vm.removeProject(project.slug)"><i class="fa fa-remove"></i></a>
+							<a href="" class="image fit" ng-click="vm.openEditProjectDialog(project.slug)">
+								<img ng-src="{{project.metadata.image.url}}" alt="" />
+							</a>
+							<header class="text-center" ng-click="vm.openEditProjectDialog(project.slug)">
 								<h3>{{project.metadata.name}}</h3>
 							</header>
 						</article>
@@ -123,6 +126,32 @@
 					</div>
 				</form>
 			</uib-tab>
+			<uib-tab index="5" heading="Global">
+				<br>
+				<div class="text-center"
+					 flow-init="vm.flowConfig"
+					 flow-name="vm.flowAvatar">
+					<div>
+						<img ng-if="vm.flowAvatar.files.length" flow-img="vm.flowAvatar.files[0]" class="img-responsive">
+						<uib-progressbar ng-if="vm.uploadProgress" class="event-progress active" max="100" value="vm.uploadProgress"></uib-progressbar>
+					</div>
+					<br>
+					<button class="btn btn-default btn-lg" flow-btn>Change Avatar</button>
+					<button ng-show="vm.flowAvatar.files.length" class="btn btn-primary btn-lg" ng-click="vm.uploadAvatar()">Upload</button>
+				</div>
+				<br>
+				<form name="userForm">
+					<div class="row">
+						<div class="6u 12u$(mobile)"><input type="text" name="firstName" ng-model="vm.portfolio.metafields[0].value" placeholder="First Name" required></div>
+						<div class="6u$ 12u$(mobile)"><input type="text" name="lastName" ng-model="vm.portfolio.metafields[1].value" placeholder="Last Name" required></div>
+						<div class="6u$ 12u$(mobile)"><input type="email" name="email" ng-model="vm.portfolio.metafields[2].value" placeholder="Email" required></div>
+						<div class="12u$" ng-if="userForm.$valid">
+							<input type="submit" value="Save" ng-click="vm.updatePortfolio()">
+						</div>
+					</div>
+				</form>
+			</uib-tab>
+
 		</uib-tabset>
 
 

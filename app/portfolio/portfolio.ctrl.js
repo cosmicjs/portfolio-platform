@@ -33,6 +33,8 @@
         vm.uploadAboutImage = uploadAboutImage;
         vm.uploadHomePageImage = uploadHomePageImage;
         vm.updateHomePage = updateHomePage;
+        vm.removeProject = removeProject;
+        vm.uploadAvatar = uploadAvatar;
 
         vm.portfolio = {};
 
@@ -43,11 +45,28 @@
         vm.uploadProgress = 0;
         vm.flowIntro = {};
         vm.flowAbout = {};
+        vm.flowAvatar = {};
         vm.flowHomePage = {};
         vm.flowConfig = {
             target: MEDIA_URL,
             singleFile: true
         };
+
+        function uploadAvatar() {
+            PortfolioProjectsService
+                .upload(vm.flowAvatar.files[0].file)
+                .then(function(response){
+
+                    vm.portfolio.metafields[12].value = response.media.name;
+                    vm.uploadProgress = 0;
+                    updatePortfolio();
+
+                }, function(){
+                    console.log('failed :(');
+                }, function(progress){
+                    vm.uploadProgress = progress;
+                });
+        }
 
         function uploadHomePageImage() {
             PortfolioProjectsService
@@ -209,6 +228,21 @@
 
             PortfolioService
                 .getHomePage()
+                .then(success, failed);
+        }
+
+        function removeProject(slug) {
+            function success(response) {
+                getPortfolio();
+                $log.info(response);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+            PortfolioService
+                .removeProject(slug)
                 .then(success, failed);
         }
         

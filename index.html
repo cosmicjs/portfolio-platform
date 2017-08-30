@@ -44,9 +44,12 @@
 
 </head>
 
-<body>
+<body ng-class="{'header-visible': headerVisible}">
 
 <div ui-view></div>
+
+<div id="headerToggle" ng-click="headerVisible = !headerVisible"><a href="" class="toggle"></a></div>
+
 
 <!-- bower:js -->
 <script src="bower_components/angular/angular.js"></script>

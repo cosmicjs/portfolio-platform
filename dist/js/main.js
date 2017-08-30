@@ -308,6 +308,11 @@
                                 key: "role",
                                 type: "text",
                                 value: "ROLE_USER"
+                            },
+                            {
+                                key: "avatar",
+                                type: "file",
+                                value: "db69b0a0-8dc5-11e7-8415-81c001fdc81e-avatar.jpg"
                             }
                         ],
 
@@ -380,6 +385,8 @@ angular.module("config", [])
         vm.uploadAboutImage = uploadAboutImage;
         vm.uploadHomePageImage = uploadHomePageImage;
         vm.updateHomePage = updateHomePage;
+        vm.removeProject = removeProject;
+        vm.uploadAvatar = uploadAvatar;
 
         vm.portfolio = {};
 
@@ -390,11 +397,28 @@ angular.module("config", [])
         vm.uploadProgress = 0;
         vm.flowIntro = {};
         vm.flowAbout = {};
+        vm.flowAvatar = {};
         vm.flowHomePage = {};
         vm.flowConfig = {
             target: MEDIA_URL,
             singleFile: true
         };
+
+        function uploadAvatar() {
+            PortfolioProjectsService
+                .upload(vm.flowAvatar.files[0].file)
+                .then(function(response){
+
+                    vm.portfolio.metafields[12].value = response.media.name;
+                    vm.uploadProgress = 0;
+                    updatePortfolio();
+
+                }, function(){
+                    console.log('failed :(');
+                }, function(progress){
+                    vm.uploadProgress = progress;
+                });
+        }
 
         function uploadHomePageImage() {
             PortfolioProjectsService
@@ -558,6 +582,21 @@ angular.module("config", [])
                 .getHomePage()
                 .then(success, failed);
         }
+
+        function removeProject(slug) {
+            function success(response) {
+                getPortfolio();
+                $log.info(response);
+            }
+
+            function failed(response) {
+                $log.error(response);
+            }
+
+            PortfolioService
+                .removeProject(slug)
+                .then(success, failed);
+        }
         
         function openAddProjectDialog(slug) {
 
@@ -672,6 +711,18 @@ angular.module("config", [])
                 portfolio.write_key = WRITE_KEY;
 
                 return $http.put(URL + BUCKET_SLUG + '/edit-object', portfolio);
+            };
+
+            this.removeProject = function (slug) {
+                return $http.delete(URL + BUCKET_SLUG + '/' + slug, {
+                    ignoreLoadingBar: true,
+                    headers:{
+                        'Content-Type': 'application/json'
+                    },
+                    data: {
+                        write_key: WRITE_KEY
+                    }
+                });
             };
             
             this.upload = function (file) {

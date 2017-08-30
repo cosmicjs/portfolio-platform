@@ -32,6 +32,18 @@
 
                 return $http.put(URL + BUCKET_SLUG + '/edit-object', portfolio);
             };
+
+            this.removeProject = function (slug) {
+                return $http.delete(URL + BUCKET_SLUG + '/' + slug, {
+                    ignoreLoadingBar: true,
+                    headers:{
+                        'Content-Type': 'application/json'
+                    },
+                    data: {
+                        write_key: WRITE_KEY
+                    }
+                });
+            };
             
             this.upload = function (file) {
                 var fd = new FormData(); 

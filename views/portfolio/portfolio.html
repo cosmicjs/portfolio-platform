@@ -4,8 +4,8 @@
 
 	<!-- Logo -->
 	<div id="logo">
-		<span class="image avatar48"><img src="/dist/img/avatar.jpg" alt="" /></span>
-		<h1 id="title">{{vm.currentUser.first_name}} {{vm.currentUser.last_name}}</h1>
+		<span class="image avatar48"><img ng-src="{{vm.portfolio.metadata.avatar.url}}" alt="" /></span>
+		<h1 id="title">{{vm.portfolio.metadata.first_name}} {{vm.portfolio.metadata.last_name}}</h1>
 		<p uib-tooltip="Share this link with other people" tooltip-placement="top" cr-granted="ROLE_USER,ROLE_ADMIN">
 			<a target="_blank" ui-sref="portfolio.intro({slug: vm.currentUser.slug})">Public Link <i class="fa fa-external-link"></i></a>
 		</p>
