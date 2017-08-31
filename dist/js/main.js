@@ -50,6 +50,8 @@
                 url: '/',
                 templateUrl: '../views/main.html',
                 controller: function ($scope, $log, PortfolioService) {
+                    $scope.innerHeight = window.innerHeight;
+
                     getHomePage();
                     
                     function getHomePage() {
@@ -376,6 +378,7 @@ angular.module("config", [])
         getHomePage();
 
         vm.currentUser = $rootScope.globals.currentUser ? $rootScope.globals.currentUser : getUser();
+        vm.innerHeight = window.innerHeight;
         
         vm.logout = logout;
         vm.updatePortfolio = updatePortfolio;

@@ -1,15 +1,16 @@
-<div id="main" class="welcome-page">
+<div id="main" class="welcome-page" style="{}">
 <section id="top" class="one dark" ng-style="{
 'background-image': ('url(\'' + homePage.metadata.background.url + '\')'),
 'background-size': 'cover',
 'background-position': 'center',
-'background-repeat': 'no-repeat'
+'background-repeat': 'no-repeat',
+'height': (innerHeight - 160) + 'px'
 }">
 	<div class="container">
-
 		<header ng-bind-html="homePage.metadata.home_text">
 			<h2 class="alt">Hi! It is website for <strong>Photographers</strong><br>
 				You can create portfolio</h2>
+
 			<p>Please <a ui-sref="register">register</a> or <a ui-sref="login">log in</a>.
 				<br></p>
 		</header>
@@ -23,7 +24,7 @@
 </section>
 
 <!-- Footer -->
-<div id="footer" style="margin: 0">
+<div id="footer" class="home-footer">
 
 	<!-- Copyright -->
 	<ul class="copyright">

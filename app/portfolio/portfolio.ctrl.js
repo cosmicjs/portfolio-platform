@@ -24,6 +24,7 @@
         getHomePage();
 
         vm.currentUser = $rootScope.globals.currentUser ? $rootScope.globals.currentUser : getUser();
+        vm.innerHeight = window.innerHeight;
         
         vm.logout = logout;
         vm.updatePortfolio = updatePortfolio;
