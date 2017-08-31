@@ -1,5 +1,5 @@
-# Angular JS Photography Portfolio App
-##### [View a demo here](http://photography-portfolio.cosmicapp.co/)
+# Portfolio Platform
+##### [View a demo here](https://cosmicjs.com/apps/photography-platform)
 [Sign up for Cosmic JS](https://cosmicjs.com/) to start managing content for your websites and applications faster and easier.
 ### Get Started
 
