@@ -1,5 +1,5 @@
 # Portfolio Platform
-![Portfolio Platform](https://cosmicjs.com/uploads/789652f0-8e68-11e7-bb67-6d13b05f1acc-portfolio-platform-projects.jpg)
+![Portfolio Platform](https://cosmicjs.com/uploads/18026590-8e69-11e7-9057-55bb117a3035-portfolio-platform-home.png)
 
 ### [View a demo here](https://cosmicjs.com/apps/photography-platform)
 
