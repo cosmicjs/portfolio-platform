@@ -799,16 +799,16 @@ angular.module("config", [])
     'use strict';
 
     angular
-        .module('portfolio.contact', [])
+        .module('portfolio.about', [])
         .config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
     function config($stateProvider, $urlRouterProvider) {
 
         $stateProvider
-            .state('portfolio.contact', {
-                url: 'contact',
-                templateUrl: '../views/portfolio/portfolio.contact.html',
+            .state('portfolio.about', {
+                url: 'about',
+                templateUrl: '../views/portfolio/portfolio.about.html',
                 data: {
                     is_granted: ['ROLE_USER', 'ROLE_GUEST']
                 }
@@ -821,16 +821,16 @@ angular.module("config", [])
     'use strict';
 
     angular
-        .module('portfolio.about', [])
+        .module('portfolio.contact', [])
         .config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
     function config($stateProvider, $urlRouterProvider) {
 
         $stateProvider
-            .state('portfolio.about', {
-                url: 'about',
-                templateUrl: '../views/portfolio/portfolio.about.html',
+            .state('portfolio.contact', {
+                url: 'contact',
+                templateUrl: '../views/portfolio/portfolio.contact.html',
                 data: {
                     is_granted: ['ROLE_USER', 'ROLE_GUEST']
                 }
