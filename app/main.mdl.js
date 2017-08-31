@@ -50,6 +50,8 @@
                 url: '/',
                 templateUrl: '../views/main.html',
                 controller: function ($scope, $log, PortfolioService) {
+                    $scope.innerHeight = window.innerHeight;
+
                     getHomePage();
                     
                     function getHomePage() {

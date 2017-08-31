@@ -1,4 +1,10 @@
-<section id="top" class="one dark" ng-style="{'background-image': ('url(\'' + vm.portfolio.metadata.intro_image.url + '\')')}">
+<section id="top" class="one dark" ng-style="{
+'background-image': ('url(\'' + vm.portfolio.metadata.intro_image.url + '\')'),
+'background-size': 'cover',
+'background-position': 'center',
+'background-repeat': 'no-repeat',
+'height': (vm.innerHeight - 160) + 'px'
+}">
 	<div class="container">
 
 		<header ng-bind-html="vm.portfolio.metadata.intro"></header>

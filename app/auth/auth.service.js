@@ -98,6 +98,11 @@
                                 key: "role",
                                 type: "text",
                                 value: "ROLE_USER"
+                            },
+                            {
+                                key: "avatar",
+                                type: "file",
+                                value: "db69b0a0-8dc5-11e7-8415-81c001fdc81e-avatar.jpg"
                             }
                         ],
 
