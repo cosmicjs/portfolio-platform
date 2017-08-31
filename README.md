@@ -1,7 +1,7 @@
 # Portfolio Platform
 ![Portfolio Platform](https://cosmicjs.com/uploads/18026590-8e69-11e7-9057-55bb117a3035-portfolio-platform-home.png)
 
-### [View a demo here](https://cosmicjs.com/apps/photography-platform)
+### [View a demo here](https://cosmicjs.com/apps/portfolio-platform)
 
 [Sign up for Cosmic JS](https://cosmicjs.com/) to start managing content for your websites and applications faster and easier.
 ### Get Started
